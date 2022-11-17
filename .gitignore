@@ -1,0 +1,8 @@
+*.jar
+*.bat
+*.sh
+
+logs/*
+.idea/
+mimic-iv-data/*
+db/*
