@@ -1,0 +1,192 @@
+{
+  "url": "https://mimic.mit.edu/fhir/mappings/admissions",
+  "name": "admissions",
+  "title": "Mapping of entries in 'admissions' table in MIMIC-IV v2.0 dataset into FHIR Encounter resources as well as FHIR Patch to FHIR Patient resource",
+  "source": [{
+    "alias": "source",
+    "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-admissions"
+  }],
+  "context": {
+    "admissionTypeConceptMap":  {
+      "category": "concept-map",
+      "url": "./admission-type-concept-map.csv"
+    }
+  },
+  "mapping": [
+    {
+      "expression": {
+        "name": "admissions-to-encounter-mapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Encounter",
+          "id": "{{mpp:getHashedId('Encounter',hadm_id.toString())}}",
+          "meta": {
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "identifier": [
+            {
+              "use": "official",
+              "system": "{{%sourceSystem.sourceUri}}/fhir/hadm_ids",
+              "value": "{{hadm_id.toString()}}"
+            }
+          ],
+          "status": "finished",
+          "class": {
+            "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+            "code": "{{mpp:getConcept(%admissionTypeConceptMap, admission_type, 'target_class')}}",
+            "display": "{{mpp:getConcept(%admissionTypeConceptMap, admission_type, 'target_class_display')}}"
+          },
+          "type": [
+            {
+              "coding": [
+                "{{? trms:translateToCoding(admission_type, 'https://mimic.mit.edu/fhir/CodeSystem/admission-types','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/admission-type-to-snomedct')}}"
+              ],
+              "text":"{{admission_type}}"
+            }
+          ],
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
+          "period": {
+            "start": "{{admittime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
+            "end": "{{dischtime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}"
+          },
+          "length": "{{utl:getDurationAsQuantityObject(admittime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00'), dischtime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00'))}}",
+          "hospitalization": {
+            "admitSource": {
+              "coding": "{{* trms:translateToCoding(admission_location, 'https://mimic.mit.edu/fhir/CodeSystem/admission-locations','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/admission-location-to-hl7')}}",
+              "text": "{{admission_location}}"
+            },
+            "dischargeDisposition": {
+              "{{#dscl}}": "{{iif(hospital_expire_flag=1,'DIED',discharge_location)}}",
+              "{{?}}": {
+                "coding": "{{* trms:translateToCoding(%dscl, 'https://mimic.mit.edu/fhir/CodeSystem/discharge-locations','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/discharge-location-to-hl7')}}",
+                "text": "{{%dscl}}"
+              }
+            }
+          },
+          "location": {
+            "{{#isFromED}}": "{{iif(edregtime.exists(), true, {})}}",
+            "{{*}}": {
+              "location": {
+                "identifier": {
+                  "system": "http://terminology.hl7.org/CodeSystem/admit-source",
+                  "value": "emd"
+                },
+                "display": "Emergency Department"
+              },
+              "status": "completed",
+              "period": {
+                "start": "{{edregtime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
+                "end": "{{edouttime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}"
+              }
+            }
+          },
+          "extension": [
+            {
+              "url": "https://mimic.mit.edu/fhir/StructureDefinition/ext-insurance",
+              "valueString": "{{insurance}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "precondition":{
+        "name": "isDemographicsExist",
+        "language": "text/fhirpath",
+        "expression": "marital_status.exists() or race.exists()"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Parameters",
+          "parameter": [
+            {
+              "{{#ms}}": "{{marital_status}}",
+              "{{?}}":   {
+                "name": "operation",
+                "part": [
+                  {
+                    "name": "type",
+                    "valueCode": "add"
+                  },
+                  {
+                    "name": "path",
+                    "valueString": "Patient"
+                  },
+                  {
+                    "name": "name",
+                    "valueString": "maritalStatus"
+                  },
+                  {
+                    "name": "value",
+                    "valueCodeableConcept": {
+                      "coding": "{{* trms:translateToCoding(%ms, 'https://mimic.mit.edu/fhir/CodeSystem/marital-status','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/marital-status-to-hl7')}}",
+                      "text": "{{%ms}}"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "{{#rc}}": "{{race}}",
+              "{{?}}":   {
+                "name": "operation",
+                "part": [
+                  {
+                    "name": "type",
+                    "valueCode": "delete"
+                  },
+                  {
+                    "name": "path",
+                    "valueString": "Patient.extension.where(url='http://hl7.org/fhir/us/core/StructureDefinition/us-core-race')"
+                  }
+                ]
+              }
+            },
+            {
+              "{{#rc}}": "{{race}}",
+              "{{?}}":   {
+                "name": "operation",
+                "part": [
+                  {
+                    "name": "type",
+                    "valueCode": "add"
+                  },
+                  {
+                    "name": "path",
+                    "valueString": "Patient"
+                  },
+                  {
+                    "name": "name",
+                    "valueString": "extension"
+                  },
+                  {
+                    "name": "value",
+                    "valueExtension": {
+                      "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race",
+                      "extension": [
+                        {
+                          "url": "text",
+                          "valueString": "{{%rc}}"
+                        },
+                        {
+                          "url": "ombCategory",
+                          "valueCoding": "{{trms:translateToCoding(%rc, 'https://mimic.mit.edu/fhir/CodeSystem/race','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/race-to-hl7')}}"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "fhirInteraction": {
+        "type": "patch",
+        "rid": "Patient/{{mpp:getHashedId('Patient',subject_id.toString())}}"
+      }
+    }
+  ]
+}

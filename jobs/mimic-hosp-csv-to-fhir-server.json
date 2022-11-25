@@ -1,0 +1,103 @@
+{
+  "id": "mimic-csv-to-fhir-server",
+  "sourceSettings": {
+    "source": {
+      "jsonClass": "FileSystemSourceSettings",
+      "name": "MIMIC-IV v2.0",
+      "sourceUri": "https://physionet.org/content/mimiciv/2.0",
+      "dataFolderPath": "./mimic-iv-data"
+    }
+  },
+  "sinkSettings": {
+    "jsonClass": "FhirRepositorySinkSettings",
+    "fhirRepoUrl": "${FHIR_REPO_URL}",
+    "errorHandling": "continue"
+  },
+  "terminologyServiceSettings": {
+    "jsonClass": "LocalFhirTerminologyServiceSettings",
+    "folderPath": "./terminology",
+    "conceptMapFiles": [
+      {
+        "fileName": "labitems-to-loinc.csv",
+        "conceptMapUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhirmimic-hosp-csv-to-fhir-server.json/ConceptMap/labitems-to-loinc",
+        "sourceValueSet": "https://mimic.mit.edu/fhir/ValueSet/labitems",
+        "targetValueSet": "http://loinc.org/vs"
+      },
+      {
+        "fileName": "labitem-coded-values-to-loinc.csv",
+        "conceptMapUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/labitem-coded-values-to-other",
+        "sourceValueSet": "https://mimic.mit.edu/fhir/ValueSet/labitem-coded-values",
+        "targetValueSet": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/labitem-coded-values"
+      },
+      {
+        "fileName": "admission-type-to-snomedct.csv",
+        "conceptMapUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/admission-type-to-snomedct",
+        "sourceValueSet": "https://mimic.mit.edu/fhir/ValueSet/admission-types",
+        "targetValueSet": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/admision-types"
+      },
+      {
+        "fileName": "admission-location-to-hl7.csv",
+        "conceptMapUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/admission-location-to-hl7",
+        "sourceValueSet": "https://mimic.mit.edu/fhir/ValueSet/admission-locations",
+        "targetValueSet": "http://hl7.org/fhir/ValueSet/encounter-admit-source"
+      },
+      {
+        "fileName": "discharge-location-to-hl7.csv",
+        "conceptMapUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/discharge-location-to-hl7",
+        "sourceValueSet": "https://mimic.mit.edu/fhir/ValueSet/discharge-locations",
+        "targetValueSet": "http://hl7.org/fhir/ValueSet/encounter-discharge-disposition"
+      },
+      {
+        "fileName": "marital-status-to-hl7.csv",
+        "conceptMapUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/marital-status-to-hl7",
+        "sourceValueSet": "https://mimic.mit.edu/fhir/ValueSet/marital-status",
+        "targetValueSet": "http://hl7.org/fhir/ValueSet/marital-status"
+      },
+      {
+        "fileName": "race-to-hl7.csv",
+        "conceptMapUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/race-to-hl7",
+        "sourceValueSet": "https://mimic.mit.edu/fhir/ValueSet/race",
+        "targetValueSet": "http://terminology.hl7.org/ValueSet/v3-Race"
+      }
+    ],
+    "codeSystemFiles": [
+      {
+        "fileName": "labitems-code-system.csv",
+        "codeSystem": "https://mimic.mit.edu/fhir/CodeSystem/labitems"
+      }
+    ]
+  },
+  "mappingErrorHandling": "continue",
+  "mappings": [
+    {
+      "mappingRef": "https://mimic.mit.edu/fhir/mappings/patients",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "hosp/patients.csv",
+          "fileFormat": "csv"
+        }
+      }
+    },
+    {
+      "mappingRef": "https://mimic.mit.edu/fhir/mappings/admissions",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "hosp/admissions.csv",
+          "fileFormat": "csv"
+        }
+      }
+    },
+    {
+      "mappingRef": "https://mimic.mit.edu/fhir/mappings/labevents",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "hosp/labevents.csv",
+          "fileFormat": "csv"
+        }
+      }
+    }
+  ]
+}

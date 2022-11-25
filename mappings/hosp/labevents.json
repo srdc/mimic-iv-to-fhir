@@ -42,7 +42,7 @@
           ],
           "code": {
             "coding": [
-              "{{? trms:translateToCoding(itemid.toString(), 'https://mimic.mit.edu/fhir/CodeSystem/labitems','https://mimic.mit.edu/fhir/ConceptMap/mimic_labitems_to_loinc')}}",
+              "{{? trms:translateToCoding(itemid.toString(), 'https://mimic.mit.edu/fhir/CodeSystem/labitems','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/labitems-to-loinc')}}",
               {
                 "system": "https://mimic.mit.edu/fhir/CodeSystem/labitems",
                 "code": "{{itemid.toString()}}",
@@ -59,7 +59,7 @@
             "{{?}}": "{{utl:createFhirQuantity(valuenum.orElse(value), valueuom.trim(), 'http://unitsofmeasure.org', valueuom.trim())}}"
           },
           "valueCodeableConcept": {
-            "{{#codedValue}}": "{{iif(valuenum.exists().not(), trms:translateToCoding(value.orElse(comments).utl:takeUntil('.' | '*').trim().orElse('!NO-SUCH-CODE!'), 'https://mimic.mit.edu/fhir/CodeSystem/labitem_coded_values', 'https://mimic.mit.edu/fhir/ConceptMap/labitem_coded_values_to_other'),{})}}",
+            "{{#codedValue}}": "{{iif(valuenum.exists().not(), trms:translateToCoding(value.orElse(comments).utl:takeUntil('.' | '*').trim().orElse('!NO-SUCH-CODE!'), 'https://mimic.mit.edu/fhir/CodeSystem/labitem-coded-values', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/labitem-coded-values-to-other'),{})}}",
             "{{?}}": {
               "coding": "{{* %codedValue}}",
               "text": "{{? value}}"

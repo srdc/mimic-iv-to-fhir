@@ -15,7 +15,9 @@ required by toFHIR to perform a quick validation on source data. For example, ['
 FHIR resource. For example, ['patients.json'](./mappings/hosp/patients.json) provide the mapping that will convert each row in MIMIC-IV 'patient' table 
 into a FHIR Patient resource.
 * In the ['jobs'](./jobs) folder, you will find a range of job configurations that will convert data in a subset or all MIMIC-IV tables and 
-store them into a configured FHIR server or file system.
+store them into a configured FHIR server or file system. For example, ['mimic-hosp-csv-to-fhir-server.json'](./jobs/mimic-hosp-csv-to-fhir-server.json) 
+will map all information in 'hosp' module given in CSV files into FHIR resources and store them a FHIR server where base 
+URL can be provided with environment variable 'FHIR_REPO_URL'.
 * In the ['terminology](./terminology) folder, you can find the CSV files that corresponds to FHIR ConceptMap or CodeSystem definitions 
 used during some mapping. For example 'mimic_labitems_to_loinc.csv' includes the mapping of MIMIC-IV labitem identifiers 
 to LOINC codes that is used for mapping 'labevents' into FHIR Observation resource to also convert the lab result code 
@@ -50,6 +52,37 @@ writing some simple FHIR path expressions
 * For 'specimen_id' column indicating the identifier of the specimen, we use FHIR Logical referencing as there is no further 
 table or data related with this specimen to link with.
 * For 'priority' column, we use an [extension](http://hl7.org/fhir/us/cdmh/StructureDefinition/cdmh-pcornet-lab-test-priority) defined by Common Data Models Harmonization (CDMH) project.
+
+### Mapping of ['admissions'](https://mimic.mit.edu/docs/iv/modules/hosp/admissions/) table into ['FHIR Encounter'](http://www.hl7.org/FHIR/ecnounter.html) resources
+* Based on the 'admission_type', we infer the category of the encounter (Encounter.class) by using the mapping context 
+map file ['admission-type-concept-map'](./mappings/hosp/admission-type-concept-map.csv). Context maps are used in toFHIR 
+to get a corresponding value based on a key. The first column in the file is the key and other columns are the attributes 
+for that key to access within your mappings. You can use 'mpp:getConcept(...)' function to access these attributes.
+* The 'admission_type' is also mapped to a suitable SNOMED-CT code by using the concept map ['admission-type-to-snomedct.csv'](./terminology/admission-type-to-snomedct.csv) and set into 'Encounter.type'. The original 'admission_type' 
+value is also set to the Encounter.type.text.
+* The 'admission_location' is similarly mapped to a suitable HL7 code from the [FHIR encounter-admit-source ValueSet](http://hl7.org/fhir/ValueSet/encounter-admit-source)  by using the ['admission-location-to-hl7.csv'](./terminology/admission-location-to-hl7.csv).
+Note that the concept map also includes mapping the location into a SNOMED-CT code if there is no direct mapping to one of 
+the concepts in the value set to distinguish such cases (e.g. WALK-IN/SELF REFERRAL).
+* The 'discharge_location' is similarly mapped to a suitable  code from the [FHIR encounter-discharge-disposition ValueSet](http://hl7.org/fhir/ValueSet/encounter-discharge-disposition)  by using the ['discharge-location-to-hl7.csv'](./terminology/discharge-location-to-hl7.csv).
+  Note that the concept map also includes mapping the location into a SNOMED-CT code if there is no direct mapping to one of
+  the concepts in the value set to distinguish such cases (e.g. HOME HEALTH CARE).
+* In order not to lose the information Emergency department admission and discharge times ('edregtime' and 'edouttime'), 
+we use them in 'Encounter.location' element where the location is specified by the code indicating it is an Emergency 
+department.
+* The 'insurance' information is put as an extension to the resource with url 'https://mimic.mit.edu/fhir/StructureDefinition/ext-insurance'
+with string value.
+* Other demographic information ('race' and 'marital_status') are not directly put into Encounter resource as 
+they are part of Patient resource in FHIR. toFHIR supports FHIR Patch interaction and enable users to 
+map the content into FHIR Patch contents (FHIR Path Patch or JSON Patch) that are used to partially update a resource. 
+We use this mechanism here and define another mapping expression within the same mapping to update FHIR Patient resources 
+with this partial information.
+  * The 'race' is mapped to an extension as defined in [US-Core](http://hl7.org/fhir/us/core/StructureDefinition/us-core-race) 
+  where the race is mapped to a suitable code from [FHIR Race ValueSet](http://terminology.hl7.org/ValueSet/v3-Race) by 
+  using the concept map ['race-to-hl7.csv'](./terminology/race-to-hl7.csv).
+  * The 'marital_status' is mapped to 'Patient.maritalStatus' element by using the concept map ['marital-status-to-hl7.csv'](./terminology/marital-status-to-hl7.csv).
+* Please note that, as there is no much information about the meaning of the concepts used for admission/discharge type, location 
+we have used our best knowledge to choose the corresponding codes from the FHIR or SNOMED-CT codes. You can check and update 
+the mappings according to your requirements.
 
 ## How to run the ETL jobs
 You can download the latest release of toFHIR from the GitHub page or download the source code and build it to get the 
