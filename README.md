@@ -83,6 +83,24 @@ with this partial information.
 * Please note that, as there is no much information about the meaning of the concepts used for admission/discharge type, location 
 we have used our best knowledge to choose the corresponding codes from the FHIR or SNOMED-CT codes. You can check and update 
 the mappings according to your requirements.
+* We also join the 'diagnoses_icd' and 'procedures_icd' tables into the 'admissions' table by using the 'hadm_id' column. 
+Then we use the data to populate the 'Encounter.diagnosis' element with references to diagnoses and procedures applied 
+during the admission.
+
+### Mapping of ['diagnoses_icd'](https://mimic.mit.edu/docs/iv/modules/hosp/diagnoses_icd/) table into ['FHIR Condition'](http://hl7.org/fhir/condition.html) resources
+* Unique identifier for a Condition resource is generated via hashing by using the 'hadm_id' and 'seq_no'.
+* The ['d_icd_diagnoses'] table is also joined to the source data to get the display text for ICD codes.
+* Category is indicated as 'encounter-diagnosis' for all as it is the logic for the MIMIC data.
+* Given 'icd_code' is processed and converted to actual ICD-9-CM or ICD-10-CM code (with the dot) and set into 'Condition.code' element.
+* ICD-9 codes are also mapped to ICD-10 codes by using the General Equivalence Mappings (GEM) file provided by CMS. The [mapping file](./mappings/hosp/icd9toicd10cmgem.csv) is used as context map file in toFHIR. 
+Only mappings that do not use combinations of codes (combination of ICD-10 codes for a single ICD-9 code) are performed.  
+
+### Mapping of ['procedures_icd'](https://mimic.mit.edu/docs/iv/modules/hosp/procedures_icd/) table into ['FHIR Procedure'](http://hl7.org/fhir/procedure.html) resources
+* Unique identifier for a Condition resource is generated via hashing by using the 'hadm_id' and 'seq_no'.
+* The ['d_icd_procedures'] table is also joined to the source data to get the display text for ICD codes.
+* For ICD-9 codes, given 'icd_code' is processed and converted to actual ICD-9-PCS code (with the dot) and set into 'Procedure.code' element.
+* ICD-9 codes are also mapped to ICD-10 codes by using the General Equivalence Mappings (GEM) file provided by CMS. The [mapping file](./mappings/hosp/icd9toicd10pcsgem.csv) is used as context map file in toFHIR.
+Only mappings that do not use combinations of codes (combination of ICD-10 codes for a single ICD-9 code) are performed.
 
 ## How to run the ETL jobs
 You can download the latest release of toFHIR from the GitHub page or download the source code and build it to get the 

@@ -82,9 +82,49 @@
     {
       "mappingRef": "https://mimic.mit.edu/fhir/mappings/admissions",
       "sourceContext": {
-        "source": {
+        "admissions": {
           "jsonClass": "FileSystemSource",
           "path": "hosp/admissions.csv",
+          "fileFormat": "csv"
+        },
+        "diagnoses": {
+          "jsonClass": "FileSystemSource",
+          "path": "hosp/diagnoses_icd.csv",
+          "fileFormat": "csv"
+        },
+        "procedures": {
+          "jsonClass": "FileSystemSource",
+          "path": "hosp/procedures_icd.csv",
+          "fileFormat": "csv"
+        }
+      }
+    },
+    {
+      "mappingRef": "https://mimic.mit.edu/fhir/mappings/diagnoses-icd",
+      "sourceContext": {
+        "diagnoses": {
+          "jsonClass": "FileSystemSource",
+          "path": "hosp/diagnoses_icd.csv",
+          "fileFormat": "csv"
+        },
+        "icdConceptMap": {
+          "jsonClass": "FileSystemSource",
+          "path": "hosp/d_icd_diagnoses.csv",
+          "fileFormat": "csv"
+        }
+      }
+    },
+    {
+      "mappingRef": "https://mimic.mit.edu/fhir/mappings/procedures-icd",
+      "sourceContext": {
+        "procedures": {
+          "jsonClass": "FileSystemSource",
+          "path": "hosp/procedures_icd.csv",
+          "fileFormat": "csv"
+        },
+        "icdConceptMap": {
+          "jsonClass": "FileSystemSource",
+          "path": "hosp/d_icd_procedures.csv",
           "fileFormat": "csv"
         }
       }
