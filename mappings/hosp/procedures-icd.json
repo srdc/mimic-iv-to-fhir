@@ -1,4 +1,5 @@
 {
+  "id": "procedures-icd",
   "url": "https://mimic.mit.edu/fhir/mappings/procedures-icd",
   "name": "procedures-icd",
   "title": "Mapping of entries in 'procedures_icd' table joined with 'd_icd_procedures' table restructured as FHIR concept map in MIMIC-IV v2.0 dataset into FHIR Procedure resources.",
@@ -17,7 +18,7 @@
   "context": {
     "icd9to10Map":  {
       "category": "concept-map",
-      "url": "./icd9toicd10pcsgem.csv"
+      "url": "$CONTEXT_REPO/icd9toicd10pcsgem.csv"
     }
   },
   "mapping": [

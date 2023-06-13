@@ -65,9 +65,9 @@
         "max": "1",
         "type": [
           {
-            "code": "code",
+            "code": "integer",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/code"
+              "http://hl7.org/fhir/StructureDefinition/integer"
             ]
           }
         ]

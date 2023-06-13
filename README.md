@@ -55,7 +55,7 @@ table or data related with this specimen to link with.
 
 ### Mapping of ['admissions'](https://mimic.mit.edu/docs/iv/modules/hosp/admissions/) table into ['FHIR Encounter'](http://www.hl7.org/FHIR/ecnounter.html) resources
 * Based on the 'admission_type', we infer the category of the encounter (Encounter.class) by using the mapping context 
-map file ['admission-type-concept-map'](./mappings/hosp/admission-type-concept-map.csv). Context maps are used in toFHIR 
+map file ['admission-type-concept-map'](mapping-contexts/admission-type-concept-map.csv). Context maps are used in toFHIR 
 to get a corresponding value based on a key. The first column in the file is the key and other columns are the attributes 
 for that key to access within your mappings. You can use 'mpp:getConcept(...)' function to access these attributes.
 * The 'admission_type' is also mapped to a suitable SNOMED-CT code by using the concept map ['admission-type-to-snomedct.csv'](./terminology/admission-type-to-snomedct.csv) and set into 'Encounter.type'. The original 'admission_type' 
@@ -92,15 +92,30 @@ during the admission.
 * The ['d_icd_diagnoses'] table is also joined to the source data to get the display text for ICD codes.
 * Category is indicated as 'encounter-diagnosis' for all as it is the logic for the MIMIC data.
 * Given 'icd_code' is processed and converted to actual ICD-9-CM or ICD-10-CM code (with the dot) and set into 'Condition.code' element.
-* ICD-9 codes are also mapped to ICD-10 codes by using the General Equivalence Mappings (GEM) file provided by CMS. The [mapping file](./mappings/hosp/icd9toicd10cmgem.csv) is used as context map file in toFHIR. 
+* ICD-9 codes are also mapped to ICD-10 codes by using the General Equivalence Mappings (GEM) file provided by CMS. The [mapping file](mapping-contexts/icd9toicd10cmgem.csv) is used as context map file in toFHIR. 
 Only mappings that do not use combinations of codes (combination of ICD-10 codes for a single ICD-9 code) are performed.  
 
 ### Mapping of ['procedures_icd'](https://mimic.mit.edu/docs/iv/modules/hosp/procedures_icd/) table into ['FHIR Procedure'](http://hl7.org/fhir/procedure.html) resources
 * Unique identifier for a Condition resource is generated via hashing by using the 'hadm_id' and 'seq_no'.
 * The ['d_icd_procedures'] table is also joined to the source data to get the display text for ICD codes.
 * For ICD-9 codes, given 'icd_code' is processed and converted to actual ICD-9-PCS code (with the dot) and set into 'Procedure.code' element.
-* ICD-9 codes are also mapped to ICD-10 codes by using the General Equivalence Mappings (GEM) file provided by CMS. The [mapping file](./mappings/hosp/icd9toicd10pcsgem.csv) is used as context map file in toFHIR.
+* ICD-9 codes are also mapped to ICD-10 codes by using the General Equivalence Mappings (GEM) file provided by CMS. The [mapping file](mapping-contexts/icd9toicd10pcsgem.csv) is used as context map file in toFHIR.
 Only mappings that do not use combinations of codes (combination of ICD-10 codes for a single ICD-9 code) are performed.
+
+### Mapping of ['prescriptions'](https://mimic.mit.edu/docs/iv/modules/hosp/prescriptions/) table into ['FHIR MedicationRequest'](http://hl7.org/fhir/medicationrequest.html) and ['FHIR Medication'](http://hl7.org/fhir/medication.html) resources
+In this mapping we have used FHIR Medication resources to represent the medications mentioned in MIMIC database. 
+For each distinct medication (drug name + NDC code) in prescriptions table, we have created the FHIR Medication resource 
+based on the information (drug, gsn, formulary_drug_cd, prod_strength, form_unit_disp) given in the table. The following items give information about this mapping.
+* Unique identifier for a Medication resource is generated via hashing by using the 'drug', 'gsn', 'ndc', 'formulary_drug_cd'
+* We have mapped 'ndc' and 'formulary_drug_cd' to Medication.code
+* We use RxNorm API to retrieve the medication details given NDC code (corresponding RxNorm Concept id, its ingredients and their ATC codes, dose form, etc)
+* By using the RxNorm API, we use the RxNorm Concept id for dose form of medication for medication form code (Medication.form)
+* By using the RxNorm API, we use the corresponding ATC codes for found ingredients for medication and map the dose units 
+and ingredient strengths coming from RxNorm API
+
+For prescriptions;
+* The route code given in the table is transformed to SNOMED-CT (http://hl7.org/fhir/ValueSet/route-codes)
+* Dosing units are converted to UCUM or codes from http://terminology.hl7.org/CodeSystem/v3-orderableDrugForm if possible
 
 ## How to run the ETL jobs
 You can download the latest release of toFHIR from the GitHub page or download the source code and build it to get the 

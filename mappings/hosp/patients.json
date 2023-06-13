@@ -1,4 +1,5 @@
 {
+  "id": "patients",
   "url": "https://mimic.mit.edu/fhir/mappings/patients",
   "name": "patients",
   "title": "Mapping of entries in 'patients' table in MIMIC-IV v2.0 dataset into FHIR Patient resources",

@@ -1,0 +1,20 @@
+source_system,source_code,target_system,target_code,target_display
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,AERO,http://snomed.info/sct,385157007,"Nasal spray"
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,AMP,http://snomed.info/sct,1208958005,"Solution for infusion and/or injection"
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,AMP:INHALATION,http://snomed.info/sct, 420641004,"Solution for inhalation"
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,AMP:NEB,http://snomed.info/sct,421221008,"Suspension for inhalation"
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,AMP:PO,http://snomed.info/sct,385024007,"Oral suspension"
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,Appl:PR,http://snomed.info/sct,385184008,"Rectal ointment"
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,Appl:VG,http://snomed.info/sct,385167002,"Vaginal ointment"
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,Appl:TP,http://snomed.info/sct,425753008,"Cutaneous ointment"
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,Appl:LEFT EYE,http://snomed.info/sct,385123004,"Eye ointment"
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,Appl:RIGHT EYE,http://snomed.info/sct,385123004,"Eye ointment"
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,BAG,http://snomed.info/sct,1208958005,"Solution for infusion and/or injection"
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,BTL:AD,http://snomed.info/sct, 385277008,"Otic dose form"
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,BTL:AU,http://snomed.info/sct, 385277008,"Otic dose form"
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,BTL:AS,http://snomed.info/sct, 385277008,"Otic dose form"
+
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,CADD,http://snomed.info/sct,1208958005,"Solution for infusion and/or injection"
+
+
+

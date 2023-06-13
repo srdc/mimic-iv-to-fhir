@@ -1,0 +1,9 @@
+source_system,source_code,target_system,target_code,target_display
+http://www.nlm.nih.gov/research/umls/rxnorm,MG,http://unitsofmeasure.org,mg,
+http://www.nlm.nih.gov/research/umls/rxnorm,ML,http://unitsofmeasure.org,mL,
+http://www.nlm.nih.gov/research/umls/rxnorm,MCG,http://unitsofmeasure.org,ug,
+http://www.nlm.nih.gov/research/umls/rxnorm,UNT,http://unitsofmeasure.org,U,
+http://www.nlm.nih.gov/research/umls/rxnorm,HR,http://unitsofmeasure.org,h,
+http://www.nlm.nih.gov/research/umls/rxnorm,MEQ,http://unitsofmeasure.org,meq,
+http://www.nlm.nih.gov/research/umls/rxnorm,ACTUAT,http://unitsofmeasure.org,{each},
+http://www.nlm.nih.gov/research/umls/rxnorm,EACH,http://unitsofmeasure.org,{each},

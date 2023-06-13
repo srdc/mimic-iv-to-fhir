@@ -1,4 +1,5 @@
 {
+  "id": "admissions",
   "url": "https://mimic.mit.edu/fhir/mappings/admissions",
   "name": "admissions",
   "title": "Mapping of entries in 'admissions' table joined with 'diagnoses_icd' and 'procedures_icd' in MIMIC-IV v2.0 dataset into FHIR Encounter resources as well as FHIR Patch to FHIR Patient resource",
@@ -22,7 +23,7 @@
   "context": {
     "admissionTypeConceptMap":  {
       "category": "concept-map",
-      "url": "./admission-type-concept-map.csv"
+      "url": "$CONTEXT_REPO/admission-type-concept-map.csv"
     }
   },
   "mapping": [

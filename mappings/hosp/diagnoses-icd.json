@@ -1,4 +1,5 @@
 {
+  "id": "diagnoses-icd",
   "url": "https://mimic.mit.edu/fhir/mappings/diagnoses-icd",
   "name": "diagnoses-icd",
   "title": "Mapping of entries in 'diagnoses_icd' table joined with 'd_icd_diagnoses' table restructured as FHIR concept map in MIMIC-IV v2.0 dataset into FHIR Condition resources.",
@@ -17,7 +18,7 @@
   "context": {
     "icd9to10Map":  {
       "category": "concept-map",
-      "url": "./icd9toicd10cmgem.csv"
+      "url": "$CONTEXT_REPO/icd9toicd10cmgem.csv"
     }
   },
   "mapping": [

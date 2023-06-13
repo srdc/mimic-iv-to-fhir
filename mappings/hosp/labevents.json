@@ -1,4 +1,5 @@
 {
+  "id": "labevents",
   "url": "https://mimic.mit.edu/fhir/mappings/labevents",
   "name": "labevents",
   "title": "Mapping of entries in 'labevents' table in MIMIC-IV v2.0 dataset into FHIR Observation resources",
