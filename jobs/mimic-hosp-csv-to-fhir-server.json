@@ -30,12 +30,6 @@
         "targetValueSetUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/labitem-coded-values"
       },
       {
-        "name": "admission-type-to-snomedct.csv",
-        "conceptMapUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/admission-type-to-snomedct",
-        "sourceValueSetUrl": "https://mimic.mit.edu/fhir/ValueSet/admission-types",
-        "targetValueSetUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/admision-types"
-      },
-      {
         "name": "admission-location-to-hl7.csv",
         "conceptMapUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/admission-location-to-hl7",
         "sourceValueSetUrl": "https://mimic.mit.edu/fhir/ValueSet/admission-locations",
@@ -74,14 +68,30 @@
       {
         "name": "medication-route-codes-to-snomed.csv",
         "conceptMapUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/medication-route-codes-to-snomed",
-        "sourceValueSetUrl": "https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes",
+        "sourceValueSetUrl": "https://mimic.mit.edu/fhir/ValueSet/medication-route-codes",
         "targetValueSetUrl": "http://hl7.org/fhir/ValueSet/route-codes"
+      },
+      {
+        "name": "careunits-to-hl7.csv",
+        "conceptMapUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/careunits-to-hl7",
+        "sourceValueSetUrl": "https://mimic.mit.edu/fhir/ValueSet/care-units",
+        "targetValueSetUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/care-units"
+      },
+      {
+        "name": "services-to-snomed.csv",
+        "conceptMapUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/services-to-snomed",
+        "sourceValueSetUrl": "https://mimic.mit.edu/fhir/ValueSet/services",
+        "targetValueSetUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/services"
       }
     ],
     "codeSystemFiles": [
       {
         "name": "labitems-code-system.csv",
         "codeSystem": "https://mimic.mit.edu/fhir/CodeSystem/labitems"
+      },
+      {
+        "name": "services.csv",
+        "codeSystem": "https://mimic.mit.edu/fhir/CodeSystem/services"
       }
     ]
   },
@@ -94,6 +104,17 @@
           "jsonClass": "FileSystemSource",
           "path": "hosp/patients.csv",
           "fileFormat": "csv"
+        }
+      }
+    },
+    {
+      "mappingRef": "https://mimic.mit.edu/fhir/mappings/careunits",
+      "sourceContext": {
+        "careunits": {
+          "jsonClass": "FileSystemSource",
+          "path": "hosp/transfers.csv",
+          "fileFormat": "csv",
+          "preprocessSql": "SELECT DISTINCT CU.careunit FROM careunits CU WHERE CU.careunit IS NOT NULL"
         }
       }
     },
@@ -113,6 +134,16 @@
         "procedures": {
           "jsonClass": "FileSystemSource",
           "path": "hosp/procedures_icd.csv",
+          "fileFormat": "csv"
+        },
+        "transfers": {
+          "jsonClass": "FileSystemSource",
+          "path": "hosp/transfers.csv",
+          "fileFormat": "csv"
+        },
+        "services": {
+          "jsonClass": "FileSystemSource",
+          "path": "hosp/services.csv",
           "fileFormat": "csv"
         }
       }

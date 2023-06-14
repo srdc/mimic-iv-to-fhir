@@ -58,14 +58,18 @@ table or data related with this specimen to link with.
 map file ['admission-type-concept-map'](mapping-contexts/admission-type-concept-map.csv). Context maps are used in toFHIR 
 to get a corresponding value based on a key. The first column in the file is the key and other columns are the attributes 
 for that key to access within your mappings. You can use 'mpp:getConcept(...)' function to access these attributes.
-* The 'admission_type' is also mapped to a suitable SNOMED-CT code by using the concept map ['admission-type-to-snomedct.csv'](./terminology/admission-type-to-snomedct.csv) and set into 'Encounter.type'. The original 'admission_type' 
-value is also set to the Encounter.type.text.
+* We join the 'admissions' table with 'transfers' table to get the locations of patient during whole hospital stay and
+use this information to populate 'Encounter.location' element. By using another mapping we map unique care units
+listed in 'transfers' table into FHIR Location recources which we give reference to within 'Encounter.location.location'.
+* We also join the 'admissions' table with 'services' table to get the services patient get during the encounter. We map 
+these into encounter type (Encounter.type) using the original service code in MIMIC also mapping it to a corresponding 
+SNOMED-CT code ([Mapping of Service codes to SNOMED-CT](/terminology/services-to-snomed.csv)).
 * The 'admission_location' is similarly mapped to a suitable HL7 code from the [FHIR encounter-admit-source ValueSet](http://hl7.org/fhir/ValueSet/encounter-admit-source)  by using the ['admission-location-to-hl7.csv'](./terminology/admission-location-to-hl7.csv).
 Note that the concept map also includes mapping the location into a SNOMED-CT code if there is no direct mapping to one of 
 the concepts in the value set to distinguish such cases (e.g. WALK-IN/SELF REFERRAL).
 * The 'discharge_location' is similarly mapped to a suitable  code from the [FHIR encounter-discharge-disposition ValueSet](http://hl7.org/fhir/ValueSet/encounter-discharge-disposition)  by using the ['discharge-location-to-hl7.csv'](./terminology/discharge-location-to-hl7.csv).
-  Note that the concept map also includes mapping the location into a SNOMED-CT code if there is no direct mapping to one of
-  the concepts in the value set to distinguish such cases (e.g. HOME HEALTH CARE).
+Note that the concept map also includes mapping the location into a SNOMED-CT code if there is no direct mapping to one of
+the concepts in the value set to distinguish such cases (e.g. HOME HEALTH CARE).
 * In order not to lose the information Emergency department admission and discharge times ('edregtime' and 'edouttime'), 
 we use them in 'Encounter.location' element where the location is specified by the code indicating it is an Emergency 
 department.

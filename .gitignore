@@ -6,3 +6,4 @@ logs/*
 .idea/
 mimic-iv-data/*
 db/*
+target/
