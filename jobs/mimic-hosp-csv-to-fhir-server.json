@@ -82,6 +82,18 @@
         "conceptMapUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/services-to-snomed",
         "sourceValueSetUrl": "https://mimic.mit.edu/fhir/ValueSet/services",
         "targetValueSetUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/services"
+      },
+      {
+        "name": "order-types-to-snomed.csv",
+        "conceptMapUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/order-types-to-snomed",
+        "sourceValueSetUrl": "https://mimic.mit.edu/fhir/ValueSet/order-types",
+        "targetValueSetUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/order-types"
+      },
+      {
+        "name": "order-subtypes-to-snomed.csv",
+        "conceptMapUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/order-subtypes-to-snomed",
+        "sourceValueSetUrl": "https://mimic.mit.edu/fhir/ValueSet/order-subtypes",
+        "targetValueSetUrl": "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/order-subtypes"
       }
     ],
     "codeSystemFiles": [
@@ -205,6 +217,16 @@
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "hosp/prescriptions.csv",
+          "fileFormat": "csv"
+        }
+      }
+    },
+    {
+      "mappingRef": "https://mimic.mit.edu/fhir/mappings/poe",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "hosp/poe_subset.csv",
           "fileFormat": "csv"
         }
       }
