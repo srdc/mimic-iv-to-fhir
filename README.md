@@ -121,10 +121,15 @@ For prescriptions;
 * The route code given in the table is transformed to SNOMED-CT (http://hl7.org/fhir/ValueSet/route-codes)
 * Dosing units are converted to UCUM or codes from http://terminology.hl7.org/CodeSystem/v3-orderableDrugForm if possible
 
-### Mapping of ['poe'](https://mimic.mit.edu/docs/iv/modules/hosp/poe/) table into ['FHIR Servicerequest'](http://hl7.org/fhir/servicerequest.html) resources
+### Mapping of ['poe'](https://mimic.mit.edu/docs/iv/modules/hosp/poe/) table into ['FHIR ServiceRequest'](http://hl7.org/fhir/servicerequest.html) resources
 * The column 'order_type' is mapped to SNOMED-CT for classification of ordered service (ServiceRequest.category).
 * The column 'order_subtype' is mapped SNOMED-CT for further classification of ordered service (ServiceRequest.code). 
 Note that some codes cannot be mapped to a proper SNOMED-CT code.
+
+### Mapping of ['omr'](https://mimic.mit.edu/docs/iv/modules/hosp/omr/) table into ['FHIR Observation'](http://hl7.org/fhir/observation.html) resources
+* Results are mapped to Observation resources complying the FHIR VitalSigns profiles except the eGFR. So the corresponding 
+LOINC codes are used for Observation.code.
+* For blood pressure measures given in different contexts (lying, standing, etc), an additional SNOMED-CT code is used to indicate the context.
 
 ## How to run the ETL jobs
 You can download the latest release of toFHIR from the GitHub page or download the source code and build it to get the 

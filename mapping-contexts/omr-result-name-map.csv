@@ -1,0 +1,14 @@
+source_code,target_profile,target_code,target_unit,secondary_code
+Blood Pressure,http://hl7.org/fhir/StructureDefinition/bp,85354-9,mm[Hg],
+Blood Pressure Lying,http://hl7.org/fhir/StructureDefinition/bp,85354-9,mm[Hg],163033001
+Blood Pressure Sitting,http://hl7.org/fhir/StructureDefinition/bp,85354-9,mm[Hg],163035008
+Blood Pressure Standing (1 min),http://hl7.org/fhir/StructureDefinition/bp,85354-9,mm[Hg],163034007
+Blood Pressure Standing,http://hl7.org/fhir/StructureDefinition/bp,85354-9,mm[Hg],163034007
+Blood Pressure Standing (3 mins),http://hl7.org/fhir/StructureDefinition/bp,85354-9,mm[Hg],163034007
+BMI (kg/m2),http://hl7.org/fhir/StructureDefinition/bmi,39156-5,kg/m2,
+Weight (Lbs),http://hl7.org/fhir/StructureDefinition/bodyweight,29463-7,[lb_av],
+Height (Inches),http://hl7.org/fhir/StructureDefinition/bodyheight,8302-2,[in_i],
+BMI,http://hl7.org/fhir/StructureDefinition/bmi,39156-5,kg/m2,
+Weight,http://hl7.org/fhir/StructureDefinition/bodyweight,29463-7,[lb_av],
+Height,http://hl7.org/fhir/StructureDefinition/bodyheight,8302-2,[in_i],
+eFGR,,50384-7,mL/min/{1.73_m2},

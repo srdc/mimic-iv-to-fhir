@@ -230,6 +230,16 @@
           "fileFormat": "csv"
         }
       }
+    },
+    {
+      "mappingRef": "https://mimic.mit.edu/fhir/mappings/omr",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "hosp/omr.csv",
+          "fileFormat": "csv"
+        }
+      }
     }
   ]
 }
