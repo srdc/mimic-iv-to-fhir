@@ -1,4 +1,4 @@
-﻿source_system,source_code,source_display,target_system,target_code,target_display
+source_system,source_code,source_display,target_system,target_code,target_display
 https://mimic.mit.edu/fhir/CodeSystem/labitems,50801,Alveolar-arterial Gradient,http://loinc.org,19991-9,Alveolar-arterial oxygen Partial pressure difference
 https://mimic.mit.edu/fhir/CodeSystem/labitems,50802,Base Excess,http://loinc.org,11555-0,Base excess in Blood by calculation
 https://mimic.mit.edu/fhir/CodeSystem/labitems,50803,"Calculated Bicarbonate, Whole Blood",http://loinc.org,1959-6,Bicarbonate [Moles/volume] in Blood
