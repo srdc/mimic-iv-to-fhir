@@ -1,0 +1,4 @@
+source_system,source_code,source_display,target_system,target_code,target_display
+https://mimic.mit.edu/fhir/CodeSystem/testitems,90240,ACID FAST CULTURE,http://loinc.org,94540-2,"Mycobacterial stain and culture panel - Specimen"
+https://mimic.mit.edu/fhir/CodeSystem/testitems,90198,Staph aureus Screen,http://loinc.org,100913-3,Staph aureus and MRSA screening panel - Specimen by Organism specific culture
+

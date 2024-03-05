@@ -1,0 +1,139 @@
+source_system,source_code,source_display,target_system,target_code,target_display
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70003,ABSCESS,http://terminology.hl7.org/CodeSystem/v2-0487,ABS,Abscess
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90902,AMNIOTIC FLUID,http://terminology.hl7.org/CodeSystem/v2-0487,AMN,Amniotic fluid
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70006,ANORECTAL/VAGINAL,http://terminology.hl7.org/CodeSystem/v2-0487,GENV,Genital vaginal
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70006,ANORECTAL/VAGINAL,http://snomed.info/sct,119394009,Specimen from vagina
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70004,ARTHROPOD,http://terminology.hl7.org/CodeSystem/v2-0487,INS,Insect
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70004,ARTHROPOD,http://snomed.info/sct,258614005,Insect specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70005,ASPIRATE,http://terminology.hl7.org/CodeSystem/v2-0487,ASP,Aspirate
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70005,ASPIRATE,http://snomed.info/sct,119295008,Specimen obtained by aspiration
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70009,BILE,http://terminology.hl7.org/CodeSystem/v2-0487,BIFL,Bile fluid
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70010,BIOPSY,http://terminology.hl7.org/CodeSystem/v2-0487,BX,Biopsy
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70010,BIOPSY,http://snomed.info/sct,258415003,Biopsy specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70015,BLOOD,http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70087,Blood (CMV AB),http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70088,Blood (EBV),http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90919,Blood (LYME),http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70089,Blood (Malaria),http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70093,Blood (Toxo),http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70012,BLOOD CULTURE,http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70012,BLOOD CULTURE,http://snomed.info/sct,446131002,Blood specimen obtained for blood culture
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70014,BLOOD CULTURE - NEONATE,http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70014,BLOOD CULTURE - NEONATE,http://snomed.info/sct,446131002,Blood specimen obtained for blood culture
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70011,BLOOD CULTURE ( MYCO/F LYTIC BOTTLE),http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70011,BLOOD CULTURE ( MYCO/F LYTIC BOTTLE),http://snomed.info/sct,446131002,Blood specimen obtained for blood culture
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70016,BLOOD CULTURE (POST-MORTEM),http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70016,BLOOD CULTURE (POST-MORTEM),http://snomed.info/sct,446131002,Blood specimen obtained for blood culture
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70018,BONE MARROW,http://terminology.hl7.org/CodeSystem/v2-0487,MAR,Marrow
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70018,BONE MARROW,http://snomed.info/sct,119359002,Bone marrow specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70019,BONE MARROW - CYTOGENETICS,http://terminology.hl7.org/CodeSystem/v2-0487,MAR,Marrow
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70019,BONE MARROW - CYTOGENETICS,http://snomed.info/sct,119359002,Bone marrow specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70020,BRONCHIAL BRUSH,http://terminology.hl7.org/CodeSystem/v2-0487,BRUS,Brushing
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70020,BRONCHIAL BRUSH,http://snomed.info/sct,309176002,Broncial brushing specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70008,BRONCHIAL BRUSH - PROTECTED,http://terminology.hl7.org/CodeSystem/v2-0487,BRUS,Brushing
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70008,BRONCHIAL BRUSH - PROTECTED,http://snomed.info/sct,309176002,Broncial brushing specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70022,BRONCHIAL WASHINGS,http://terminology.hl7.org/CodeSystem/v2-0487,WASI,Washing
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70022,BRONCHIAL WASHINGS,http://snomed.info/sct,122609004,Specimen from lung obtained by bronchial washing procedure
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70021,BRONCHOALVEOLAR LAVAGE,http://terminology.hl7.org/CodeSystem/v2-0487,LAVPG,"Lavage, Pre-Bronch"
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70021,BRONCHOALVEOLAR LAVAGE,http://snomed.info/sct,440674008, Specimen obtained by lavage
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70023,CATHETER TIP-IV,http://terminology.hl7.org/CodeSystem/v2-0487,ARTC,"Catheter Tip, Arterial"
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70023,CATHETER TIP-IV,http://snomed.info/sct,119312009,"Catheter tip submitted as specimen"
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90909,CHORIONIC VILLUS SAMPLE,http://terminology.hl7.org/CodeSystem/v2-0487,PLC,Placenta
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90909,CHORIONIC VILLUS SAMPLE,http://snomed.info/sct,258565009,Chorionic villi specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90908,Cipro Resistant Screen,http://snomed.info/sct,258528007,Rectal swab
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70027,CORNEAL EYE SCRAPINGS,http://snomed.info/sct,258485006,Corneal scraping specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70026,CSF;SPINAL FLUID,http://terminology.hl7.org/CodeSystem/v2-0487,CSF,Cerebral spinal fluid
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70026,CSF;SPINAL FLUID,http://snomed.info/sct,258450006,Cerebrospinal fluid specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70029,DIALYSIS FLUID,http://terminology.hl7.org/CodeSystem/v2-0487,DIAF,Dialysis fluid
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70029,DIALYSIS FLUID,http://snomed.info/sct,258454002,Dialysis fluid sample
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70028,Direct Antigen Test for Herpes Simplex Virus Types 1 & 2,http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70028,Direct Antigen Test for Herpes Simplex Virus Types 1 & 2,http://snomed.info/sct,119297000,Blood sample
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70030,DIRECT ANTIGEN TEST FOR VARICELLA-ZOSTER VIRUS,http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70030,DIRECT ANTIGEN TEST FOR VARICELLA-ZOSTER VIRUS,http://snomed.info/sct,119297000,Blood sample
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70031,EAR,http://snomed.info/sct,447148003,Body substance specimen from ear
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70033,EYE,http://snomed.info/sct,119399004,Specimen from eye
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70038,FECAL SWAB,http://terminology.hl7.org/CodeSystem/v2-0487,STL,Stool
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70038,FECAL SWAB,http://snomed.info/sct,119339001,Stool specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70013,FLUID RECEIVED IN BLOOD CULTURE BOTTLES,http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70013,FLUID RECEIVED IN BLOOD CULTURE BOTTLES,http://snomed.info/sct,446131002,Blood specimen obtained for blood culture
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70036,FLUID WOUND,http://terminology.hl7.org/CodeSystem/v2-0487,WNDD,Wound drainage
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70036,FLUID WOUND,http://snomed.info/sct,122566000,Fluid specimen from wound
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70051,"FLUID,OTHER",http://terminology.hl7.org/CodeSystem/v2-0487,FLD,Flood other
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70051,"FLUID,OTHER",http://snomed.info/sct,309051001,Body fluid specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70037,FOOT CULTURE,http://terminology.hl7.org/CodeSystem/v2-0487,WND,Wound
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70037,FOOT CULTURE,http://snomed.info/sct,119365002,Specimen from wound
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70034,FOREIGN BODY,http://snomed.info/sct,447103002,Foreign body submitted as specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90912,Foreign Body - Sonication Culture,http://snomed.info/sct,447103002,Foreign body submitted as specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90913,HAIR,http://terminology.hl7.org/CodeSystem/v2-0487,HAR,Hair
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90913,HAIR,http://snomed.info/sct,119326000,Hair specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70046,IMMUNOLOGY,http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70046,IMMUNOLOGY,http://snomed.info/sct,119297000,Blood sample
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70045,Immunology (CMV),http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70045,Immunology (CMV),http://snomed.info/sct,119297000,Blood sample
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90914,Infection Control Yeast,http://terminology.hl7.org/CodeSystem/v2-0487,GENV,Gential Vagina
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90914,Infection Control Yeast,http://snomed.info/sct,258520000,Vaginal Swab specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70042,Influenza A/B by DFA,http://terminology.hl7.org/CodeSystem/v2-0487,MUCUS,Mucus
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70042,Influenza A/B by DFA,http://snomed.info/sct,472901003,Swab from nasal sinus
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70043,Influenza A/B by DFA - Bronch Lavage,http://terminology.hl7.org/CodeSystem/v2-0487,LAVPG,"Lavage, Pre-Bronch"
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70043,Influenza A/B by DFA - Bronch Lavage,http://snomed.info/sct,440674008, Specimen obtained by lavage
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90915,Isolate,http://snomed.info/sct,119303007,Microbial isolate
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70047,JOINT FLUID,http://terminology.hl7.org/CodeSystem/v2-0487,JNTFLD,"Fluid, Joint"
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70047,JOINT FLUID,http://snomed.info/sct,119332005,Synovial fluid sample
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70090,Mini-BAL,http://terminology.hl7.org/CodeSystem/v2-0487,FRS,"Fluid, Respiratory"
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70090,Mini-BAL,http://snomed.info/sct,309171007,Lower respiratory fluid sample
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70091,MRSA SCREEN,http://terminology.hl7.org/CodeSystem/v2-0487,MUCUS,Mucus
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70091,MRSA SCREEN,http://snomed.info/sct,472901003,Swab from nasal sinus
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70048,NAIL SCRAPINGS,http://terminology.hl7.org/CodeSystem/v2-0487,NAIL,Nail
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70048,NAIL SCRAPINGS,http://snomed.info/sct,447098004,Specimen from nail obtained by scraping
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70049,NEOPLASTIC BLOOD,http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70049,NEOPLASTIC BLOOD,http://snomed.info/sct,119297000,Blood sample
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70052,PERIPHERAL BLOOD LYMPHOCYTES,http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70052,PERIPHERAL BLOOD LYMPHOCYTES,http://snomed.info/sct,122551003,Peripheral blood specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70053,PERITONEAL FLUID,http://terminology.hl7.org/CodeSystem/v2-0487,FGA,"Fluid, Abdomen"
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70053,PERITONEAL FLUID,http://snomed.info/sct,168139001,Peritoneal fluid specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70054,PLEURAL FLUID,http://terminology.hl7.org/CodeSystem/v2-0487,PLR,Pleural fluid
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70054,PLEURAL FLUID,http://snomed.info/sct,418564007,Pleural fluid specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90920,PROSTHETIC JOINT FLUID,http://terminology.hl7.org/CodeSystem/v2-0487,JNTFLD,"Fluid, Joint"
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90920,PROSTHETIC JOINT FLUID,http://snomed.info/sct,119332005,Synovial fluid sample
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70058,RAPID RESPIRATORY VIRAL ANTIGEN TEST,http://snomed.info/sct,472901003,Swab from nasal sinus
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70057,Rapid Respiratory Viral Screen & Culture,http://snomed.info/sct,472901003,Swab from nasal sinus
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70056,RECTAL - R/O GC,http://snomed.info/sct,258528007,Rectal swab
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70065,SCOTCH TAPE PREP/PADDLE,http://snomed.info/sct,258664003,Scotch tape slide specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70017,SEROLOGY/BLOOD,http://terminology.hl7.org/CodeSystem/v2-0487,BLD,Whole blood
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70017,SEROLOGY/BLOOD,http://snomed.info/sct,119297000,Blood sample
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70061,SKIN SCRAPINGS,http://terminology.hl7.org/CodeSystem/v2-0487,SKN,Skin
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70061,SKIN SCRAPINGS,http://snomed.info/sct,446952006,Specimen from skin obtained by scraping
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70062,SPUTUM,http://terminology.hl7.org/CodeSystem/v2-0487,SPT,Sputum
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70062,SPUTUM,http://snomed.info/sct,119334006,Sputum specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70059,Staph aureus swab,http://snomed.info/sct,472901003,Swab from nasal sinus
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70060,Stem Cell - Blood Culture,http://snomed.info/sct,57731000052104,Stem cell specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70064,STOOL,http://terminology.hl7.org/CodeSystem/v2-0487,STL,Stool
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70064,STOOL,http://snomed.info/sct,119339001,Stool specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70066,STOOL (RECEIVED IN TRANSPORT SYSTEM)L,http://terminology.hl7.org/CodeSystem/v2-0487,STL,Stool
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70066,STOOL (RECEIVED IN TRANSPORT SYSTEM),http://snomed.info/sct,119339001,Stool specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70070,SWAB,http://snomed.info/sct,257261003,Swab specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70092,"SWAB, R/O GC",http://terminology.hl7.org/CodeSystem/v2-0487,GENV,Gential Vagina
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70092,"SWAB, R/O GC",http://snomed.info/sct,258520000,Vaginal Swab specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70071,SWAB - R/O YEAST,http://terminology.hl7.org/CodeSystem/v2-0487,GENV,Gential Vagina
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70071,SWAB - R/O YEAST,http://snomed.info/sct,258520000,Vaginal Swab specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90929,Swab R/O Yeast Screen,http://terminology.hl7.org/CodeSystem/v2-0487,GENV,Gential Vagina
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90929,Swab R/O Yeast Screen,http://snomed.info/sct,258520000,Vaginal Swab specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70074,THROAT,http://snomed.info/sct,258529004,Throat swab
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70075,THROAT CULTURE,http://snomed.info/sct,119389009,Specimen from throat
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70002,THROAT FOR STREP,http://snomed.info/sct,258529004,Throat swab
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70076,TISSUE,http://terminology.hl7.org/CodeSystem/v2-0487,TISS,Tissue
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70076,TISSUE,http://snomed.info/sct,119376003,Tissue specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90930,Touch Prep/Sections,http://terminology.hl7.org/CodeSystem/v2-0487,BX,Biopsy
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,90930,Touch Prep/Sections,http://snomed.info/sct,430855004,Touch preparation cytologic material
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70072,TRACHEAL ASPIRATE,http://terminology.hl7.org/CodeSystem/v2-0487,SPTT,Sputum - tracheal aspirate
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70072,TRACHEAL ASPIRATE,http://snomed.info/sct,258609006,Sputum specimen obtained by aspiration from trachea
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70079,URINE,http://terminology.hl7.org/CodeSystem/v2-0487,UR,Urine
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70079,URINE,http://snomed.info/sct,122575003,Urine specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70080,"URINE,KIDNEY",http://terminology.hl7.org/CodeSystem/v2-0487,URINN,"Urine, Nephrostomy"
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70080,"URINE,KIDNEY",http://snomed.info/sct,446907008,Urine specimen obtained from kidney (specimen)
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70082,"URINE,SUPRAPUBIC ASPIRATE",http://terminology.hl7.org/CodeSystem/v2-0487,UR,Urine
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70082,"URINE,SUPRAPUBIC ASPIRATE",http://snomed.info/sct,258576008,Suprapubic aspirate specimen
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70083,VARICELLA-ZOSTER CULTURE,http://snomed.info/sct,472862007,Swab from lesion of skin
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70024,VIRAL CULTURE: R/O CYTOMEGALOVIRUS,http://snomed.info/sct,258529004,Throat swab
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70085,WORM,http://terminology.hl7.org/CodeSystem/v2-0487,WORM,Worm
+https://mimic.mit.edu/fhir/CodeSystem/specimen_types,70085,WORM,http://snomed.info/sct,258618008,Helminth specimen
