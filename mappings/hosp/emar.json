@@ -1,4 +1,5 @@
 {
+  "id": "emar",
   "url": "https://mimic.mit.edu/fhir/mappings/emar",
   "name": "emar",
   "title": "Mapping of entries in 'emar' and 'emar_detail' tables in MIMIC-IV v2.0 dataset into FHIR MedicationAdministration resources.",
