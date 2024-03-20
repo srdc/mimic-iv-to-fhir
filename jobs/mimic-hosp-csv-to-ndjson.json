@@ -1,5 +1,5 @@
 {
-  "id": "mimic-csv-to-ndjson",
+  "id": "mimic-csv-to-ndjson-bck",
   "sourceSettings": {
     "source": {
       "jsonClass": "FileSystemSourceSettings",
@@ -12,7 +12,7 @@
     "jsonClass": "FileSystemSinkSettings",
     "path": "./mimic-iv-json",
     "fileFormat": "ndjson",
-    "numOfPartitions": 4,
+    "numOfPartitions": 1,
     "errorHandling": "continue"
   },
   "terminologyServiceSettings": {
