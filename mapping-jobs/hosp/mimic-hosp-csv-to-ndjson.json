@@ -1,5 +1,5 @@
 {
-  "id": "mimic-csv-to-ndjson-bck",
+  "id": "mimic-hosp-csv-to-ndjson",
   "sourceSettings": {
     "source": {
       "jsonClass": "FileSystemSourceSettings",

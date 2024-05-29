@@ -1,7 +1,7 @@
 [ {
-  "id" : "terminology",
-  "name" : "terminology",
-  "description" : "terminology",
+  "id" : "MIMICTerminologyService",
+  "name" : "MIMICTerminologyService",
+  "description" : "MIMIC-IV Terminology Service",
   "conceptMaps": [
     {
       "id": "labitems-to-loinc.csv",

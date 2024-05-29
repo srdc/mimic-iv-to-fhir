@@ -6,4 +6,5 @@ logs/*
 .idea/
 mimic-iv-data/*
 db/*
+tofhir-db/*
 target/
