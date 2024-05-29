@@ -15,7 +15,7 @@ required by toFHIR to perform a quick validation on source data. For example, ['
 FHIR resource. For example, ['patients.json'](./mappings/hosp/patients.json) provide the mapping that will convert each row in MIMIC-IV 'patient' table 
 into a FHIR Patient resource.
 * In the ['jobs'](./jobs) folder, you will find a range of job configurations that will convert data in a subset or all MIMIC-IV tables and 
-store them into a configured FHIR server or file system. For example, ['mimic-hosp-csv-to-fhir-server.json'](./jobs/mimic-hosp-csv-to-fhir-server.json) 
+store them into a configured FHIR server or file system. For example, ['mimic-hosp-csv-to-fhir-server.json'](jobs/hosp/mimic-hosp-csv-to-fhir-server.json) 
 will map all information in 'hosp' module given in CSV files into FHIR resources and store them a FHIR server where base 
 URL can be provided with environment variable 'FHIR_REPO_URL'.
 * In the ['terminology](./terminology) folder, you can find the CSV files that corresponds to FHIR ConceptMap or CodeSystem definitions 
