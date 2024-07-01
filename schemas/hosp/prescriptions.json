@@ -5,7 +5,7 @@
   "status": "draft",
   "version": "2.0",
   "description": "Schema of the 'emar' table in MIMIC-IV v2.0 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/emar/)",
-  "fhirVersion": "4.0.1",
+  "fhirVersion": "5.0.0",
   "kind": "logical",
   "abstract": false,
   "type": "Ext-prescriptions",
