@@ -1,0 +1,205 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-poe",
+  "name": "Ext-poe",
+  "status": "draft",
+  "version": "2.0",
+  "description": "Schema of the 'poe' table in MIMIC-IV v2.0 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/poe/)",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-poe",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-poe",
+        "path": "Ext-poe",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-poe.poe_id",
+        "path": "Ext-poe.poe_id",
+        "short": "Order identifier",
+        "definition": "A unique identifier for the given order. poe_id is composed of subject_id and a monotonically increasing integer, poe_seq, in the following format: subject_id-poe_seq",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-poe.poe_seq",
+        "path": "Ext-poe.poe_seq",
+        "short": "Sequence number for order",
+        "definition": "A monotonically increasing integer which chronologically sorts the POE orders. That is, POE orders can be ordered sequentially by poe_seq",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-poe.subject_id",
+        "path": "Ext-poe.subject_id",
+        "short": "Patient identifier",
+        "definition": "It is a unique identifier which specifies an individual patient. Any rows associated with a single subject_id pertain to the same individual",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-poe.hadm_id",
+        "path": "Ext-poe.hadm_id",
+        "short": "Admission identifier",
+        "definition": "It is an integer identifier which is unique for each patient hospitalization.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-poe.ordertime",
+        "path": "Ext-poe.ordertime",
+        "short": "Time of order",
+        "definition": "The date and time at which the provider order was made (Timestamp format: yyyy-MM-dd HH:mm:ss)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-poe.order_type",
+        "path": "Ext-poe.order_type",
+        "short": "Order type",
+        "definition": "The type of provider order. One of the following: ADT orders, Blood Bank, Cardiology, Consults, Critical Care, General Care, Hemodialysis, IV therapy, Lab, Medications, Neurology, Nutrition, OB, Radiology, Respiratory, TPN",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-poe.order_subtype",
+        "path": "Ext-poe.order_subtype",
+        "short": "Order sub type",
+        "definition": "Further detail on the type of order made by the provider. The order_subtype is best interpreted alongside the order_type, e.g. order_type: 'Cardiology' with order_subtype: 'Holter Monitor'",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-poe.transaction_type",
+        "path": "Ext-poe.transaction_type",
+        "short": "Type of order status change",
+        "definition": "The action which the provider performed when performing this order. One of the following: Change, Co, D/C, H, New, T",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-poe.discontinue_of_poe_id",
+        "path": "Ext-poe.discontinue_of_poe_id",
+        "short": "Identifier of discontinued order",
+        "definition": "If this order discontinues a previous order, then discontinue_of_poe_id will link to the previous order which was discontinued",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-poe.discontinued_by_poe_id",
+        "path": "Ext-poe.discontinued_by_poe_id",
+        "short": "Identifier of the order that discontinues this one",
+        "definition": "if this order was later discontinued by a distinct order, then discontinued_by_poe_id will link to that future order",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-poe.order_status",
+        "path": "Ext-poe.order_status",
+        "short": "Status of order",
+        "definition": "Whether the order is still active (‘Active’) or whether it has been inactivated (‘Inactive’).",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

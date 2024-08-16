@@ -1,0 +1,5 @@
+source_system,source_code,target_system,target_code,target_display
+https://mimic.mit.edu/fhir/CodeSystem/marital-status,SINGLE,http://terminology.hl7.org/CodeSystem/v3-MaritalStatus,U,Unmarried
+https://mimic.mit.edu/fhir/CodeSystem/marital-status,WIDOWED,http://terminology.hl7.org/CodeSystem/v3-MaritalStatus,W,Widowed
+https://mimic.mit.edu/fhir/CodeSystem/marital-status,DIVORCED,http://terminology.hl7.org/CodeSystem/v3-MaritalStatus,D,Divorced
+https://mimic.mit.edu/fhir/CodeSystem/marital-status,MARRIED,http://terminology.hl7.org/CodeSystem/v3-MaritalStatus,M,Married

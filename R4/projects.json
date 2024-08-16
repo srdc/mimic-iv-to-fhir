@@ -1,0 +1,148 @@
+[ {
+  "id" : "hosp",
+  "name" : "hosp",
+  "url" : "https://www.hosp.com",
+  "description" : "",
+  "schemas" : [ {
+    "id" : "Ext-labevents",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-labevents",
+    "type" : "Ext-labevents",
+    "name" : "Ext-labevents"
+  }, {
+    "id" : "Ext-transfers",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-transfers",
+    "type" : "Ext-transfers",
+    "name" : "Ext-transfers"
+  }, {
+    "id" : "Ext-omr",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-omr",
+    "type" : "Ext-omr",
+    "name" : "Ext-omr"
+  }, {
+    "id" : "Ext-diagnoses-icd",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-diagnoses-icd",
+    "type" : "Ext-diagnoses-icd",
+    "name" : "Ext-diagnoses-icd"
+  }, {
+    "id" : "Ext-emar-detail",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-emar-detail",
+    "type" : "Ext-emar-detail",
+    "name" : "Ext-emar-detail"
+  }, {
+    "id" : "Ext-admissions",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-admissions",
+    "type" : "Ext-admissions",
+    "name" : "Ext-admissions"
+  }, {
+    "id" : "Ext-services",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-services",
+    "type" : "Ext-services",
+    "name" : "Ext-services"
+  }, {
+    "id" : "Ext-poe",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-poe",
+    "type" : "Ext-poe",
+    "name" : "Ext-poe"
+  }, {
+    "id" : "Ext-procedures-icd",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-procedures-icd",
+    "type" : "Ext-procedures-icd",
+    "name" : "Ext-procedures-icd"
+  }, {
+    "id" : "Ext-patients",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-patients",
+    "type" : "Ext-patients",
+    "name" : "Ext-patients"
+  }, {
+    "id" : "Ext-d-icd-diagnoses",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-d-icd-diagnoses",
+    "type" : "Ext-d-icd-diagnoses",
+    "name" : "Ext-d-icd-diagnoses"
+  }, {
+    "id" : "Ext-prescriptions",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-prescriptions",
+    "type" : "Ext-prescriptions",
+    "name" : "Ext-prescriptions"
+  }, {
+    "id" : "Ext-microbiologyevents",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-microbiologyevents",
+    "type" : "Ext-microbiologyevents",
+    "name" : "Ext-microbiologyevents"
+  }, {
+    "id" : "Ext-emar",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-emar",
+    "type" : "Ext-emar",
+    "name" : "Ext-emar"
+  }, {
+    "id" : "Ext-medications",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-medications",
+    "type" : "Ext-medications",
+    "name" : "Ext-medications"
+  }, {
+    "id" : "Ext-careunits",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-careunits",
+    "type" : "Ext-careunits",
+    "name" : "Ext-careunits"
+  } ],
+  "mappings" : [ {
+    "id" : "medications-without-rxn",
+    "name" : "medications-without-rxn",
+    "url" : "https://mimic.mit.edu/fhir/mappings/medications-without-rxn"
+  }, {
+    "id" : "poe",
+    "name" : "poe",
+    "url" : "https://mimic.mit.edu/fhir/mappings/poe"
+  }, {
+    "id" : "patients",
+    "name" : "patients",
+    "url" : "https://mimic.mit.edu/fhir/mappings/patients"
+  }, {
+    "id" : "diagnoses-icd",
+    "name" : "diagnoses-icd",
+    "url" : "https://mimic.mit.edu/fhir/mappings/diagnoses-icd"
+  }, {
+    "id" : "microbiologyevents",
+    "name" : "microbiologyevents",
+    "url" : "https://mimic.mit.edu/fhir/mappings/microbiologyevents"
+  }, {
+    "id" : "admissions",
+    "name" : "admissions",
+    "url" : "https://mimic.mit.edu/fhir/mappings/admissions"
+  }, {
+    "id" : "careunits",
+    "name" : "careunits",
+    "url" : "https://mimic.mit.edu/fhir/mappings/careunits"
+  }, {
+    "id" : "omr",
+    "name" : "omr",
+    "url" : "https://mimic.mit.edu/fhir/mappings/omr"
+  }, {
+    "id" : "emar",
+    "name" : "emar",
+    "url" : "https://mimic.mit.edu/fhir/mappings/emar"
+  }, {
+    "id" : "medications",
+    "name" : "medications",
+    "url" : "https://mimic.mit.edu/fhir/mappings/medications"
+  }, {
+    "id" : "procedures-icd",
+    "name" : "procedures-icd",
+    "url" : "https://mimic.mit.edu/fhir/mappings/procedures-icd"
+  }, {
+    "id" : "labevents",
+    "name" : "labevents",
+    "url" : "https://mimic.mit.edu/fhir/mappings/labevents"
+  }, {
+    "id" : "prescriptions",
+    "name" : "prescriptions",
+    "url" : "https://mimic.mit.edu/fhir/mappings/prescriptions"
+  } ],
+  "mappingContexts" : [ "admission-type-concept-map.csv", "icd9toicd10cmgem.csv", "icd9toicd10pcsgem.csv", "ndcToMedDetails.csv", "omr-result-name-map.csv" ],
+  "mappingJobs" : [ {
+    "id" : "mimic-hosp-csv-to-ndjson",
+    "name" : "mimic-hosp-csv-to-ndjson"
+  }, {
+    "id" : "mimic-hosp-csv-to-fhir-server",
+    "name" : "mimic-hosp-csv-to-fhir-server"
+  } ]
+} ]

@@ -1,0 +1,36 @@
+{
+  "id": "patients",
+  "url": "https://mimic.mit.edu/fhir/mappings/patients",
+  "name": "patients",
+  "title": "Mapping of entries in 'patients' table in MIMIC-IV v2.0 dataset into FHIR Patient resources",
+  "source": [{
+    "alias": "source",
+    "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-patients"
+  }],
+  "mapping": [
+    {
+      "expression": {
+        "name": "patients-mapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Patient",
+          "id": "{{mpp:getHashedId('Patient', subject_id.toString())}}",
+          "meta": {
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "identifier": [
+            {
+              "use": "official",
+              "system": "{{%sourceSystem.sourceUri}}/fhir/subject_ids",
+              "value": "{{subject_id.toString()}}"
+            }
+          ],
+          "active": true,
+          "gender": "{{iif(gender='M', 'male', 'female')}}",
+          "birthDate": "{{(anchor_year - anchor_age)}}",
+          "deceasedDateTime": "{{? dod}}"
+        }
+      }
+    }
+  ]
+}

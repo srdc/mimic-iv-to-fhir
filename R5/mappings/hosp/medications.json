@@ -1,0 +1,116 @@
+{
+  "id": "medications",
+  "url": "https://mimic.mit.edu/fhir/mappings/medications",
+  "name": "medications",
+  "title": "Mapping of mentioned medications in 'prescriptions' table in MIMIC-IV v2.0 dataset into FHIR Medication resources",
+  "source": [
+    {
+      "alias": "prescribed_meds",
+      "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-medications"
+    }
+  ],
+  "variable": [
+    {
+      "name": "rxcui",
+      "language": "text/fhirpath",
+      "expression": "rxn:findRxConceptIdsByNdc(ndc)"
+    },
+    {
+      "name": "medDetails",
+      "language": "text/fhirpath",
+      "expression": "rxn:getMedicationDetails(%rxcui)"
+    }
+  ],
+  "mapping": [
+    {
+      "expression": {
+        "name": "medications-mapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Medication",
+          "id": "{{mpp:getHashedId('Medication', drug & gsn.toString() & ndc.toString() & formulary_drug_cd)}}",
+          "identifier": [
+            {
+              "{{#gsn}}": "{{gsn}}",
+               "{{?}}": {
+                 "use": "official",
+                 "system": "http://www.fdbhealth.com/gsn",
+                 "value": "{{%gsn.toString()}}"
+               }
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "{{#ndc}}": "{{ndc.toString()}}",
+                "{{?}}": {
+                  "system": "http://hl7.org/fhir/sid/ndc",
+                  "code": "{{%ndc}}",
+                  "display": "{{drug}}"
+                }
+              },
+              {
+                "{{#fdc}}": "{{formulary_drug_cd}}",
+                "{{?}}": {
+                  "system": "http://fhir.mimic.mit.edu/CodeSystem/mimic-medication-formulary-drug-cd",
+                  "code": "{{%fdc}}"
+                }
+              }
+            ],
+            "text": "{{drug}}"
+          },
+          "doseForm": {
+            "coding": {
+                "{{#dfc}}": "{{%medDetails.doseFormConcept}}",
+                "{{*}}": {
+                  "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                  "code": "{{%dfc.doseFormRxcui}}",
+                  "display": "{{? %dfc.doseFormName}}"
+                }
+            },
+            "text": "{{? prod_strength}}"
+          },
+          "ingredient": {
+            "{{#ingrd}}": "{{%medDetails.ingredientAndStrength}}",
+            "{{*}}": {
+              "item" : {
+                "concept" : {
+                  "coding" : [ {
+                    "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                    "code": "{{%ingrd.activeIngredientRxcui}}",
+                    "display": "{{%ingrd.activeIngredientName}}"
+                  }, {
+                    "{{#atcCode}}": "{{rxn:getATC(%ingrd.activeIngredientRxcui)}}",
+                    "{{?}}": {
+                      "system": "http://www.whocc.no/atc",
+                      "code": "{{%atcCode}}"
+                    }
+                  } ],
+                  "text" : "{{%ingrd.activeIngredientName}}"
+                }
+              },
+              "strengthRatio": {
+                "numerator": {
+                  "{{#nmrUnit}}": "{{trms:translateToCoding(%ingrd.numeratorUnit, 'http://www.nlm.nih.gov/research/umls/rxnorm', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/medication-units-to-ucum-or-drugform')}}",
+                  "{{?}}": {
+                    "value": "{{%ingrd.numeratorValue}}",
+                    "system": "{{%nmrUnit.system}}",
+                    "code": "{{%nmrUnit.code}}"
+                  }
+                },
+                "denominator": {
+                  "{{#dnmrUnit}}": "{{trms:translateToCoding(%ingrd.denominatorUnit, 'http://www.nlm.nih.gov/research/umls/rxnorm', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/medication-units-to-ucum-or-drugform')}}",
+                  "{{?}}": {
+                    "value": "{{%ingrd.denominatorValue}}",
+                    "system": "{{%dnmrUnit.system}}",
+                    "code": "{{%dnmrUnit.code}}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

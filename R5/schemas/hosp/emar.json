@@ -1,0 +1,205 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-emar",
+  "name": "Ext-emar",
+  "status": "draft",
+  "version": "2.0",
+  "description": "Schema of the 'emar' table in MIMIC-IV v2.0 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/emar/)",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-emar",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-emar",
+        "path": "Ext-emar",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-emar.subject_id",
+        "path": "Ext-emar.subject_id",
+        "short": "Patient identifier",
+        "definition": "subject_id is a unique identifier which specifies an individual patient. Any rows associated with a single subject_id pertain to the same individual.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-emar.hadm_id",
+        "path": "Ext-emar.hadm_id",
+        "short": "Unique identifier for hospitalization",
+        "definition": "It is an integer identifier which is unique for each patient hospitalization",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-emar.emar_id",
+        "path": "Ext-emar.emar_id",
+        "short": "Electronic Medication Administration Identifier",
+        "definition": "It is a unique identifier for each order made in eMAR. emar_id is composed of subject_id and emar_seq in the following pattern: ‘subject_id-emar_seq’.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-emar.emar_seq",
+        "path": "Ext-emar.emar_seq",
+        "short": "Consecutive medication administration number",
+        "definition": "A consecutive integer which numbers eMAR orders chronologically.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-emar.poe_id",
+        "path": "Ext-emar.poe_id",
+        "short": "Prescription Order identifier",
+        "definition": "An identifier which links administrations in emar to orders in poe and prescriptions.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-emar.pharmacy_id",
+        "path": "Ext-emar.pharmacy_id",
+        "short": "Prescription identifier",
+        "definition": "An identifier which links administrations in emar to pharmacy information in the pharmacy table.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-emar.charttime",
+        "path": "Ext-emar.charttime",
+        "short": "Medication administration time",
+        "definition": "The time at which the medication was administered. (in timestamp format, e.g. 2180-03-23 11:51:00)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-emar.medication",
+        "path": "Ext-emar.medication",
+        "short": "Medication name",
+        "definition": "The name of the medication which was administered.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-emar.event_txt",
+        "path": "Ext-emar.event_txt",
+        "short": "Details about administration",
+        "definition": "Information about the administration. Most frequently event_txt is ‘Administered’, but other possible values are ‘Applied’, ‘Confirmed’, ‘Delayed’, ‘Not Given’, and so on",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-emar.scheduletime",
+        "path": "Ext-emar.scheduletime",
+        "short": "Scheduled time",
+        "definition": "If present, the time at which the administration was scheduled. (in timestamp format, e.g. 2180-03-23 11:51:00)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-emar.storetime",
+        "path": "Ext-emar.storetime",
+        "short": "Data entry time",
+        "definition": "The time at which the administration was documented in the eMAR table.  (in timestamp format, e.g. 2180-03-23 11:51:00)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

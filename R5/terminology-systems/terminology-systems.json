@@ -1,0 +1,93 @@
+[ {
+  "id" : "MIMICTerminologyService",
+  "name" : "MIMICTerminologyService",
+  "description" : "MIMIC-IV Terminology Service",
+  "conceptMaps" : [ {
+    "id" : "labitems-to-loinc.csv",
+    "name" : "labitems-to-loinc.csv",
+    "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhirmimic-hosp-csv-to-fhir-server.json/ConceptMap/labitems-to-loinc",
+    "sourceValueSetUrl" : "https://mimic.mit.edu/fhir/ValueSet/labitems",
+    "targetValueSetUrl" : "http://loinc.org/vs"
+  }, {
+    "id" : "labitem-coded-values-to-loinc.csv",
+    "name" : "labitem-coded-values-to-loinc.csv",
+    "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/labitem-coded-values-to-other",
+    "sourceValueSetUrl" : "https://mimic.mit.edu/fhir/ValueSet/labitem-coded-values",
+    "targetValueSetUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/labitem-coded-values"
+  }, {
+    "id" : "admission-location-to-hl7.csv",
+    "name" : "admission-location-to-hl7.csv",
+    "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/admission-location-to-hl7",
+    "sourceValueSetUrl" : "https://mimic.mit.edu/fhir/ValueSet/admission-locations",
+    "targetValueSetUrl" : "http://hl7.org/fhir/ValueSet/encounter-admit-source"
+  }, {
+    "id" : "discharge-location-to-hl7.csv",
+    "name" : "discharge-location-to-hl7.csv",
+    "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/discharge-location-to-hl7",
+    "sourceValueSetUrl" : "https://mimic.mit.edu/fhir/ValueSet/discharge-locations",
+    "targetValueSetUrl" : "http://hl7.org/fhir/ValueSet/encounter-discharge-disposition"
+  }, {
+    "id" : "marital-status-to-hl7.csv",
+    "name" : "marital-status-to-hl7.csv",
+    "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/marital-status-to-hl7",
+    "sourceValueSetUrl" : "https://mimic.mit.edu/fhir/ValueSet/marital-status",
+    "targetValueSetUrl" : "http://hl7.org/fhir/ValueSet/marital-status"
+  }, {
+    "id" : "race-to-hl7.csv",
+    "name" : "race-to-hl7.csv",
+    "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/race-to-hl7",
+    "sourceValueSetUrl" : "https://mimic.mit.edu/fhir/ValueSet/race",
+    "targetValueSetUrl" : "http://terminology.hl7.org/ValueSet/v3-Race"
+  }, {
+    "id" : "medication-units-to-ucum-or-drugform.csv",
+    "name" : "medication-units-to-ucum-or-drugform.csv",
+    "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/medication-units-to-ucum-or-drugform",
+    "sourceValueSetUrl" : "https://mimic.mit.edu/fhir/ValueSet/medication-form-units",
+    "targetValueSetUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/medication-units"
+  }, {
+    "id" : "medication-dose-to-orderable-drug-form.csv",
+    "name" : "medication-dose-to-orderable-drug-form.csv",
+    "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/medication-dose-to-orderable-drug-form",
+    "sourceValueSetUrl" : "https://mimic.mit.edu/fhir/ValueSet/medication-dose-units",
+    "targetValueSetUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/medication-units"
+  }, {
+    "id" : "medication-route-codes-to-snomed.csv",
+    "name" : "medication-route-codes-to-snomed.csv",
+    "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/medication-route-codes-to-snomed",
+    "sourceValueSetUrl" : "https://mimic.mit.edu/fhir/ValueSet/medication-route-codes",
+    "targetValueSetUrl" : "http://hl7.org/fhir/ValueSet/route-codes"
+  }, {
+    "id" : "careunits-to-hl7.csv",
+    "name" : "careunits-to-hl7.csv",
+    "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/careunits-to-hl7",
+    "sourceValueSetUrl" : "https://mimic.mit.edu/fhir/ValueSet/care-units",
+    "targetValueSetUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/care-units"
+  }, {
+    "id" : "services-to-snomed.csv",
+    "name" : "services-to-snomed.csv",
+    "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/services-to-snomed",
+    "sourceValueSetUrl" : "https://mimic.mit.edu/fhir/ValueSet/services",
+    "targetValueSetUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/services"
+  }, {
+    "id" : "order-types-to-snomed.csv",
+    "name" : "order-types-to-snomed.csv",
+    "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/order-types-to-snomed",
+    "sourceValueSetUrl" : "https://mimic.mit.edu/fhir/ValueSet/order-types",
+    "targetValueSetUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/order-types"
+  }, {
+    "id" : "order-subtypes-to-snomed.csv",
+    "name" : "order-subtypes-to-snomed.csv",
+    "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/order-subtypes-to-snomed",
+    "sourceValueSetUrl" : "https://mimic.mit.edu/fhir/ValueSet/order-subtypes",
+    "targetValueSetUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ValueSet/order-subtypes"
+  } ],
+  "codeSystems" : [ {
+    "id" : "labitems-code-system.csv",
+    "name" : "labitems-code-system.csv",
+    "codeSystem" : "https://mimic.mit.edu/fhir/CodeSystem/labitems"
+  }, {
+    "id" : "services.csv",
+    "name" : "services.csv",
+    "codeSystem" : "https://mimic.mit.edu/fhir/CodeSystem/services"
+  } ]
+} ]

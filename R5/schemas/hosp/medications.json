@@ -1,0 +1,125 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-medications",
+  "name": "Ext-medications",
+  "status": "draft",
+  "version": "2.0",
+  "description": "Schema of the 'emar' table in MIMIC-IV v2.0 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/emar/)",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-medications",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-medications",
+        "path": "Ext-medications",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-medications.drug",
+        "path": "Ext-medications.drug",
+        "short": "Drug name",
+        "definition": "A free-text description of the medication administered.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-medications.formulary_drug_cd",
+        "path": "Ext-medications.formulary_drug_cd",
+        "short": "Drug formula code",
+        "definition": "A hospital specific ontology used to order drugs from the formulary.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-medications.gsn",
+        "path": "Ext-medications.gsn",
+        "short": "GSN",
+        "definition": "The Generic Sequence Number (GSN), a coded identifier used for medications",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-medications.ndc",
+        "path": "Ext-medications.ndc",
+        "short": "NDC",
+        "definition": "The National Drug Code (NDC), a coded identifier which uniquely identifiers medications",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-medications.prod_strength",
+        "path": "Ext-medications.prod_strength",
+        "short": "Product strength",
+        "definition": "A free-text description of the composition of the prescribed medication (e.g. ‘12 mg / 0.8 mL Oral Syringe’, ‘12.5mg Tablet’, etc).",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-medications.form_unit_disp",
+        "path": "Ext-medications.form_unit_disp",
+        "short": "Form unit",
+        "definition": "The unit of measurement used for the formulary dosage",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,349 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-prescriptions",
+  "name": "Ext-prescriptions",
+  "status": "draft",
+  "version": "2.0",
+  "description": "Schema of the 'emar' table in MIMIC-IV v2.0 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/emar/)",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-prescriptions",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-prescriptions",
+        "path": "Ext-prescriptions",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.subject_id",
+        "path": "Ext-prescriptions.subject_id",
+        "short": "Patient identifier",
+        "definition": "subject_id is a unique identifier which specifies an individual patient. Any rows associated with a single subject_id pertain to the same individual.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.hadm_id",
+        "path": "Ext-prescriptions.hadm_id",
+        "short": "Unique identifier for hospitalization",
+        "definition": "It is an integer identifier which is unique for each patient hospitalization",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.pharmacy_id",
+        "path": "Ext-prescriptions.pharmacy_id",
+        "short": "Pharmacy entry identifier",
+        "definition": "An identifier which links prescription to pharmacy information in the pharmacy table",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.poe_id",
+        "path": "Ext-prescriptions.poe_id",
+        "short": "Prescription Order identifier",
+        "definition": "Identifier of the order",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.poe_seq",
+        "path": "Ext-prescriptions.poe_seq",
+        "short": "Prescription Order sequence",
+        "definition": "Prescription Order sequence",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.starttime",
+        "path": "Ext-prescriptions.starttime",
+        "short": "Prescribed start time",
+        "definition": "The prescribed start time for the medication",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.stoptime",
+        "path": "Ext-prescriptions.stoptime",
+        "short": "Prescribed stop time",
+        "definition": "The prescribed stop time for the medication",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.drug_type",
+        "path": "Ext-prescriptions.drug_type",
+        "short": "Drug type",
+        "definition": "The component of the prescription which the drug occupies. Can be one of ‘MAIN’, ‘BASE’, or ‘ADDITIVE’.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.drug",
+        "path": "Ext-prescriptions.drug",
+        "short": "Drug name",
+        "definition": "A free-text description of the medication administered.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.formulary_drug_cd",
+        "path": "Ext-prescriptions.formulary_drug_cd",
+        "short": "Drug formula code",
+        "definition": "A hospital specific ontology used to order drugs from the formulary.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.gsn",
+        "path": "Ext-prescriptions.gsn",
+        "short": "GSN",
+        "definition": "The Generic Sequence Number (GSN), a coded identifier used for medications",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.ndc",
+        "path": "Ext-prescriptions.ndc",
+        "short": "NDC",
+        "definition": "The National Drug Code (NDC), a coded identifier which uniquely identifiers medications",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.prod_strength",
+        "path": "Ext-prescriptions.prod_strength",
+        "short": "Product strength",
+        "definition": "A free-text description of the composition of the prescribed medication (e.g. ‘12 mg / 0.8 mL Oral Syringe’, ‘12.5mg Tablet’, etc).",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.form_rx",
+        "path": "Ext-prescriptions.form_rx",
+        "short": "Form code",
+        "definition": "The container in which the formulary dose is delivered (e.g. ‘TABLET’, ‘VIAL’, etc)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.dose_val_rx",
+        "path": "Ext-prescriptions.dose_val_rx",
+        "short": "Dose",
+        "definition": "The prescribed dose for the patient intended to be administered over the given time period.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.dose_unit_rx",
+        "path": "Ext-prescriptions.dose_unit_rx",
+        "short": "Dose Unit",
+        "definition": "The unit of measurement for the dose",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.form_val_disp",
+        "path": "Ext-prescriptions.form_val_disp",
+        "short": "Form amount",
+        "definition": "The amount of the medication which is contained in a single formulary dose",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.form_unit_disp",
+        "path": "Ext-prescriptions.form_unit_disp",
+        "short": "Form unit",
+        "definition": "The unit of measurement used for the formulary dosage",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.doses_per_24_hrs",
+        "path": "Ext-prescriptions.doses_per_24_hrs",
+        "short": "Doses per 24h",
+        "definition": "The number of doses per 24 hours for which the medication is to be given. A daily dose would result in doses_per_24_hrs: 1, bidaily (BID) would be 2, and so on",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-prescriptions.route",
+        "path": "Ext-prescriptions.route",
+        "short": "Route code",
+        "definition": "The route of administration for the medication",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

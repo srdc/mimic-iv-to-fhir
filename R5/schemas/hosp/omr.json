@@ -1,0 +1,109 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-omr",
+  "name": "Ext-omr",
+  "status": "draft",
+  "version": "2.0",
+  "description": "Schema of the 'omr' table in MIMIC-IV v2.0 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/omr/)",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-omr",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-omr",
+        "path": "Ext-omr",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-omr.subject_id",
+        "path": "Ext-omr.subject_id",
+        "short": "Patient identifier",
+        "definition": "It is a unique identifier which specifies an individual patient. Any rows associated with a single subject_id pertain to the same individual. As subject_id is the primary key for the table, it is unique for each row.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-omr.chartdate",
+        "path": "Ext-omr.chartdate",
+        "short": "Date of observation",
+        "definition": "The date on which the observation was recorded.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "date",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/date"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-omr.seq_num",
+        "path": "Ext-omr.seq_num",
+        "short": "Seq number",
+        "definition": "An monotonically increasing integer which uniquely distinguishes results of the same type recorded on the same day. For example, if two blood pressure measurements occur on the same day, seq_num orders them chronologically",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-omr.result_name",
+        "path": "Ext-omr.result_name",
+        "short": "Name of the result",
+        "definition": "Each row provides detail regarding a single observation in the EHR. result_name provides a human interpretable description of the observation.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-omr.result_value",
+        "path": "Ext-omr.result_value",
+        "short": "Value of the result",
+        "definition": "result_value is the value associated with the given OMR observation. For example, for the result_name of ‘Blood Pressure’, the field_value column contains the recorded blood pressure (120/80, 130/70, and so on).",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

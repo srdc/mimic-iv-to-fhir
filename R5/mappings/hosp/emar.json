@@ -1,0 +1,71 @@
+{
+  "id": "emar",
+  "url": "https://mimic.mit.edu/fhir/mappings/emar",
+  "name": "emar",
+  "title": "Mapping of entries in 'emar' and 'emar_detail' tables in MIMIC-IV v2.0 dataset into FHIR MedicationAdministration resources.",
+  "source": [
+    {
+      "alias": "emar",
+      "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-emar",
+      "joinOn": [
+        "poe_id", "emar_id"
+      ]
+    },
+    {
+      "alias": "prescription",
+      "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-prescriptions",
+      "joinOn": [
+        "poe_id", null
+      ]
+    },
+    {
+      "alias": "emarDetail",
+      "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-emar-detail",
+      "joinOn": [
+        null, "emar_id"
+      ]
+    }
+  ],
+  "mapping": [
+    {
+      "expression": {
+        "name": "medication-administration-mapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "MedicationAdministration",
+          "id": "{{mpp:getHashedId('MedicationAdministration',emar_id.toString())}}",
+          "identifier": [
+            {
+              "use": "official",
+              "system": "{{%sourceSystem.sourceUri}}/fhir/emar_seq",
+              "value": "{{emar_seq.toString()}}"
+            }
+          ],
+          "status": "{{}}",
+          "medication": {
+            "reference": {
+              "reference": "{{}}",
+              "display": "{{? medication}}",
+              "type": "Medication"
+            }
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}",
+          "occurenceDateTime": "{{charttime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
+          "request": "{{mpp:createFhirReferenceWithHashedId('MedicationRequest', poe_id.toString())}}",
+          "dosage": {
+            "site": "{{}}",
+            "route": "{{}}",
+            "dose": {
+              "value": 500,
+              "unit": "mg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg"
+            },
+            "rateRatio": {}
+          }
+        }
+      }
+    }
+  ]
+}
