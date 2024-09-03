@@ -2,9 +2,10 @@
 *.bat
 *.sh
 
-logs/*
+**/logs/*
 .idea/
 mimic-iv-data/*
 db/*
 tofhir-db/*
 target/
+projects.json
