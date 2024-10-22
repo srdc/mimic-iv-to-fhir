@@ -5,7 +5,7 @@
   "conceptMaps" : [ {
     "id" : "labitems-to-loinc.csv",
     "name" : "labitems-to-loinc.csv",
-    "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhirmimic-hosp-csv-to-fhir-server.json/ConceptMap/labitems-to-loinc",
+    "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/labitems-to-loinc",
     "sourceValueSetUrl" : "https://mimic.mit.edu/fhir/ValueSet/labitems",
     "targetValueSetUrl" : "http://loinc.org/vs"
   }, {

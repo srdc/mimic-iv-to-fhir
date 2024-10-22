@@ -11,7 +11,7 @@
     },
     {
       "alias": "icdConceptMap",
-      "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-tofhir-concept-map",
+      "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-d-icd-diagnoses",
       "joinOn": ["icd_version", "icd_code"]
     }
   ],

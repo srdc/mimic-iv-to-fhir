@@ -6,7 +6,7 @@
       "jsonClass" : "FileSystemSourceSettings",
       "name" : "MIMIC-IV v2.0",
       "sourceUri" : "https://physionet.org/content/mimiciv/2.0",
-      "dataFolderPath" : "./mimic-iv-data",
+      "dataFolderPath" : "C:\\development\\data\\mimic-iv-2.2\\hosp",
       "asStream" : false
     }
   },

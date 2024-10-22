@@ -35,17 +35,17 @@ to set birthDate element.
 * As you may see from the mapping definition, the mapping produces an FHIR Observation resource compliant with [US-Core Observation Lab profile](http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab). 
 Similar to this you can update the mapping definition to produce resources that are compliant with other profiles you need.
 * The 'itemid' that is the identifier indicating the lab test in MIMIC-IV data is mapped to a corresponding LOINC code. 
-For this mapping, we have used the mapping [file](https://github.com/MIT-LCP/mimic-code/blob/main/mimic-iv/concepts/concept_map/d_labitems_to_loinc.csv) provided in [MIMIC-Code repository](https://github.com/MIT-LCP/mimic-code).
+For this mapping, we have used the mapping [file](https://github.com/MIT-LCP/mimic-code/blob/main/mimic-iv/mapping/d_labitems_to_loinc.csv) provided in [MIMIC-Code repository](https://github.com/MIT-LCP/mimic-code).
 and convert it to the toFHIR CSV representation of FHIR ConceptMap, [labitems-to-loinc.csv](terminology-systems/MIMICTerminologyService/labitems-to-loinc.csv).
 Both the 'itemid' and the corresponding LOINC code (if exists) are set in Observation.code element as they may be both 
 beneficial for the users. 
 * As you may know, when the lab result is non-numeric, textual data is provided in MIMIC data. By using toFHIR terminology 
 mapping facilities, we have shown how you can map some of these to corresponding LOINC or SNOMED-CT codes to enhance the 
-semantics of your data while converting it to FHIR. The file ['labitem-coded-values-to-loinc.csv'](terminology-systems/MIMICTerminologyService/labitem-coded-values-to-loinc.csv)
-provides the ConceptMap file including some examples.For example, the values 'NEG' or 'NEGATIVE' are transformed into the LOINC 
+semantics of your data while converting it to FHIR. The file ['labitem-coded-values-to-loinc.csv'](terminology-systems/MIMICTerminologyService/labitem-coded-values-to-loinc.csv) provides the 
+ConceptMap file including some examples. For example, the values 'NEG' or 'NEGATIVE' are transformed into the LOINC 
 code 'LA6577-6'. You can update the file with new mappings to map the values to your own value sets.
-If the 'value' column is null (as there are many in the data), we also try to parse the 'comments' column and convert it to a corresponding code by 
-writing some simple FHIR path expressions
+If the 'value' column is null (as there are many in the data), we also try to parse the 'comments' column and convert it 
+to a corresponding code by writing some simple FHIR path expressions.
 * Numeric lab results provided in the 'valuenum' column as well as the statements like '>1.05' provided in the 
 'value' column are converted to quantified values and set to Observation.valueQuantity.
 * If we cannot extract a numeric or coded value with the above methods, then value is set as valueString in Observation.
