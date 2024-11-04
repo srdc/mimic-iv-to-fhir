@@ -10,23 +10,7 @@
     "joinOn" : [ ]
   } ],
   "context" : { },
-  "variable" : [ {
-    "name" : "testIds",
-    "language" : "text/fhirpath",
-    "expression" : "%microbiologyresults.test_itemid.distinct()"
-  }, {
-    "name" : "results",
-    "language" : "text/fhirpath",
-    "expression" : "(%microbiologyresults.microevent_id)"
-  }, {
-    "name" : "resultIds",
-    "language" : "text/fhirpath",
-    "expression" : "(%microbiologyresults.micro_specimen_id & %microbiologyresults.test_itemid & %microbiologyresults.org_itemid).distinct()"
-  }, {
-    "name" : "suscResultsId",
-    "language" : "text/fhirpath",
-    "expression" : "%microbiologyresults.where(ab_itemid.exists()).select(micro_specimen_id & test_itemid & org_itemid & ab_itemid).distinct()"
-  } ],
+  "variable" : [ ],
   "mapping" : [ {
     "expression" : {
       "name" : "diagnostic-report-mapping",
@@ -52,8 +36,8 @@
         "effectiveDateTime" : "{{charttime.nav:orElse(chartdate).first().utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
         "specimen" : "{{* mpp:createFhirReferenceWithHashedId('Specimen', micro_specimen_id.toString())}}",
         "result" : {
-          "{{#oid}}" : "{{%resultIds | %suscResultsId}}",
-          "{{*}}" : "{{mpp:createFhirReferenceWithHashedId('Observation', %oid)}}"
+          "{{#oid}}" : "{{microevent_id}}",
+          "{{*}}" : "{{mpp:createFhirReferenceWithHashedId('Observation', %oid.toString())}}"
         },
         "id" : "{{mpp:getHashedId('DiagnosticReport', subject_id.toString() & micro_specimen_id.toString())}}",
         "meta" : {
@@ -139,12 +123,7 @@
               "text" : "{{%note}}"
             }
           },
-          "specimen" : {
-            "identifier" : {
-              "system" : "{{%sourceSystem.sourceUri}}/fhir/micro_specimen_ids",
-              "value" : "{{micro_specimen_id.toString()}}"
-            }
-          },
+          "specimen" : "{{mpp:createFhirReferenceWithHashedId('Specimen', micro_specimen_id.toString())}}",
           "component" : [ {
             "{{#o_itemid}}" : "{{org_itemid[%ind]}}",
             "{{?}}" : {
