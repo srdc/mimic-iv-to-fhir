@@ -1,0 +1,72 @@
+source_code,target_code
+Stopped - Unscheduled,stopped
+Delayed Stopped,stopped
+Stopped,stopped
+Delayed Restarted,on-hold
+Restarted in Other Location,in-progress
+Delayed Not Stopped,in-progress
+Delayed Removed,stopped
+Started,in-progress
+Assessed in Other Location,unknown
+Delayed Not Flushed,in-progress
+TPN Rate Not Changed,in-progress
+Removed Existing / Applied New in Other Location,completed
+Documented in O.R. Holding,completed
+Applied in Other Location,completed
+nan,unknown
+Stopped - Unscheduled in Other Location,stopped
+Delayed Not Applied,not-done
+Not Started,not-done
+Administered in Other Location,completed
+Delayed Flushed,completed
+Delayed Not Removed,in-progress
+Read in Other Location,unknown
+Delayed Stopped As Directed,stopped
+Started in Other Location,in-progress
+Not Given,not-done
+Flushed,completed
+Stopped As Directed,stopped
+ in Other Location,unknown
+Confirmed,completed
+Delayed,on-hold
+Removed - Unscheduled,stopped
+Not Confirmed,not-done
+Delayed Not Confirmed,not-done
+Delayed Not Assessed,unknown
+Delayed Confirmed,completed
+Delayed Assessed,in-progress
+Delayed Applied,in-progress
+Rate Change in Other Location,in-progress
+Flushed in Other Location,completed
+Not Applied,not-done
+Confirmed in Other Location,completed
+Delayed Rate Change,in-progress
+Delayed Administered,in-progress
+Read,unknown
+Removed,stopped
+Administered Bolus from IV Drip,completed
+Not Read,unknown
+Assessed,unknown
+Partial Administered,in-progress
+Infusion Reconciliation,in-progress
+Removed in Other Location,stopped
+Not Removed,in-progress
+Delayed Not Started,not-done
+Not Assessed,unknown
+Applied,completed
+Not Given per Sliding Scale in Other Location,not-done
+Not Flushed,in-progress
+Infusion Reconciliation Not Done,not-done
+Not Given per Sliding Scale,not-done
+Delayed Started,in-progress
+Not Started per Sliding Scale,not-done
+Stopped in Other Location,stopped
+Not Stopped,in-progress
+Removed Existing / Applied New,completed
+Restarted,in-progress
+Partial,in-progress
+Administered,completed
+Infusion Reconciliation in Other Location,in-progress
+Hold Dose,on-hold
+Not Stopped per Sliding Scale,in-progress
+Rate Change,in-progress

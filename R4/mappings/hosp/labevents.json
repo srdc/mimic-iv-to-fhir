@@ -2,7 +2,7 @@
   "id" : "labevents",
   "url" : "https://mimic.mit.edu/fhir/mappings/labevents",
   "name" : "labevents",
-  "title" : "Mapping of entries in 'labevents' table in MIMIC-IV v3.0 dataset into FHIR Observation resources",
+  "title" : "Mapping of entries in 'labevents' table in MIMIC-IV v3.1 dataset into FHIR Observation resources",
   "source" : [ {
     "alias" : "source",
     "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-labevents",

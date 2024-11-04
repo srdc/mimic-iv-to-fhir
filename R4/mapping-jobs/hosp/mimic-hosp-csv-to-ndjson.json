@@ -2,9 +2,9 @@
   "id" : "mimic-hosp-csv-to-ndjson",
   "name" : "mimic-hosp-csv-to-ndjson",
   "sourceSettings" : {
-    "MIMIC-IV v3.0" : {
+    "MIMIC-IV v3.1" : {
       "jsonClass" : "FileSystemSourceSettings",
-      "name" : "MIMIC-IV v3.0",
+      "name" : "MIMIC-IV v3.1",
       "sourceUri" : "https://physionet.org/content/mimiciv/3.0",
       "dataFolderPath" : "C:/development/data/mimic-iv-3.0",
       "asStream" : false
@@ -118,7 +118,7 @@
         "path" : "hosp/patients.csv",
         "contentType" : "csv",
         "options" : { },
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       }
     }
   }, {
@@ -131,7 +131,7 @@
         "contentType" : "csv",
         "options" : { },
         "preprocessSql" : "SELECT DISTINCT CU.careunit FROM careunits CU WHERE CU.careunit IS NOT NULL",
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       }
     }
   }, {
@@ -143,35 +143,35 @@
         "path" : "hosp/services.csv",
         "contentType" : "csv",
         "options" : { },
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       },
       "diagnoses" : {
         "jsonClass" : "FileSystemSource",
         "path" : "hosp/diagnoses_icd.csv",
         "contentType" : "csv",
         "options" : { },
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       },
       "procedures" : {
         "jsonClass" : "FileSystemSource",
         "path" : "hosp/procedures_icd.csv",
         "contentType" : "csv",
         "options" : { },
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       },
       "transfers" : {
         "jsonClass" : "FileSystemSource",
         "path" : "hosp/transfers.csv",
         "contentType" : "csv",
         "options" : { },
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       },
       "admissions" : {
         "jsonClass" : "FileSystemSource",
         "path" : "hosp/admissions.csv",
         "contentType" : "csv",
         "options" : { },
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       }
     }
   }, {
@@ -183,14 +183,14 @@
         "path" : "hosp/diagnoses_icd.csv",
         "contentType" : "csv",
         "options" : { },
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       },
       "icdConceptMap" : {
         "jsonClass" : "FileSystemSource",
         "path" : "hosp/d_icd_diagnoses.csv",
         "contentType" : "csv",
         "options" : { },
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       }
     }
   }, {
@@ -202,14 +202,14 @@
         "path" : "hosp/procedures_icd.csv",
         "contentType" : "csv",
         "options" : { },
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       },
       "icdConceptMap" : {
         "jsonClass" : "FileSystemSource",
         "path" : "hosp/d_icd_procedures.csv",
         "contentType" : "csv",
         "options" : { },
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       }
     }
   }, {
@@ -221,7 +221,7 @@
         "path" : "hosp/labevents.csv",
         "contentType" : "csv",
         "options" : { },
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       }
     }
   }, {
@@ -234,7 +234,7 @@
         "contentType" : "csv",
         "options" : { },
         "preprocessSql" : "SELECT P.drug,P.gsn,P.ndc,P.formulary_drug_cd,first(P.prod_strength) as prod_strength,first(P.form_unit_disp) as form_unit_disp FROM prescribed_meds P GROUP BY P.drug, P.gsn, P.ndc, P.formulary_drug_cd",
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       }
     }
   }, {
@@ -246,7 +246,7 @@
         "path" : "hosp/prescriptions.csv",
         "contentType" : "csv",
         "options" : { },
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       }
     }
   }, {
@@ -258,7 +258,7 @@
         "path" : "hosp/poe_subset.csv",
         "contentType" : "csv",
         "options" : { },
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       }
     }
   }, {
@@ -270,7 +270,7 @@
         "path" : "hosp/omr.csv",
         "contentType" : "csv",
         "options" : { },
-        "sourceRef" : "MIMIC-IV v3.0"
+        "sourceRef" : "MIMIC-IV v3.1"
       }
     }
   } ],

@@ -10,11 +10,7 @@ https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,Appl:TP,http://snome
 https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,Appl:LEFT EYE,http://snomed.info/sct,385123004,"Eye ointment"
 https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,Appl:RIGHT EYE,http://snomed.info/sct,385123004,"Eye ointment"
 https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,BAG,http://snomed.info/sct,1208958005,"Solution for infusion and/or injection"
-https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,BTL:AD,http://snomed.info/sct, 385277008,"Otic dose form"
-https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,BTL:AU,http://snomed.info/sct, 385277008,"Otic dose form"
-https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,BTL:AS,http://snomed.info/sct, 385277008,"Otic dose form"
-
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,BTL:AD,http://snomed.info/sct,385277008,"Otic dose form"
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,BTL:AU,http://snomed.info/sct,385277008,"Otic dose form"
+https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,BTL:AS,http://snomed.info/sct,385277008,"Otic dose form"
 https://mimic.mit.edu/fhir/CodeSystem/medication-form-units,CADD,http://snomed.info/sct,1208958005,"Solution for infusion and/or injection"
-
-
-

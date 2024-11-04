@@ -2,7 +2,7 @@
   "id": "omr",
   "url": "https://mimic.mit.edu/fhir/mappings/omr",
   "name": "omr",
-  "title": "Mapping of entries in 'omr' table in MIMIC-IV v2.0 dataset into FHIR Observation (Vital Sign profile) resources",
+  "title": "Mapping of entries in 'omr' table in MIMIC-IV v3.1 dataset into FHIR Observation (Vital Sign profile) resources",
   "source": [{
     "alias": "source",
     "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-omr"

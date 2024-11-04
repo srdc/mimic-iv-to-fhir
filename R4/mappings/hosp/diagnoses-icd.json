@@ -2,7 +2,7 @@
   "id": "diagnoses-icd",
   "url": "https://mimic.mit.edu/fhir/mappings/diagnoses-icd",
   "name": "diagnoses-icd",
-  "title": "Mapping of entries in 'diagnoses_icd' table joined with 'd_icd_diagnoses' table restructured as FHIR concept map in MIMIC-IV v2.0 dataset into FHIR Condition resources.",
+  "title": "Mapping of entries in 'diagnoses_icd' table joined with 'd_icd_diagnoses' table restructured as FHIR concept map in MIMIC-IV v3.1 dataset into FHIR Condition resources.",
   "source": [
     {
       "alias": "diagnoses",

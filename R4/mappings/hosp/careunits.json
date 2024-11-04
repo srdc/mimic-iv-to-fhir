@@ -2,7 +2,8 @@
   "id" : "careunits",
   "url" : "https://mimic.mit.edu/fhir/mappings/careunits",
   "name" : "careunits",
-  "title" : "Mapping of Care Units in 'transfers' table in MIMIC-IV v2.0 dataset into FHIR Location resources",
+  "title" : "Mapping of Care Units in 'transfers' table in MIMIC-IV v3.1 dataset into FHIR Location resources",
+  "isDraft" : false,
   "source" : [ {
     "alias" : "careunits",
     "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-careunits",

@@ -4,7 +4,7 @@
   "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-admissions",
   "version" : "latest",
   "name" : "Ext-admissions",
-  "description" : "Schema of the 'admissions' table in MIMIC-IV v3.0 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/admissions/)",
+  "description" : "Schema of the 'admissions' table in MIMIC-IV v3.1 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/admissions/)",
   "status" : "draft",
   "fhirVersion" : "4.0.1",
   "kind" : "logical",

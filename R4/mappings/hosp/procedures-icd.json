@@ -2,7 +2,7 @@
   "id": "procedures-icd",
   "url": "https://mimic.mit.edu/fhir/mappings/procedures-icd",
   "name": "procedures-icd",
-  "title": "Mapping of entries in 'procedures_icd' table joined with 'd_icd_procedures' table restructured as FHIR concept map in MIMIC-IV v2.0 dataset into FHIR Procedure resources.",
+  "title": "Mapping of entries in 'procedures_icd' table joined with 'd_icd_procedures' table restructured as FHIR concept map in MIMIC-IV v3.1 dataset into FHIR Procedure resources.",
   "source": [
     {
       "alias": "procedures",

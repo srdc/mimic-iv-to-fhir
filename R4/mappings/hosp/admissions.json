@@ -2,7 +2,8 @@
   "id" : "admissions",
   "url" : "https://mimic.mit.edu/fhir/mappings/admissions",
   "name" : "admissions",
-  "title" : "Mapping of entries in 'admissions' table joined with 'diagnoses_icd' and 'procedures_icd' in MIMIC-IV v2.0 dataset into FHIR Encounter resources as well as FHIR Patch to FHIR Patient resource",
+  "title" : "Mapping of entries in 'admissions' table joined with 'diagnoses_icd' and 'procedures_icd' in MIMIC-IV v3.1 dataset into FHIR Encounter resources as well as FHIR Patch to FHIR Patient resource",
+  "isDraft" : false,
   "source" : [ {
     "alias" : "admissions",
     "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-admissions",
@@ -120,7 +121,6 @@
       "name" : "result",
       "language" : "application/fhir-template+json",
       "value" : {
-        "resourceType" : "Parameters",
         "parameter" : [ {
           "{{#ms}}" : "{{marital_status}}",
           "{{?}}" : {
@@ -168,26 +168,22 @@
               "name" : "name",
               "valueString" : "extension"
             }, {
-              "name" : "value",
-              "valueExtension" : {
-                "url" : "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race",
-                "extension" : [ {
-                  "url" : "text",
-                  "valueString" : "{{%rc}}"
-                }, {
-                  "url" : "ombCategory",
-                  "valueCoding" : "{{trms:translateToCoding(%rc, 'https://mimic.mit.edu/fhir/CodeSystem/race','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/race-to-hl7')}}"
-                } ]
-              }
+              "name" : "value"
             } ]
           }
-        } ]
+        } ],
+        "resourceType" : "Parameters"
       }
     },
     "precondition" : {
       "name" : "isDemographicsExist",
       "language" : "text/fhirpath",
       "expression" : "marital_status.exists() or race.exists()"
-    }
+    },
+    "fhirInteraction" : {
+      "type" : "patch",
+      "rid" : "Patient/{{mpp:getHashedId('Patient', subject_id.toString())}}"
+    },
+    "description" : "valueExtension part should be reviewed. There is no parameter.part.valueExtension field according to the FHIR standard."
   } ]
 }

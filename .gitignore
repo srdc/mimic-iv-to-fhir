@@ -9,3 +9,4 @@ db/*
 tofhir-db/*
 target/
 projects.json
+test-data/

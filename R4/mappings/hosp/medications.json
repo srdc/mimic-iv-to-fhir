@@ -2,7 +2,7 @@
   "id": "medications",
   "url": "https://mimic.mit.edu/fhir/mappings/medications",
   "name": "medications",
-  "title": "Mapping of mentioned medications in 'prescriptions' table in MIMIC-IV v2.0 dataset into FHIR Medication resources",
+  "title": "Mapping of mentioned medications in 'prescriptions' table in MIMIC-IV v3.1 dataset into FHIR Medication resources",
   "source": [
     {
       "alias": "prescribed_meds",

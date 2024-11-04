@@ -2,7 +2,7 @@
   "id": "patients",
   "url": "https://mimic.mit.edu/fhir/mappings/patients",
   "name": "patients",
-  "title": "Mapping of entries in 'patients' table in MIMIC-IV v2.0 dataset into FHIR Patient resources",
+  "title": "Mapping of entries in 'patients' table in MIMIC-IV v3.1 dataset into FHIR Patient resources",
   "source": [{
     "alias": "source",
     "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-patients"

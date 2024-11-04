@@ -1,5 +1,5 @@
 source_system,source_code,source_display,target_system,target_code,target_display
-https://mimic.mit.edu/fhir/CodeSystem/testitems,90240,ACID FAST CULTURE,http://loinc.org,6463-4,"Bacteria identified in Specimen by Culture"
+https://mimic.mit.edu/fhir/CodeSystem/testitems,90240,ACID FAST CULTURE,http://loinc.org,94540-2,"Mycobacterial stain and culture panel - Specimen"
 https://mimic.mit.edu/fhir/CodeSystem/testitems,90240,ACID FAST CULTURE,http://snomed.info/sct,117769004,"Acid fast bacteria identification"
 https://mimic.mit.edu/fhir/CodeSystem/testitems,90246,ACID FAST SMEAR,http://loinc.org,656-9,"Microscopic observation [Identifier] in Specimen by Acid fast stain"
 https://mimic.mit.edu/fhir/CodeSystem/testitems,90246,ACID FAST SMEAR,http://snomed.info/sct,117769004,"Acid fast bacteria identification"
@@ -153,7 +153,7 @@ https://mimic.mit.edu/fhir/CodeSystem/testitems,90065,STOOL SMEAR FOR POLYMORPHO
 https://mimic.mit.edu/fhir/CodeSystem/testitems,90098,SWAB- R/O YEAST,http://loinc.org,
 https://mimic.mit.edu/fhir/CodeSystem/testitems,90227,"Sonication culture, prosthetic joint",http://loinc.org,
 https://mimic.mit.edu/fhir/CodeSystem/testitems,90232,Staph aureus Preop PCR,http://loinc.org,
-https://mimic.mit.edu/fhir/CodeSystem/testitems,90198,Staph aureus Screen,http://loinc.org,6463-4,"Bacteria identified in Specimen by Culture"
+https://mimic.mit.edu/fhir/CodeSystem/testitems,90198,Staph aureus Screen,http://loinc.org,100913-3,Staph aureus and MRSA screening panel - Specimen by Organism specific culture
 https://mimic.mit.edu/fhir/CodeSystem/testitems,90207,Stem Cell Aer/Ana Culture,http://loinc.org,
 https://mimic.mit.edu/fhir/CodeSystem/testitems,90230,Stool Hold Request,http://loinc.org,
 https://mimic.mit.edu/fhir/CodeSystem/testitems,90231,Swab - R/O Yeast - IC,http://loinc.org,
