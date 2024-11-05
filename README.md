@@ -106,6 +106,15 @@ Only mappings that do not use combinations of codes (combination of ICD-10 codes
 * ICD-9 codes are also mapped to ICD-10 codes by using the General Equivalence Mappings (GEM) file provided by CMS. The [mapping file](mapping-contexts/hosp/icd9toicd10pcsgem.csv) is used as context map file in toFHIR.
 Only mappings that do not use combinations of codes (combination of ICD-10 codes for a single ICD-9 code) are performed.
 
+## Medication related tables in MIMIC-IV:
+
+Since there are relationships in the tables related to medications in the MIMIC data set, 
+the mappings were made in accordance with this in order to preserve this.
+In the diagram below, you can see the relationship between the tables and which FHIR resources they map to. 
+After that, there are detailed explanations for each mapping.
+
+![medication-relation.jpg](medication-relation.jpg)
+
 ### Mapping of ['prescriptions'](https://mimic.mit.edu/docs/iv/modules/hosp/prescriptions/) table into ['FHIR MedicationRequest'](http://hl7.org/fhir/medicationrequest.html) and ['FHIR Medication'](http://hl7.org/fhir/medication.html) resources
 In this mapping we have used FHIR Medication resources to represent the medications mentioned in MIMIC database. 
 For each distinct medication (drug name + NDC code) in prescriptions table, we have created the FHIR Medication resource 
@@ -126,10 +135,83 @@ For prescriptions;
 * The column 'order_subtype' is mapped SNOMED-CT for further classification of ordered service (ServiceRequest.code). 
 Note that some codes cannot be mapped to a proper SNOMED-CT code.
 
+### Mapping of ['emar'](https://mimic.mit.edu/docs/iv/modules/hosp/emar/) and ['emar_detail'](https://mimic.mit.edu/docs/iv/modules/hosp/emar_detail/) tables into ['FHIR MedicationAdministration'](http://hl7.org/fhir/medicationadministration.html) resources
+In this mapping we have used FHIR MedicationAdministration resources to represent the emar table and emar_detail in MIMIC database.
+First of all, we have joined the emar and emar_detail tables to get the detailed information about the medication administrations. 
+For each emar entity, we get multiple entities from emar_detail table. Based on the mimic documentation, 
+rows with a value in the parent_field_ordinal column indicate that the drug has been administered to the patient, 
+and rows with a null value indicate the dose that should be administered. We have used this information to create 
+MedicationAdministration resources for each row in emar_detail table by filtering the rows with a value in parent_field_ordinal column.
+The following items give information about this mapping:
+* Unique identifier for a MedicationAdministration resource is generated via hashing by using the 'emar_id', 'parent_field_ordinal'.
+* We have mapped 'event.txt' to MedicationAdministration.status using a concept map file ['emar-status-to-hl7.csv'](R4/mapping-contexts/hosp/emar-status.csv).
+* By using the subject_id, we have linked the MedicationAdministration to the corresponding Patient resource (MedicationAdministration.subject).
+* By using the hadm_id, we have linked the MedicationAdministration to the corresponding Encounter resource (MedicationAdministration.context).
+* charttime is mapped as MedicationAdministration.effectiveDateTime.
+* pharmacy_id is mapped as MedicationAdministration.request if exists.
+* We also have joined the emar table with the ['prescriptions'](https://mimic.mit.edu/docs/iv/modules/hosp/prescriptions/) table to get the medication details for the MedicationAdministration resources. 
+We have used the 'drug', 'gsn', 'ndc' and 'formulary_drug_cd' columns in the prescriptions table 
+to get the corresponding Medication resource for the MedicationAdministration. If there is no corresponding prescription,
+we simply map 'medication' column in the emar table to medicationReference.display.
+* 'dose_given' and 'dose_given_unit' are mapped to MedicationAdministration.dosage.dose.
+* 'route' column is mapped to MedicationAdministration.dosage.route using a concept map file ['med-routes-to-snomed'](R4/mapping-contexts/hosp/med-routes-to-snomed.csv).
+* 'site' column is mapped to MedicationAdministration.dosage.site as a textual value.
+
 ### Mapping of ['omr'](https://mimic.mit.edu/docs/iv/modules/hosp/omr/) table into ['FHIR Observation'](http://hl7.org/fhir/observation.html) resources
 * Results are mapped to Observation resources complying the FHIR VitalSigns profiles except the eGFR. So the corresponding 
 LOINC codes are used for Observation.code.
 * For blood pressure measures given in different contexts (lying, standing, etc), an additional SNOMED-CT code is used to indicate the context.
+
+### Mapping of ['microbiologyevents'](https://mimic.mit.edu/docs/iv/modules/hosp/microbiologyevents/) table into ['FHIR Specimen'](http://hl7.org/fhir/specimen.html), ['FHIR DiagnosticReport'](http://hl7.org/fhir/DiagnosticReport.html) and ['FHIR Observation'](http://hl7.org/fhir/observation.html) resources
+In this mapping, we first grouped this dataset based on samples. For this, we used
+subject_id, hadm_id, micro_specimen_id, spec_itemid, spec_type_desc columns. 
+After grouping, we created a FHIR Specimen and FHIR DiagnosticReport for each row. 
+And for each microevent_id within a group, we created a FHIR Observation resource.
+
+For DiagnosticReport;
+* A fixed code display pair ("MB", "Microbiology") is used for DiagnosticReport.category and a fixed code display pair
+  ("4341000179107", "Microbiology Report") is used for DiagnosticReport.code to indicate the type of the report.
+* 'subject_id' is mapped as DiagnosticReport.subject.
+* 'hadm_id' is mapped as DiagnosticReport.encounter.
+* 'charttime' or 'chartdate' is mapped as DiagnosticReport.effectiveDateTime.
+* A reference to the Specimen is mapped as DiagnosticReport.specimen using 'micro_specimen_id' column.
+* A micro specimen may have multiple 'microevent_id's. For each of these, we create an Observation reference in  
+DiagnosticReport.result.
+
+For specimen;
+* Unique identifier 'micro_specimen_id' is used as Specimen.id.
+* 'subject_id' is mapped as Specimen.subject.
+* 'charttime' is mapped as Specimen.receivedTime.
+* 'spec_itemid' is mapped as Specimen.type. We put the code itself from the dataset and also mapped it to 
+the HL7 FHIR standard using ['specimen-types-to-hl7.csv'](R4/terminology-systems/MIMICTerminologyService/specimen-types-to-hl7.csv). 
+
+
+For Observation;
+* Unique identifier 'microevent_id' is used as Observation.id.
+* Since it's microbiology data, we have used the ("MB", "Microbiology") pair from 
+"http://terminology.hl7.org/CodeSystem/v2-0074" as a fixed value.
+* We mapped the lab test information code in the 'test_itemid' column to Observation.code as is. 
+We also mapped the lab code to LOINC using ['test-itemids-to-loinc'](R4/terminology-systems/MIMICTerminologyService/test-itemids-to-loinc.csv) 
+if available and put it back in Observation.code.
+* 'subject_id' is mapped as Observation.subject as a reference to the patient.
+* 'hadm_id' is mapped as Observation.encounter as a reference to the encounter.
+* 'charttime' or 'chartdate' is mapped as Observation.effectiveDateTime.
+* 'storetime' or 'storedate' is mapped as Observation.issued.
+* 'dilution_value' and 'dilution_comparison' are mapped to Observation.valueQuantity.
+* 'interpretation' is mapped to Observation.interpretation using a concept map file ['test-itemids-interpretation-to-hl7'](R4/terminology-systems/MIMICTerminologyService/test-itemids-interpretation-to-hl7.csv) 
+(e.g. 'S' is mapped to the 'S' code and the 'Suspectible' display).
+* Textual data in 'comments' column regarding this observation are mapped to Observation.note.
+* 'micro_specimen_id' is mapped as Observation.specimen as a reference to the specimen.
+* There are two phases in the microbiology data: 
+  * whether an organism is grown and if grown what the organism is.
+  * if the organism is grown, which antibiotic is used to test the organism.
+
+  First, we checked if the 'org_itemid' column is not null. If it is not null, we put the organism details into Observation.component.
+  'org_itemid' value is translated to a SNOMED-CT code using ['org-itemids-to-snomed'](R4/terminology-systems/MIMICTerminologyService/org-itemids-to-snomed.csv).
+  Second, we checked if the 'ab_itemid' column is not null. If it is not null, 
+  we put which antibiotic is used into Observation.component as well.
+  'ab_itemid' value (anti-biotic code) is translated to an ATC code using ['ab-itemids-to-atc'](R4/terminology-systems/MIMICTerminologyService/ab-itemids-to-atc.csv).
+
 
 ## How to run the ETL jobs
 You can download the latest release of toFHIR from the GitHub page or download the source code and build it to get the 
