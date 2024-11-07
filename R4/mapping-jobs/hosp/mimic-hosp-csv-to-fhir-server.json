@@ -1,6 +1,7 @@
 {
   "id" : "mimic-hosp-csv-to-fhir-server",
   "name" : "mimic-hosp-csv-to-fhir-server",
+  "description" : "",
   "sourceSettings" : {
     "MIMIC-IV v3.1" : {
       "jsonClass" : "FileSystemSourceSettings",
@@ -159,9 +160,16 @@
     "name" : "patient-mapping",
     "mappingRef" : "https://mimic.mit.edu/fhir/mappings/patients",
     "sourceBinding" : {
-      "source" : {
+      "patients" : {
         "jsonClass" : "FileSystemSource",
         "path" : "hosp/patients.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "MIMIC-IV v3.1"
+      },
+      "admissions" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "hosp/admissions.csv",
         "contentType" : "csv",
         "options" : { },
         "sourceRef" : "MIMIC-IV v3.1"

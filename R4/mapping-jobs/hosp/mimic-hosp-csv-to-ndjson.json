@@ -1,6 +1,7 @@
 {
   "id" : "mimic-hosp-csv-to-ndjson",
   "name" : "mimic-hosp-csv-to-ndjson",
+  "description" : "",
   "sourceSettings" : {
     "MIMIC-IV v3.1" : {
       "jsonClass" : "FileSystemSourceSettings",
@@ -15,7 +16,9 @@
     "path" : "C:/development/data/ndjson-tofhir-output",
     "contentType" : "ndjson",
     "numOfPartitions" : 1,
-    "options" : { }
+    "options" : { },
+    "partitionByResourceType" : false,
+    "partitioningColumns" : { }
   },
   "terminologyServiceSettings" : {
     "jsonClass" : "LocalFhirTerminologyServiceSettings",
@@ -110,19 +113,26 @@
     } ]
   },
   "mappings" : [ {
-    "name": "patient-mapping",
+    "name" : "patient-mapping",
     "mappingRef" : "https://mimic.mit.edu/fhir/mappings/patients",
     "sourceBinding" : {
-      "source" : {
+      "patients" : {
         "jsonClass" : "FileSystemSource",
         "path" : "hosp/patients.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "MIMIC-IV v3.1"
+      },
+      "admissions" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "hosp/admissions.csv",
         "contentType" : "csv",
         "options" : { },
         "sourceRef" : "MIMIC-IV v3.1"
       }
     }
   }, {
-    "name": "careunit-mapping",
+    "name" : "careunit-mapping",
     "mappingRef" : "https://mimic.mit.edu/fhir/mappings/careunits",
     "sourceBinding" : {
       "careunits" : {
@@ -135,7 +145,7 @@
       }
     }
   }, {
-    "name": "admissions-mapping",
+    "name" : "admissions-mapping",
     "mappingRef" : "https://mimic.mit.edu/fhir/mappings/admissions",
     "sourceBinding" : {
       "services" : {
@@ -175,7 +185,7 @@
       }
     }
   }, {
-    "name": "diagnoses-mapping",
+    "name" : "diagnoses-mapping",
     "mappingRef" : "https://mimic.mit.edu/fhir/mappings/diagnoses-icd",
     "sourceBinding" : {
       "diagnoses" : {
@@ -194,7 +204,7 @@
       }
     }
   }, {
-    "name": "procedures-mapping",
+    "name" : "procedures-mapping",
     "mappingRef" : "https://mimic.mit.edu/fhir/mappings/procedures-icd",
     "sourceBinding" : {
       "procedures" : {
@@ -213,7 +223,7 @@
       }
     }
   }, {
-    "name": "labevents-mapping",
+    "name" : "labevents-mapping",
     "mappingRef" : "https://mimic.mit.edu/fhir/mappings/labevents",
     "sourceBinding" : {
       "source" : {
@@ -225,7 +235,7 @@
       }
     }
   }, {
-    "name": "medications-mapping",
+    "name" : "medications-mapping",
     "mappingRef" : "https://mimic.mit.edu/fhir/mappings/medications-without-rxn",
     "sourceBinding" : {
       "prescribed_meds" : {
@@ -238,7 +248,7 @@
       }
     }
   }, {
-    "name": "prescriptions-mapping",
+    "name" : "prescriptions-mapping",
     "mappingRef" : "https://mimic.mit.edu/fhir/mappings/prescriptions",
     "sourceBinding" : {
       "source" : {
@@ -250,7 +260,7 @@
       }
     }
   }, {
-    "name": "peo-mapping",
+    "name" : "peo-mapping",
     "mappingRef" : "https://mimic.mit.edu/fhir/mappings/poe",
     "sourceBinding" : {
       "source" : {
@@ -262,7 +272,7 @@
       }
     }
   }, {
-    "name": "omr-mapping",
+    "name" : "omr-mapping",
     "mappingRef" : "https://mimic.mit.edu/fhir/mappings/omr",
     "sourceBinding" : {
       "source" : {
