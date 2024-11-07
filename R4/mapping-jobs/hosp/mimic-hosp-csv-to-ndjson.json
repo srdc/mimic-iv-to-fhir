@@ -5,8 +5,8 @@
     "MIMIC-IV v3.1" : {
       "jsonClass" : "FileSystemSourceSettings",
       "name" : "MIMIC-IV v3.1",
-      "sourceUri" : "https://physionet.org/content/mimiciv/3.0",
-      "dataFolderPath" : "C:/development/data/mimic-iv-3.0",
+      "sourceUri" : "https://physionet.org/content/mimiciv/3.1",
+      "dataFolderPath" : "C:/development/data/mimic-iv-3.1",
       "asStream" : false
     }
   },
