@@ -27,7 +27,11 @@
       "url" : "$CONTEXT_REPO/hosp/med-routes-to-snomed.csv"
     }
   },
-  "variable" : [ ],
+  "variable" : [ {
+    "name" : "prescriptionsWithNdcCode",
+    "language" : "text/fhirpath",
+    "expression" : "%prescription.where(ndc.exists())"
+  } ],
   "mapping" : [ {
     "expression" : {
       "name" : "medication-administration-mapping",
@@ -42,7 +46,7 @@
           } ],
           "status" : "{{mpp:getConcept(%emarStatusConceptMap, event_txt, 'target_code')}}",
           "medicationReference" : {
-            "reference" : "{{? mpp:createFhirReferenceWithHashedId('Medication', %prescription.first().drug & %prescription.first().gsn.toString() & %prescription.first().ndc.toString() & %prescription.first().formulary_drug_cd).reference}}",
+            "reference" : "{{? mpp:createFhirReferenceWithHashedId('Medication', %prescriptionsWithNdcCode.first().drug & %prescriptionsWithNdcCode.first().gsn.toString() & %prescriptionsWithNdcCode.first().ndc.toString() & %prescriptionsWithNdcCode.first().formulary_drug_cd).reference}}",
             "display" : "{{? medication}}"
           },
           "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
