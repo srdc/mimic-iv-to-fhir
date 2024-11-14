@@ -145,6 +145,12 @@
       "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/test-itemids-to-loinc",
       "sourceValueSetUrl" : "https://mimic.mit.edu/fhir/ValueSet/testitems",
       "targetValueSetUrl" : "http://loinc.org/vs"
+    }, {
+      "id" : "rx-norm-to-atc.csv",
+      "name" : "rx-norm-to-atc.csv",
+      "conceptMapUrl" : "https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/rx-norm-to-atc",
+      "sourceValueSetUrl" : "http://www.nlm.nih.gov/research/umls/rxnorm",
+      "targetValueSetUrl" : "http://www.whocc.no/atc"
     } ],
     "codeSystemFiles" : [ {
       "id" : "labitems-code-system.csv",
