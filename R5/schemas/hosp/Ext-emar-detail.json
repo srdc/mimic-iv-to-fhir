@@ -1,0 +1,389 @@
+{
+  "id" : "Ext-emar-detail",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-emar-detail",
+  "version" : "latest",
+  "name" : "Ext-emar-detail",
+  "description" : "Schema of the 'emar_detail' table in MIMIC-IV v3.1 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/emar_detail/)",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Ext-emar-detail",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Ext-emar-detail",
+      "path" : "Ext-emar-detail",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Ext-emar-detail.subject_id",
+      "path" : "Ext-emar-detail.subject_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "A unique identifier which specifies an individual patient. Any rows associated with a single subject_id pertain to the same individual.",
+      "short" : "Patient identifier"
+    }, {
+      "id" : "Ext-emar-detail.emar_id",
+      "path" : "Ext-emar-detail.emar_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "It is a unique identifier for each order made in eMAR. emar_id is composed of subject_id and emar_seq in the following pattern: ‘subject_id-emar_seq’.",
+      "short" : "Electronic Medication Administration Identifier"
+    }, {
+      "id" : "Ext-emar-detail.emar_seq",
+      "path" : "Ext-emar-detail.emar_seq",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "A consecutive integer which numbers eMAR orders chronologically.",
+      "short" : "Consecutive medication administration number"
+    }, {
+      "id" : "Ext-emar-detail.parent_field_ordinal",
+      "path" : "Ext-emar-detail.parent_field_ordinal",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "delineates multiple administrations for the same eMar event, e.g. multiple formulary doses for the full dose. As eMAR requires the administrating provider to scan a barcode for each formulary provided to the patient, it is often the case that multiple rows in emar_detail correspond to a single row in emar (e.g. multiple pills are administered which add up to the desired dose). The structure for emar_detail rows is as follows: There is one row per eMAR order with a NULL parent_field_ordinal: this row usually contains the desired dose for the administration. Afterward, if there are N formulary doses, parent_field_ordinal will take values ‘1.1’, ‘1.2’, …, ‘1.N’.",
+      "short" : "Parent field ordinal"
+    }, {
+      "id" : "Ext-emar-detail.administration_type",
+      "path" : "Ext-emar-detail.administration_type",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The type of administration, including ‘IV Bolus’, ‘IV Infusion’, ‘Medication Infusion’, ‘Transdermal Patch’, and so on.",
+      "short" : "Administration type"
+    }, {
+      "id" : "Ext-emar-detail.pharmacy_id",
+      "path" : "Ext-emar-detail.pharmacy_id",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "An identifier which allows linking the eMAR order to pharmacy information provided in the pharmacy table. Note: rarely the same emar_id may have multiple distinct pharmacy_id across rows in the emar_detail table.",
+      "short" : "Prescription identifier"
+    }, {
+      "id" : "Ext-emar-detail.barcode_type",
+      "path" : "Ext-emar-detail.barcode_type",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "Barcode type",
+      "short" : "Barcode type"
+    }, {
+      "id" : "Ext-emar-detail.reason_for_no_barcode",
+      "path" : "Ext-emar-detail.reason_for_no_barcode",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Reason for no barcode",
+      "short" : "Reason for no barcode"
+    }, {
+      "id" : "Ext-emar-detail.complete_dose_not_given",
+      "path" : "Ext-emar-detail.complete_dose_not_given",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "boolean",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/boolean" ]
+      } ],
+      "definition" : "Complete dose not given",
+      "short" : "Complete dose not given"
+    }, {
+      "id" : "Ext-emar-detail.dose_due",
+      "path" : "Ext-emar-detail.dose_due",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Dose due",
+      "short" : "Dose due"
+    }, {
+      "id" : "Ext-emar-detail.dose_due_unit",
+      "path" : "Ext-emar-detail.dose_due_unit",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Dose due unit",
+      "short" : "Dose due unit"
+    }, {
+      "id" : "Ext-emar-detail.dose_given",
+      "path" : "Ext-emar-detail.dose_given",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Dose given",
+      "short" : "Dose given"
+    }, {
+      "id" : "Ext-emar-detail.dose_given_unit",
+      "path" : "Ext-emar-detail.dose_given_unit",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Dose given unit",
+      "short" : "Dose given unit"
+    }, {
+      "id" : "Ext-emar-detail.will_remainder_of_dose_be_given",
+      "path" : "Ext-emar-detail.will_remainder_of_dose_be_given",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "boolean",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/boolean" ]
+      } ],
+      "definition" : "Will remainder of dose be given",
+      "short" : "Will remainder of dose be given"
+    }, {
+      "id" : "Ext-emar-detail.product_amount_given",
+      "path" : "Ext-emar-detail.product_amount_given",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Product amount given",
+      "short" : "Product amount given"
+    }, {
+      "id" : "Ext-emar-detail.product_unit",
+      "path" : "Ext-emar-detail.product_unit",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Product unit",
+      "short" : "Product unit"
+    }, {
+      "id" : "Ext-emar-detail.product_code",
+      "path" : "Ext-emar-detail.product_code",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "Product code",
+      "short" : "Product code"
+    }, {
+      "id" : "Ext-emar-detail.product_description",
+      "path" : "Ext-emar-detail.product_description",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Product description",
+      "short" : "Product description"
+    }, {
+      "id" : "Ext-emar-detail.product_description_other",
+      "path" : "Ext-emar-detail.product_description_other",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Product description other",
+      "short" : "Product description other"
+    }, {
+      "id" : "Ext-emar-detail.prior_infusion_rate",
+      "path" : "Ext-emar-detail.prior_infusion_rate",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Prior infusion rate",
+      "short" : "Prior infusion rate"
+    }, {
+      "id" : "Ext-emar-detail.infusion_rate",
+      "path" : "Ext-emar-detail.infusion_rate",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Infusion rate",
+      "short" : "Infusion rate"
+    }, {
+      "id" : "Ext-emar-detail.infusion_rate_adjustment",
+      "path" : "Ext-emar-detail.infusion_rate_adjustment",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Infusion rate adjustment",
+      "short" : "Infusion rate adjustment"
+    }, {
+      "id" : "Ext-emar-detail.infusion_rate_adjustment_amount",
+      "path" : "Ext-emar-detail.infusion_rate_adjustment_amount",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Infusion rate adjustment amount",
+      "short" : "Infusion rate adjustment amount"
+    }, {
+      "id" : "Ext-emar-detail.infusion_rate_unit",
+      "path" : "Ext-emar-detail.infusion_rate_unit",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Infusion rate unit",
+      "short" : "Infusion rate unit"
+    }, {
+      "id" : "Ext-emar-detail.route",
+      "path" : "Ext-emar-detail.route",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Route",
+      "short" : "Route"
+    }, {
+      "id" : "Ext-emar-detail.infusion_complete",
+      "path" : "Ext-emar-detail.infusion_complete",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Infusion complete",
+      "short" : "Infusion complete"
+    }, {
+      "id" : "Ext-emar-detail.completion_interval",
+      "path" : "Ext-emar-detail.completion_interval",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Completion interval",
+      "short" : "Completion interval"
+    }, {
+      "id" : "Ext-emar-detail.new_iv_bag_hung",
+      "path" : "Ext-emar-detail.new_iv_bag_hung",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "New IV bag hung",
+      "short" : "New IV bag hung"
+    }, {
+      "id" : "Ext-emar-detail.continued_infusion_in_other_location",
+      "path" : "Ext-emar-detail.continued_infusion_in_other_location",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "continued_infusion_in_other_location",
+      "short" : "continued_infusion_in_other_location"
+    }, {
+      "id" : "Ext-emar-detail.restart_interval",
+      "path" : "Ext-emar-detail.restart_interval",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "restart_interval",
+      "short" : "restart_interval"
+    }, {
+      "id" : "Ext-emar-detail.side",
+      "path" : "Ext-emar-detail.side",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Side",
+      "short" : "Side"
+    }, {
+      "id" : "Ext-emar-detail.site",
+      "path" : "Ext-emar-detail.site",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Site",
+      "short" : "Site"
+    }, {
+      "id" : "Ext-emar-detail.non_formulary_visual_verification",
+      "path" : "Ext-emar-detail.non_formulary_visual_verification",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "non_formulary_visual_verification",
+      "short" : "non_formulary_visual_verification"
+    } ]
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "id" : "Ext-services",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-services",
+  "version" : "latest",
+  "name" : "Ext-services",
+  "description" : "Schema of the 'services' table in MIMIC-IV v3.1 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/services/)",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Ext-services",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Ext-services",
+      "path" : "Ext-services",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Ext-services.subject_id",
+      "path" : "Ext-services.subject_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "It is a unique identifier which specifies an individual patient. Any rows associated with a single subject_id pertain to the same individual. As subject_id is the primary key for the table, it is unique for each row.",
+      "short" : "Patient identifier"
+    }, {
+      "id" : "Ext-services.hadm_id",
+      "path" : "Ext-services.hadm_id",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Represents a single patient’s admission to the hospital. hadm_id ranges from 2000000 - 2999999",
+      "short" : "Hospital admission identifier"
+    }, {
+      "id" : "Ext-services.transfertime",
+      "path" : "Ext-services.transfertime",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "It is the time at which the patient moved from the prev_service (if present) to the curr_service (Timestamp format: yyyy-MM-dd HH:mm:ss)",
+      "short" : "Transfer time from service to service"
+    }, {
+      "id" : "Ext-services.prev_service",
+      "path" : "Ext-services.prev_service",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "It is the previous service that the patient resides under",
+      "short" : "Code for previous service"
+    }, {
+      "id" : "Ext-services.curr_service",
+      "path" : "Ext-services.curr_service",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "It is the current service that the patient resides under",
+      "short" : "Code for current service"
+    } ]
+  }
+}

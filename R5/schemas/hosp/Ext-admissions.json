@@ -1,0 +1,202 @@
+{
+  "id" : "Ext-admissions",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-admissions",
+  "version" : "latest",
+  "name" : "Ext-admissions",
+  "description" : "Schema of the 'admissions' table in MIMIC-IV v3.1 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/admissions/)",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Ext-admissions",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Ext-admissions",
+      "path" : "Ext-admissions",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Ext-admissions.subject_id",
+      "path" : "Ext-admissions.subject_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "It is a unique identifier which specifies an individual patient. Any rows associated with a single subject_id pertain to the same individual. As subject_id is the primary key for the table, it is unique for each row.",
+      "short" : "Patient identifier"
+    }, {
+      "id" : "Ext-admissions.hadm_id",
+      "path" : "Ext-admissions.hadm_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Represents a single patient’s admission to the hospital. hadm_id ranges from 2000000 - 2999999",
+      "short" : "Hospital admission identifier"
+    }, {
+      "id" : "Ext-admissions.admittime",
+      "path" : "Ext-admissions.admittime",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Provides the date and time the patient was admitted to the hospital (Timestamp format: yyyy-MM-dd HH:mm:ss)",
+      "short" : "Hospital admission time"
+    }, {
+      "id" : "Ext-admissions.dischtime",
+      "path" : "Ext-admissions.dischtime",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Provides the date and time the patient was discharged from the hospital (Timestamp format: yyyy-MM-dd HH:mm:ss)",
+      "short" : "Hospital discharge time"
+    }, {
+      "id" : "Ext-admissions.deathtime",
+      "path" : "Ext-admissions.deathtime",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "If applicable, deathtime provides the time of in-hospital death for the patient. Note that deathtime is only present if the patient died in-hospital, and is almost always the same as the patient’s dischtime. However, there can be some discrepancies due to typographical errors. (Timestamp format: yyyy-MM-dd HH:mm:ss)",
+      "short" : "Hospital death time"
+    }, {
+      "id" : "Ext-admissions.admission_type",
+      "path" : "Ext-admissions.admission_type",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "Used for classifying the urgency of the admission. There are 9 possibilities: ‘AMBULATORY OBSERVATION’, ‘DIRECT EMER.’, ‘DIRECT OBSERVATION’, ‘ELECTIVE’, ‘EU OBSERVATION’, ‘EW EMER.’, ‘OBSERVATION ADMIT’, ‘SURGICAL SAME DAY ADMISSION’, ‘URGENT’.",
+      "short" : "Admission type"
+    }, {
+      "id" : "Ext-admissions.admit_provider_id",
+      "path" : "Ext-admissions.admit_provider_id",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "An anonymous identifier for the provider who admitted the patient. ",
+      "short" : "Provider who admitted the patient"
+    }, {
+      "id" : "Ext-admissions.admission_location",
+      "path" : "Ext-admissions.admission_location",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "Provides information about the location of the patient prior to arriving at the hospital. Note that as the emergency room is technically a clinic, patients who are admitted via the emergency room usually have it as their admission location.",
+      "short" : "Admission Location"
+    }, {
+      "id" : "Ext-admissions.discharge_location",
+      "path" : "Ext-admissions.discharge_location",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "It is the disposition of the patient after they are discharged from the hospital.",
+      "short" : "Discharge Location"
+    }, {
+      "id" : "Ext-admissions.insurance",
+      "path" : "Ext-admissions.insurance",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "Type of the insurance",
+      "short" : "Insurance type"
+    }, {
+      "id" : "Ext-admissions.language",
+      "path" : "Ext-admissions.language",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "Language used by patient",
+      "short" : "Language"
+    }, {
+      "id" : "Ext-admissions.marital_status",
+      "path" : "Ext-admissions.marital_status",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "Marital status of patient",
+      "short" : "Marital status"
+    }, {
+      "id" : "Ext-admissions.race",
+      "path" : "Ext-admissions.race",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "Ethnicity of patient",
+      "short" : "Ethnicity"
+    }, {
+      "id" : "Ext-admissions.edregtime",
+      "path" : "Ext-admissions.edregtime",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The date and time at which the patient was registered from the emergency department",
+      "short" : "Emergency department registration time"
+    }, {
+      "id" : "Ext-admissions.edouttime",
+      "path" : "Ext-admissions.edouttime",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The date and time at which the patient was discharged from the emergency department",
+      "short" : "Emergency department discharge time"
+    }, {
+      "id" : "Ext-admissions.hospital_expire_flag",
+      "path" : "Ext-admissions.hospital_expire_flag",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "This is a binary flag which indicates whether the patient died within the given hospitalization. 1 indicates death in the hospital, and 0 indicates survival to hospital discharge.",
+      "short" : "Is patient died during hospitalization"
+    } ]
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "id" : "microbiologyevents",
+  "url" : "https://mimic.mit.edu/fhir/mappings/microbiologyevents",
+  "name" : "microbiologyevents",
+  "title" : "Mapping of entries in 'microbiologyevents' table in MIMIC-IV v3.1 dataset into FHIR DiagnosticReport and FHIR Observation resources",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "microbiologyevents",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-microbiologyevents",
+    "joinOn" : [ ]
+  } ],
+  "context" : { },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "diagnostic-report-mapping",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "status" : "final",
+        "category" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/v2-0074",
+            "code" : "MB",
+            "display" : "Microbiology"
+          } ]
+        } ],
+        "code" : {
+          "coding" : [ {
+            "system" : "http://snomed.info/sct",
+            "code" : "4341000179107",
+            "display" : "Microbiology Report"
+          } ]
+        },
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
+        "encounter" : "{{? mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}",
+        "effectiveDateTime" : "{{charttime.nav:orElse(chartdate).first().utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
+        "specimen" : "{{* mpp:createFhirReferenceWithHashedId('Specimen', micro_specimen_id.toString())}}",
+        "result" : {
+          "{{#oid}}" : "{{microevent_id}}",
+          "{{*}}" : "{{mpp:createFhirReferenceWithHashedId('Observation', %oid.toString())}}"
+        },
+        "id" : "{{mpp:getHashedId('DiagnosticReport', subject_id.toString() & micro_specimen_id.toString())}}",
+        "meta" : {
+          "source" : "{{%sourceSystem.sourceUri}}"
+        },
+        "resourceType" : "DiagnosticReport"
+      }
+    },
+    "description" : "charttime.first() is used because charttime values for each micro_specimen_id are always the same. Because charttime records the time at which an observation was charted which is specimen in this case."
+  }, {
+    "expression" : {
+      "name" : "specimen-mapping",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "accessionIdentifier" : {
+          "system" : "{{%sourceSystem.sourceUri}}/fhir/micro_specimen_ids",
+          "value" : "{{micro_specimen_id.toString()}}"
+        },
+        "status" : "unavailable",
+        "type" : {
+          "coding" : [ {
+            "system" : "https://mimic.mit.edu/fhir/CodeSystem/specimen_types",
+            "code" : "{{spec_itemid.toString()}}",
+            "display" : "{{spec_type_desc}}"
+          }, "{{* trms:translateToCoding(spec_itemid.toString(), 'https://mimic.mit.edu/fhir/CodeSystem/specimen_types','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/specimen-types-to-hl7')}}" ]
+        },
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
+        "receivedTime" : "{{charttime.nav:orElse(chartdate).first().utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
+        "id" : "{{mpp:getHashedId('Specimen', micro_specimen_id.toString())}}",
+        "meta" : {
+          "source" : "{{%sourceSystem.sourceUri}}"
+        },
+        "resourceType" : "Specimen"
+      }
+    }
+  }, {
+    "expression" : {
+      "name" : "test-mapping",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "{{#ind}}" : "{{utl:indices(0, count.toInteger() - 1)}}",
+        "{{*}}" : {
+          "identifier" : [ {
+            "use" : "official",
+            "system" : "{{%sourceSystem.sourceUri}}/fhir/microbiologyevents_ids",
+            "value" : "{{microevent_id[%ind].toString()}}"
+          } ],
+          "status" : "final",
+          "category" : [ {
+            "coding" : [ {
+              "system" : "http://terminology.hl7.org/CodeSystem/v2-0074",
+              "code" : "MB",
+              "display" : "Microbiology"
+            } ]
+          } ],
+          "code" : {
+            "coding" : [ "{{? trms:translateToCoding(test_itemid[%ind].toString(), 'https://mimic.mit.edu/fhir/ValueSet/testitems','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/test-itemids-to-loinc')}}", {
+              "system" : "https://mimic.mit.edu/fhir/ValueSet/testitems",
+              "code" : "{{test_itemid[%ind].toString()}}",
+              "display" : "{{test_name[%ind].toString()}}"
+            } ]
+          },
+          "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
+          "encounter" : "{{? mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}",
+          "effectiveDateTime" : "{{charttime[%ind].nav:orElse(chartdate[%ind]).utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
+          "issued" : "{{? storetime[%ind].nav:orElse(storedate[%ind]).utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
+          "valueQuantity" : {
+            "{{#d_value}}" : "{{dilution_value[%ind]}}",
+            "{{?}}" : {
+              "value" : "{{%d_value.toDecimal()}}",
+              "comparator" : "{{iif(dilution_comparison[%ind].utl:trim() = '=>', '>=', iif(dilution_comparison[%ind].utl:trim() = '<=', '<=', 'ad')) }}"
+            }
+          },
+          "interpretation" : {
+            "{{#int}}" : "{{interpretation[%ind]}}",
+            "{{*}}" : {
+              "coding" : "{{* trms:translateToCoding(%int.toString(), 'https://mimic.mit.edu/fhir/ValueSet/interpretation-codes', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/test-itemids-interpretation-to-hl7')}}"
+            }
+          },
+          "note" : {
+            "{{#note}}" : "{{comments[%ind]}}",
+            "{{*}}" : {
+              "text" : "{{%note}}"
+            }
+          },
+          "specimen" : "{{mpp:createFhirReferenceWithHashedId('Specimen', micro_specimen_id.toString())}}",
+          "component" : [ {
+            "{{#o_itemid}}" : "{{org_itemid[%ind]}}",
+            "{{?}}" : {
+              "code" : {
+                "coding" : "{{* trms:translateToCoding(%o_itemid.toString(), 'https://mimic.mit.edu/fhir/CodeSystem/microb-orgitems', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/org-itemids-to-snomed')}}"
+              },
+              "valueString" : "Organism Grown"
+            }
+          }, {
+            "{{#a_itemid}}" : "{{ab_itemid[%ind]}}",
+            "{{?}}" : {
+              "code" : {
+                "coding" : "{{* trms:translateToCoding(%a_itemid.toString(), 'https://mimic.mit.edu/fhir/CodeSystem/microb-abitems', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/ab-itemids-to-atc')}}"
+              },
+              "valueString" : "Anti-biotic Used"
+            }
+          } ],
+          "id" : "{{mpp:getHashedId('Observation', microevent_id[%ind].toString())}}",
+          "meta" : {
+            "source" : "{{%sourceSystem.sourceUri}}"
+          },
+          "resourceType" : "Observation"
+        }
+      }
+    }
+  } ]
+}

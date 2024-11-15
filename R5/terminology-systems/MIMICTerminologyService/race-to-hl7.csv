@@ -1,0 +1,34 @@
+source_system,source_code,target_system,target_code,target_display
+https://mimic.mit.edu/fhir/CodeSystem/race,ASIAN,urn:oid:2.16.840.1.113883.6.238,2028-9,Asian
+https://mimic.mit.edu/fhir/CodeSystem/race,ASIAN - ASIAN INDIAN,urn:oid:2.16.840.1.113883.6.238,2028-9,Asian
+https://mimic.mit.edu/fhir/CodeSystem/race,ASIAN - SOUTH EAST ASIAN,urn:oid:2.16.840.1.113883.6.238,2028-9,Asian
+https://mimic.mit.edu/fhir/CodeSystem/race,ASIAN - CHINESE,urn:oid:2.16.840.1.113883.6.238,2028-9,Asian
+https://mimic.mit.edu/fhir/CodeSystem/race,ASIAN - KOREAN,urn:oid:2.16.840.1.113883.6.238,2028-9,Asian
+https://mimic.mit.edu/fhir/CodeSystem/race,BLACK/AFRICAN,urn:oid:2.16.840.1.113883.6.238,2054-5,Black or African American
+https://mimic.mit.edu/fhir/CodeSystem/race,BLACK/AFRICAN AMERICAN,urn:oid:2.16.840.1.113883.6.238,2054-5,Black or African American
+https://mimic.mit.edu/fhir/CodeSystem/race,BLACK/CAPE VERDEAN,urn:oid:2.16.840.1.113883.6.238,2054-5,Black or African American
+https://mimic.mit.edu/fhir/CodeSystem/race,BLACK/CARIBBEAN ISLAND,urn:oid:2.16.840.1.113883.6.238,2054-5,Black or African American
+https://mimic.mit.edu/fhir/CodeSystem/race,HISPANIC OR LATINO,urn:oid:2.16.840.1.113883.6.238,2135-2,Hispanic or Latino
+https://mimic.mit.edu/fhir/CodeSystem/race,HISPANIC/LATINO - CENTRAL AMERICAN,urn:oid:2.16.840.1.113883.6.238,2135-2,Hispanic or Latino
+https://mimic.mit.edu/fhir/CodeSystem/race,HISPANIC/LATINO - PUERTO RICAN,urn:oid:2.16.840.1.113883.6.238,2135-2,Hispanic or Latino
+https://mimic.mit.edu/fhir/CodeSystem/race,HISPANIC/LATINO - DOMINICAN,urn:oid:2.16.840.1.113883.6.238,2135-2,Hispanic or Latino
+https://mimic.mit.edu/fhir/CodeSystem/race,HISPANIC/LATINO - COLUMBIAN,urn:oid:2.16.840.1.113883.6.238,2135-2,Hispanic or Latino
+https://mimic.mit.edu/fhir/CodeSystem/race,HISPANIC/LATINO - HONDURAN,urn:oid:2.16.840.1.113883.6.238,2135-2,Hispanic or Latino
+https://mimic.mit.edu/fhir/CodeSystem/race,HISPANIC/LATINO - GUATEMALAN,urn:oid:2.16.840.1.113883.6.238,2135-2,Hispanic or Latino
+https://mimic.mit.edu/fhir/CodeSystem/race,HISPANIC/LATINO - CUBAN,urn:oid:2.16.840.1.113883.6.238,2135-2,Hispanic or Latino
+https://mimic.mit.edu/fhir/CodeSystem/race,HISPANIC/LATINO - MEXICAN,urn:oid:2.16.840.1.113883.6.238,2135-2,Hispanic or Latino
+https://mimic.mit.edu/fhir/CodeSystem/race,HISPANIC/LATINO - SALVADORAN,urn:oid:2.16.840.1.113883.6.238,2135-2,Hispanic or Latino
+https://mimic.mit.edu/fhir/CodeSystem/race,WHITE,urn:oid:2.16.840.1.113883.6.238,2106-3,White
+https://mimic.mit.edu/fhir/CodeSystem/race,WHITE - EASTERN EUROPEAN,urn:oid:2.16.840.1.113883.6.238,2106-3,White
+https://mimic.mit.edu/fhir/CodeSystem/race,WHITE - RUSSIAN,urn:oid:2.16.840.1.113883.6.238,2106-3,White
+https://mimic.mit.edu/fhir/CodeSystem/race,WHITE - OTHER EUROPEAN,urn:oid:2.16.840.1.113883.6.238,2106-3,White
+https://mimic.mit.edu/fhir/CodeSystem/race,WHITE - BRAZILIAN,urn:oid:2.16.840.1.113883.6.238,2106-3,White
+https://mimic.mit.edu/fhir/CodeSystem/race,NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER,urn:oid:2.16.840.1.113883.6.238,2076-8,Native Hawaiian or Other Pacific Islander
+https://mimic.mit.edu/fhir/CodeSystem/race,SOUTH AMERICAN,urn:oid:2.16.840.1.113883.6.238,2106-3,White
+https://mimic.mit.edu/fhir/CodeSystem/race,PORTUGUESE,urn:oid:2.16.840.1.113883.6.238,2106-3,White
+https://mimic.mit.edu/fhir/CodeSystem/race,AMERICAN INDIAN/ALASKA NATIVE,urn:oid:2.16.840.1.113883.6.238,1002-5,American Indian or Alaska Native
+https://mimic.mit.edu/fhir/CodeSystem/race,MULTIPLE RACE/ETHNICITY,urn:oid:2.16.840.1.113883.6.238,2131-1,Other
+https://mimic.mit.edu/fhir/CodeSystem/race,UNKNOWN,http://terminology.hl7.org/CodeSystem/v3-NullFlavor,UNK,Unknown
+https://mimic.mit.edu/fhir/CodeSystem/race,PATIENT DECLINED TO ANSWER,http://terminology.hl7.org/CodeSystem/v3-NullFlavor,ASKU,asked but unknown
+https://mimic.mit.edu/fhir/CodeSystem/race,OTHER,urn:oid:2.16.840.1.113883.6.238,2131-1,Other
+https://mimic.mit.edu/fhir/CodeSystem/race,UNABLE TO OBTAIN,http://terminology.hl7.org/CodeSystem/v3-NullFlavor,UNK,Unknown
