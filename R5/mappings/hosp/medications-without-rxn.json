@@ -46,7 +46,7 @@
           } ],
           "text" : "{{drug}}"
         },
-        "form" : {
+        "doseForm" : {
           "coding" : [ {
             "system" : "http://www.nlm.nih.gov/research/umls/rxnorm",
             "code" : "{{mpp:getConcept(%ndcToMedDetails, ndc.toString(), 'doseFormRxcui')}}",
@@ -55,18 +55,20 @@
           "text" : "{{? prod_strength}}"
         },
         "ingredient" : [ {
-          "itemCodeableConcept" : {
-            "coding" : {
-              "{{#rxCode}}" : "{{mpp:getConcept(%ndcToMedDetails, ndc.toString())}}",
-              "{{?}}" : [ {
-                "system" : "http://www.nlm.nih.gov/research/umls/rxnorm",
-                "code" : "{{%rxCode.activeIngredientRxcui}}",
-                "display" : "{{%rxCode.activeIngredientName}}"
-              }, "{{* trms:translateToCoding(%rxCode.activeIngredientRxcui, 'http://www.nlm.nih.gov/research/umls/rxnorm', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/rx-norm-to-atc')}}" ]
-            },
-            "text" : "{{mpp:getConcept(%ndcToMedDetails, ndc.toString(), 'activeIngredientName')}}"
+          "item" : {
+            "concept": {
+              "coding" : {
+                "{{#rxCode}}" : "{{mpp:getConcept(%ndcToMedDetails, ndc.toString())}}",
+                "{{?}}" : [ {
+                  "system" : "http://www.nlm.nih.gov/research/umls/rxnorm",
+                  "code" : "{{%rxCode.activeIngredientRxcui}}",
+                  "display" : "{{%rxCode.activeIngredientName}}"
+                }, "{{* trms:translateToCoding(%rxCode.activeIngredientRxcui, 'http://www.nlm.nih.gov/research/umls/rxnorm', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/rx-norm-to-atc')}}" ]
+              },
+              "text" : "{{mpp:getConcept(%ndcToMedDetails, ndc.toString(), 'activeIngredientName')}}"
+            }
           },
-          "strength" : {
+          "strengthRatio" : {
             "numerator" : {
               "{{#nmrUnit}}" : "{{trms:translateToCoding(mpp:getConcept(%ndcToMedDetails, ndc.toString(), 'numeratorUnit'), 'http://www.nlm.nih.gov/research/umls/rxnorm', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/medication-units-to-ucum-or-drugform')}}",
               "{{?}}" : {

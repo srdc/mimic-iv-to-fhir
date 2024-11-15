@@ -45,13 +45,15 @@
             "value" : "{{emar_id.toString() & '-' & parent_field_ordinal.toString()}}"
           } ],
           "status" : "{{mpp:getConcept(%emarStatusConceptMap, event_txt, 'target_code')}}",
-          "medicationReference" : {
-            "reference" : "{{? mpp:createFhirReferenceWithHashedId('Medication', %prescriptionsWithNdcCode.first().drug & %prescriptionsWithNdcCode.first().gsn.toString() & %prescriptionsWithNdcCode.first().ndc.toString() & %prescriptionsWithNdcCode.first().formulary_drug_cd).reference}}",
-            "display" : "{{? medication}}"
+          "medication" : {
+            "reference" : {
+              "reference" : "{{? mpp:createFhirReferenceWithHashedId('Medication', %prescriptionsWithNdcCode.first().drug & %prescriptionsWithNdcCode.first().gsn.toString() & %prescriptionsWithNdcCode.first().ndc.toString() & %prescriptionsWithNdcCode.first().formulary_drug_cd).reference}}",
+              "display" : "{{? medication}}"
+            }
           },
           "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
-          "context" : "{{mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}",
-          "effectiveDateTime" : "{{charttime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
+          "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}",
+          "occurenceDateTime" : "{{charttime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
           "request" : "{{? iif(pharmacy_id.exists(), mpp:createFhirReferenceWithHashedId('MedicationRequest', pharmacy_id.toString()))}}",
           "dosage" : {
             "site" : {

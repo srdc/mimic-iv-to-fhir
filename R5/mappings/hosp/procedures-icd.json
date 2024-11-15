@@ -54,7 +54,7 @@
               }
             ]
           },
-          "performedDateTime": "{{chartdate}}"
+          "occurrenceDateTime": "{{chartdate}}"
         }
       }
     }

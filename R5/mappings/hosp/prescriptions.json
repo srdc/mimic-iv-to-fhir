@@ -36,9 +36,11 @@
           "id": "{{mpp:getHashedId('MedicationRequest', pharmacy_id.toString())}}",
           "status": "completed",
           "intent": "order",
-          "medicationReference": {
-            "reference": "{{mpp:createFhirReferenceWithHashedId('Medication', drug & gsn.toString() & ndc.toString() & formulary_drug_cd).reference}}",
-            "display": "{{drug}}"
+          "medication": {
+            "reference": {
+              "reference": "{{mpp:createFhirReferenceWithHashedId('Medication', drug & gsn.toString() & ndc.toString() & formulary_drug_cd).reference}}",
+              "display": "{{drug}}"
+            }
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
           "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}",

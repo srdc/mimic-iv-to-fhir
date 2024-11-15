@@ -27,11 +27,16 @@
           }, "{{? trms:translateToCoding(order_type, 'https://mimic.mit.edu/fhir/CodeSystem/order-types','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/order-types-to-snomed')}}" ]
         } ],
         "code" : {
-          "coding" : [ {
-            "system" : "https://mimic.mit.edu/fhir/CodeSystem/order-sub-types",
-            "code" : "{{order_subtype}}",
-            "display" : "{{order_subtype}}"
-          }, "{{? trms:translateToCoding(order_subtype, 'https://mimic.mit.edu/fhir/CodeSystem/order-subtypes','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/order-subtypes-to-snomed')}}" ]
+          "concept": {
+            "coding": [
+              {
+                "system": "https://mimic.mit.edu/fhir/CodeSystem/order-sub-types",
+                "code": "{{order_subtype}}",
+                "display": "{{order_subtype}}"
+              },
+              "{{? trms:translateToCoding(order_subtype, 'https://mimic.mit.edu/fhir/CodeSystem/order-subtypes','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/order-subtypes-to-snomed')}}"
+            ]
+          }
         },
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
         "encounter" : "{{? mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}",

@@ -59,7 +59,7 @@
             ],
             "text": "{{drug}}"
           },
-          "form": {
+          "doseForm": {
             "coding": {
                 "{{#dfc}}": "{{%medDetails.doseFormConcept}}",
                 "{{*}}": {
@@ -73,24 +73,26 @@
           "ingredient": {
             "{{#ingrd}}": "{{%medDetails.ingredientAndStrength}}",
             "{{*}}": {
-              "itemCodeableConcept": {
-                "coding": [
-                  {
-                    "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
-                    "code": "{{%ingrd.activeIngredientRxcui}}",
-                    "display": "{{%ingrd.activeIngredientName}}"
-                  },
-                  {
-                    "{{#atcCode}}": "{{rxn:getATC(%ingrd.activeIngredientRxcui)}}",
-                    "{{?}}": {
-                      "system": "http://www.whocc.no/atc",
-                      "code": "{{%atcCode}}"
+              "item" : {
+                "concept": {
+                  "coding": [
+                    {
+                      "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                      "code": "{{%ingrd.activeIngredientRxcui}}",
+                      "display": "{{%ingrd.activeIngredientName}}"
+                    },
+                    {
+                      "{{#atcCode}}": "{{rxn:getATC(%ingrd.activeIngredientRxcui)}}",
+                      "{{?}}": {
+                        "system": "http://www.whocc.no/atc",
+                        "code": "{{%atcCode}}"
+                      }
                     }
-                  }
-                ],
-                "text": "{{%ingrd.activeIngredientName}}"
+                  ],
+                  "text": "{{%ingrd.activeIngredientName}}"
+                }
               },
-              "strength": {
+              "strengthRatio": {
                 "numerator": {
                   "{{#nmrUnit}}": "{{trms:translateToCoding(%ingrd.numeratorUnit, 'http://www.nlm.nih.gov/research/umls/rxnorm', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/medication-units-to-ucum-or-drugform')}}",
                   "{{?}}": {

@@ -42,12 +42,14 @@
           "system" : "{{%sourceSystem.sourceUri}}/fhir/hadm_ids",
           "value" : "{{hadm_id.toString()}}"
         } ],
-        "status" : "finished",
-        "class" : {
-          "system" : "http://terminology.hl7.org/CodeSystem/v3-ActCode",
-          "code" : "{{mpp:getConcept(%admissionTypeConceptMap, admission_type, 'target_class')}}",
-          "display" : "{{mpp:getConcept(%admissionTypeConceptMap, admission_type, 'target_class_display')}}"
-        },
+        "status" : "completed",
+        "class" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+            "code" : "{{mpp:getConcept(%admissionTypeConceptMap, admission_type, 'target_class')}}",
+            "display" : "{{mpp:getConcept(%admissionTypeConceptMap, admission_type, 'target_class_display')}}"
+          } ]
+        } ],
         "type" : {
           "{{#stype}}" : "{{%services}}",
           "{{*}}" : {
@@ -59,26 +61,35 @@
           }
         },
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
-        "period" : {
+        "actualPeriod" : {
           "start" : "{{admittime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
           "end" : "{{dischtime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}"
         },
         "length" : "{{utl:getDurationAsQuantityObject(admittime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00'), dischtime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00'))}}",
         "diagnosis" : {
-          "{{#condOrProc}}" : "{{%diagnoses | %procedures}}",
+          "{{#cond}}" : "{{%diagnoses}}",
           "{{*}}" : {
-            "condition" : "{{mpp:createFhirReferenceWithHashedId(iif(%condOrProc.chartdate.exists(),'Procedure', 'Condition'), %condOrProc.hadm_id.toString() & %condOrProc.seq_num.toString())}}",
-            "use" : {
+            "condition" : [ {
+              "reference" : "{{mpp:createFhirReferenceWithHashedId('Condition', %cond.hadm_id.toString() & %cond.seq_num.toString())}}"
+            } ],
+            "use" : [ {
               "coding" : [ {
                 "system" : "http://terminology.hl7.org/CodeSystem/diagnosis-role",
                 "code" : "billing",
                 "display" : "Billing"
               } ]
-            },
-            "rank" : "{{%condOrProc.seq_num}}"
+            } ]
           }
         },
-        "hospitalization" : {
+        "reason" : [ {
+          "value" : {
+            "{{#proc}}" : "{{%procedures}}",
+            "{{*}}" : {
+              "reference" : "{{mpp:createFhirReferenceWithHashedId('Procedure', %proc.hadm_id.toString() & %proc.seq_num.toString())}}"
+            }
+          }
+        } ],
+        "admission" : {
           "admitSource" : {
             "coding" : "{{* trms:translateToCoding(admission_location, 'https://mimic.mit.edu/fhir/CodeSystem/admission-locations','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/admission-location-to-hl7')}}",
             "text" : "{{admission_location}}"
