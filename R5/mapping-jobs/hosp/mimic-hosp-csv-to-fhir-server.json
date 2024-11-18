@@ -290,7 +290,7 @@
     "sourceBinding" : {
       "prescribed_meds" : {
         "jsonClass" : "FileSystemSource",
-        "path" : "hosp/min-prescriptions.csv",
+        "path" : "hosp/prescriptions.csv",
         "contentType" : "csv",
         "options" : { },
         "preprocessSql" : "SELECT P.drug,P.gsn,P.ndc,P.formulary_drug_cd,first(P.prod_strength) as prod_strength,first(P.form_unit_disp) as form_unit_disp FROM prescribed_meds P GROUP BY P.drug, P.gsn, P.ndc, P.formulary_drug_cd",

@@ -47,11 +47,14 @@
           "text" : "{{drug}}"
         },
         "doseForm" : {
-          "coding" : [ {
-            "system" : "http://www.nlm.nih.gov/research/umls/rxnorm",
-            "code" : "{{mpp:getConcept(%ndcToMedDetails, ndc.toString(), 'doseFormRxcui')}}",
-            "display" : "{{mpp:getConcept(%ndcToMedDetails, ndc.toString(), 'doseFormName')}}"
-          } ],
+          "coding" : {
+            "{{#rxInfo}}" : "{{mpp:getConcept(%ndcToMedDetails, ndc.toString()}}",
+            "{{*}}" : {
+              "system" : "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code" : "{{%rxInfo.doseFormRxcui}}",
+              "display" : "{{%rxInfo.doseFormName}}"
+            }
+          },
           "text" : "{{? prod_strength}}"
         },
         "ingredient" : [ {
@@ -65,7 +68,7 @@
                   "display" : "{{%rxCode.activeIngredientName}}"
                 }, "{{* trms:translateToCoding(%rxCode.activeIngredientRxcui, 'http://www.nlm.nih.gov/research/umls/rxnorm', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/rx-norm-to-atc')}}" ]
               },
-              "text" : "{{mpp:getConcept(%ndcToMedDetails, ndc.toString(), 'activeIngredientName')}}"
+              "text" : "{{? mpp:getConcept(%ndcToMedDetails, ndc.toString(), 'activeIngredientName')}}"
             }
           },
           "strengthRatio" : {
