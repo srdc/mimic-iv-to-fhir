@@ -1,0 +1,54 @@
+{
+  "id" : "poe",
+  "url" : "https://mimic.mit.edu/fhir/mappings/poe",
+  "name" : "poe",
+  "title" : "Mapping of entries in 'poe' table in MIMIC-IV v3.1 dataset into FHIR ServiceRequest resources",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "source",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-poe",
+    "joinOn" : [ ]
+  } ],
+  "context" : { },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "poe-mapping",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "replaces" : "{{* mpp:createFhirReferenceWithHashedId('ServiceRequest', discontinue_of_poe_id)}}",
+        "status" : "{{iif(discontinued_by_poe_id.exists(),'revoked', iif(order_status = 'Active', 'active', 'completed'))}}",
+        "intent" : "order",
+        "category" : [ {
+          "coding" : [ {
+            "system" : "https://mimic.mit.edu/fhir/CodeSystem/order-types",
+            "code" : "{{order_type}}",
+            "display" : "{{order_type}}"
+          }, "{{? trms:translateToCoding(order_type, 'https://mimic.mit.edu/fhir/CodeSystem/order-types','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/order-types-to-snomed')}}" ]
+        } ],
+        "code" : {
+          "concept": {
+            "coding": [
+              {
+                "system": "https://mimic.mit.edu/fhir/CodeSystem/order-sub-types",
+                "code": "{{order_subtype}}",
+                "display": "{{order_subtype}}"
+              },
+              "{{? trms:translateToCoding(order_subtype, 'https://mimic.mit.edu/fhir/CodeSystem/order-subtypes','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/order-subtypes-to-snomed')}}"
+            ]
+          }
+        },
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
+        "encounter" : "{{? mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}",
+        "authoredOn" : "{{ordertime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
+        "id" : "{{mpp:getHashedId('ServiceRequest', poe_id)}}",
+        "resourceType" : "ServiceRequest"
+      }
+    },
+    "precondition" : {
+      "name" : "otherThanMedicationAndLab",
+      "language" : "text/fhirpath",
+      "expression" : "order_type != 'Lab' and order_type != 'Medications' and order_subtype.exists()"
+    }
+  } ]
+}

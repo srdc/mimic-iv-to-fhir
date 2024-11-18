@@ -1,0 +1,10 @@
+source_code,target_class,target_class_display
+AMBULATORY OBSERVATION,AMB,Ambulatory
+DIRECT EMER.,EMER,Emergency
+DIRECT OBSERVATION,OBSENC,Observation encounter
+ELECTIVE,IMP,Inpatient encounter
+EU OBSERVATION,EMER,Emergency
+EW EMER.,EMER,Emergency
+OBSERVATION ADMIT,IMP,Inpatient encounter
+SURGICAL SAME DAY ADMISSION,SS,Short stay
+URGENT,EMER,Emergency

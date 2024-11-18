@@ -1,0 +1,83 @@
+{
+  "id" : "emar",
+  "url" : "https://mimic.mit.edu/fhir/mappings/emar",
+  "name" : "emar",
+  "title" : "Mapping of entries in 'emar' and 'emar_detail' tables in MIMIC-IV v3.1 dataset into FHIR MedicationAdministration resources.",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "emar",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-emar",
+    "joinOn" : [ "emar_id", "pharmacy_id" ]
+  }, {
+    "alias" : "emarDetail",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-emar-detail",
+    "joinOn" : [ "emar_id", null ]
+  }, {
+    "alias" : "prescription",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-prescriptions",
+    "joinOn" : [ null, "pharmacy_id" ]
+  } ],
+  "context" : {
+    "emarStatusConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/hosp/emar-status.csv"
+    },
+    "routeConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/hosp/med-routes-to-snomed.csv"
+    }
+  },
+  "variable" : [ {
+    "name" : "prescriptionsWithNdcCode",
+    "language" : "text/fhirpath",
+    "expression" : "%prescription.where(ndc.exists())"
+  } ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "medication-administration-mapping",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "{{#emar}}" : "{{%emarDetail.where(parent_field_ordinal.exists())}}",
+        "{{*}}" : {
+          "identifier" : [ {
+            "use" : "official",
+            "system" : "{{%sourceSystem.sourceUri}}/fhir/emar_ids",
+            "value" : "{{emar_id.toString() & '-' & parent_field_ordinal.toString()}}"
+          } ],
+          "status" : "{{mpp:getConcept(%emarStatusConceptMap, event_txt, 'target_code')}}",
+          "medication" : {
+            "reference" : {
+              "reference" : "{{? mpp:createFhirReferenceWithHashedId('Medication', %prescriptionsWithNdcCode.first().drug & %prescriptionsWithNdcCode.first().gsn.toString() & %prescriptionsWithNdcCode.first().ndc.toString() & %prescriptionsWithNdcCode.first().formulary_drug_cd).reference}}",
+              "display" : "{{? medication}}"
+            }
+          },
+          "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
+          "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}",
+          "occurenceDateTime" : "{{charttime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
+          "request" : "{{? iif(pharmacy_id.exists(), mpp:createFhirReferenceWithHashedId('MedicationRequest', pharmacy_id.toString()))}}",
+          "dosage" : {
+            "site" : {
+              "text" : "{{? iif(%emar.side.exists() and %emar.site.exists(), %emar.side & '-' & %emar.site, iif(%emar.site.exists(), %emar.site) ) }}"
+            },
+            "route" : {
+              "{{#routeVar}}" : "{{iif(%emar.route.exists(), mpp:getConcept(%routeConceptMap, %emar.route))}}",
+              "{{?}}" : {
+                "coding" : [ {
+                  "system" : "http://snomed.info/sct",
+                  "code" : "{{%routeVar.target_code)}}",
+                  "display" : "{{%routeVar.target_display)}}"
+                } ]
+              }
+            },
+            "dose" : {
+              "value" : "{{%emar.dose_given.toDecimal()}}",
+              "unit" : "{{%emar.dose_given_unit}}"
+            }
+          },
+          "id" : "{{mpp:getHashedId('MedicationAdministration', emar_id.toString() & '-' & parent_field_ordinal.toString())}}",
+          "resourceType" : "MedicationAdministration"
+        }
+      }
+    }
+  } ]
+}

@@ -1,0 +1,92 @@
+{
+  "id" : "Ext-patients",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-patients",
+  "version" : "latest",
+  "name" : "Ext-patients",
+  "description" : "Schema of the 'patients' table in MIMIC-IV v3.1 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/patients/)",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Ext-patients",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Ext-patients",
+      "path" : "Ext-patients",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Ext-patients.subject_id",
+      "path" : "Ext-patients.subject_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "It is a unique identifier which specifies an individual patient. Any rows associated with a single subject_id pertain to the same individual. As subject_id is the primary key for the table, it is unique for each row.",
+      "short" : "Patient identifier"
+    }, {
+      "id" : "Ext-patients.gender",
+      "path" : "Ext-patients.gender",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "It is the geno-typical sex of the patient (M:male | F:female)",
+      "short" : "Gender"
+    }, {
+      "id" : "Ext-patients.anchor_age",
+      "path" : "Ext-patients.anchor_age",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "It is the patient’s age in the anchor_year. If a patient’s anchor_age is over 89 in the anchor_year then their anchor_age is set to 91, regardless of how old they actually were",
+      "short" : "Age of patient at anchor point"
+    }, {
+      "id" : "Ext-patients.anchor_year",
+      "path" : "Ext-patients.anchor_year",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "It is a shifted year for the patient for MIMIC dataset",
+      "short" : "Anchor year"
+    }, {
+      "id" : "Ext-patients.anchor_year_group",
+      "path" : "Ext-patients.anchor_year_group",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "It is a range of years - the patient’s anchor_year occurred during this range (e.g. 2008 - 2010)",
+      "short" : "Anchor year group"
+    }, {
+      "id" : "Ext-patients.dod",
+      "path" : "Ext-patients.dod",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "The de-identified date of death for the patient (e.g. 2018-05-03)",
+      "short" : "Date of death"
+    } ]
+  }
+}

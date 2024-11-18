@@ -1,0 +1,28 @@
+source_system,source_code,source_display,target_system,target_code,target_display
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90030,DAPTOMYCIN,http://www.whocc.no/atc,J01XX09,daptomycin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90015,VANCOMYCIN,http://www.whocc.no/atc,J01XA01,vancomycin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90008,TRIMETHOPRIM/SULFA,http://www.whocc.no/atc,J01EE01,sulfamethoxazole and trimethoprim
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90014,AMIKACIN,http://www.whocc.no/atc,J01GB06,amikacin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90021,PIPERACILLIN,http://www.whocc.no/atc,J01CA12,piperacillin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90006,ERYTHROMYCIN,http://www.whocc.no/atc,J01FA01,erythromycin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90010,NITROFURANTOIN,http://www.whocc.no/atc,J01XE01,nitrofurantoin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90029,MEROPENEM,http://www.whocc.no/atc,J01DH02,meropenem
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90005,CEFAZOLIN,http://www.whocc.no/atc,J01DB04,cefazolin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90022,AMPICILLIN/SULBACTAM,http://www.whocc.no/atc,J01CR01,ampicillin and beta-lactamase inhibitor
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90007,CLINDAMYCIN,http://www.whocc.no/atc,J01FF01,clindamycin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90027,RIFAMPIN,http://www.whocc.no/atc,J04AB02,rifampicin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90017,CEFTAZIDIME,http://www.whocc.no/atc,J01DD02,ceftazidime
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90031,LINEZOLID,http://www.whocc.no/atc,J01XX08,linezolid
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90012,GENTAMICIN,http://www.whocc.no/atc,J01GB03,gentamicin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90011,TETRACYCLINE,http://www.whocc.no/atc,J01AA07,tetracycline
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90026,PIPERACILLIN/TAZO,http://www.whocc.no/atc,J01CR05,piperacillin and beta-lactamase inhibitor
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90004,AMPICILLIN,http://www.whocc.no/atc,J01CA01,ampicillin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90023,CEFUROXIME,http://www.whocc.no/atc,J01DC02,cefuroxime
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90013,VANCOMYCIN,http://www.whocc.no/atc,J01GB01,tobramycin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90028,CEFEPIME,http://www.whocc.no/atc,J01DE01,cefepime
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90016,OXACILLIN,http://www.whocc.no/atc,J01CF04,oxacillin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90019,CIPROFLOXACIN,http://www.whocc.no/atc,J01MA02,ciprofloxacin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90018,CEFTRIAXONE,http://www.whocc.no/atc,J01DD04,ceftriaxone
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90025,LEVOFLOXACIN,http://www.whocc.no/atc,J01MA12,levofloxacin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90003,PENICILLIN G,http://www.whocc.no/atc,J01CE01,benzylpenicillin
+https://mimic.mit.edu/fhir/CodeSystem/microb-abitems,90020,IMIPENEM,http://www.whocc.no/atc,J01DH51,imipenem and cilastatin

@@ -1,0 +1,301 @@
+{
+  "id" : "Ext-microbiologyevents",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-microbiologyevents",
+  "version" : "latest",
+  "name" : "Ext-microbiologyevents",
+  "description" : "Schema of the 'microbiologyevents' table in MIMIC-IV v3.1 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/microbiologyevents/)",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Ext-microbiologyevents",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Ext-microbiologyevents",
+      "path" : "Ext-microbiologyevents",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Ext-microbiologyevents.microevent_id",
+      "path" : "Ext-microbiologyevents.microevent_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "A unique integer denoting the row.",
+      "short" : "Event unique identifier"
+    }, {
+      "id" : "Ext-microbiologyevents.subject_id",
+      "path" : "Ext-microbiologyevents.subject_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "subject_id is a unique identifier which specifies an individual patient. Any rows associated with a single subject_id pertain to the same individual.",
+      "short" : "Patient identifier"
+    }, {
+      "id" : "Ext-microbiologyevents.hadm_id",
+      "path" : "Ext-microbiologyevents.hadm_id",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "It is an integer identifier which is unique for each patient hospitalization",
+      "short" : "Unique identifier for hospitalization"
+    }, {
+      "id" : "Ext-microbiologyevents.micro_specimen_id",
+      "path" : "Ext-microbiologyevents.micro_specimen_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Uniquely denoted the specimen from which the lab measurement was made. Most lab measurements are made on patient derived samples (specimens) such as blood, urine, and so on. Often multiple measurements are made on the same sample. The specimen_id will group measurements made on the same sample, e.g. blood gas measurements made on the same sample of blood.",
+      "short" : "Specimen identifier"
+    }, {
+      "id" : "Ext-microbiologyevents.order_provider_id",
+      "path" : "Ext-microbiologyevents.order_provider_id",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "An anonymous identifier for the provider who ordered the microbiology test",
+      "short" : "Provider who ordered the microbiology test"
+    }, {
+      "id" : "Ext-microbiologyevents.chartdate",
+      "path" : "Ext-microbiologyevents.chartdate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "It records the date at which an observation was charted, and is usually the closest proxy to the time the data was actually measured",
+      "short" : "Measurement date"
+    }, {
+      "id" : "Ext-microbiologyevents.charttime",
+      "path" : "Ext-microbiologyevents.charttime",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The time at which the laboratory measurement was charted. This is usually the time at which the specimen was acquired, and is usually significantly earlier than the time at which the measurement is available. (in timestamp format, e.g. 2180-03-23 11:51:00)",
+      "short" : "Lab measurement chart time"
+    }, {
+      "id" : "Ext-microbiologyevents.spec_itemid",
+      "path" : "Ext-microbiologyevents.spec_itemid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "The specimen which is tested for bacterial growth. The specimen is a sample derived from a patient; e.g. blood, urine, sputum, etc.",
+      "short" : "Code for the specimen"
+    }, {
+      "id" : "Ext-microbiologyevents.spec_type_desc",
+      "path" : "Ext-microbiologyevents.spec_type_desc",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The specimen which is tested for bacterial growth. The specimen is a sample derived from a patient; e.g. blood, urine, sputum, etc.",
+      "short" : "Description for the specimen"
+    }, {
+      "id" : "Ext-microbiologyevents.test_seq",
+      "path" : "Ext-microbiologyevents.test_seq",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "If multiple samples are drawn, the test_seq will delineate them. For example, if an aerobic and anerobic culture bottle are used for the same specimen, they will have distinct test_seq values (likely 1 and 2).",
+      "short" : "Test sequence number"
+    }, {
+      "id" : "Ext-microbiologyevents.storedate",
+      "path" : "Ext-microbiologyevents.storedate",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "The date at which the measurement was made available in the laboratory system. This is when the information would have been available to care providers (Timestamp format: yyyy-MM-dd hh:mm:ss)",
+      "short" : "Date measurement is available"
+    }, {
+      "id" : "Ext-microbiologyevents.storetime",
+      "path" : "Ext-microbiologyevents.storetime",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The time at which the measurement was made available in the laboratory system. This is when the information would have been available to care providers (Timestamp format: yyyy-MM-dd hh:mm:ss)",
+      "short" : "Time measurement is available"
+    }, {
+      "id" : "Ext-microbiologyevents.test_itemid",
+      "path" : "Ext-microbiologyevents.test_itemid",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "The test performed on the given specimen",
+      "short" : "Code for the test"
+    }, {
+      "id" : "Ext-microbiologyevents.test_name",
+      "path" : "Ext-microbiologyevents.test_name",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The test performed on the given specimen",
+      "short" : "Name for the test"
+    }, {
+      "id" : "Ext-microbiologyevents.org_itemid",
+      "path" : "Ext-microbiologyevents.org_itemid",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "The organism, if any, which grew when tested. If NULL, no organism grew (i.e. a negative culture)",
+      "short" : "Code for the organizm found"
+    }, {
+      "id" : "Ext-microbiologyevents.org_name",
+      "path" : "Ext-microbiologyevents.org_name",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The organism, if any, which grew when tested. If NULL, no organism grew (i.e. a negative culture)",
+      "short" : "Name for the organizm found"
+    }, {
+      "id" : "Ext-microbiologyevents.isolate_num",
+      "path" : "Ext-microbiologyevents.isolate_num",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "For testing antibiotics, the isolated colony (integer; starts at 1)",
+      "short" : "Isolated colony number"
+    }, {
+      "id" : "Ext-microbiologyevents.quantity",
+      "path" : "Ext-microbiologyevents.quantity",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Quantity of found organism",
+      "short" : "Quantity of found organism"
+    }, {
+      "id" : "Ext-microbiologyevents.ab_itemid",
+      "path" : "Ext-microbiologyevents.ab_itemid",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "If an antibiotic was tested against the given organism for sensitivity, the antibiotic is listed here",
+      "short" : "Code for the antibiotic tested"
+    }, {
+      "id" : "Ext-microbiologyevents.ab_name",
+      "path" : "Ext-microbiologyevents.ab_name",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "If an antibiotic was tested against the given organism for sensitivity, the antibiotic is listed here.",
+      "short" : "Name for the antibiotic tested"
+    }, {
+      "id" : "Ext-microbiologyevents.dilution_text",
+      "path" : "Ext-microbiologyevents.dilution_text",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Dilution values when testing antibiotic sensitivity",
+      "short" : "Text for dilution value"
+    }, {
+      "id" : "Ext-microbiologyevents.dilution_comparison",
+      "path" : "Ext-microbiologyevents.dilution_comparison",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Dilution values when testing antibiotic sensitivity",
+      "short" : "Comparison operator for dilution value"
+    }, {
+      "id" : "Ext-microbiologyevents.dilution_value",
+      "path" : "Ext-microbiologyevents.dilution_value",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "decimal",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/decimal" ]
+      } ],
+      "definition" : "Dilution values when testing antibiotic sensitivity",
+      "short" : "Numeric dilution value"
+    }, {
+      "id" : "Ext-microbiologyevents.interpretation",
+      "path" : "Ext-microbiologyevents.interpretation",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "interpretation of the antibiotic sensitivity, and indicates the results of the test. “S” is sensitive, “R” is resistant, “I” is intermediate, and “P” is pending.",
+      "short" : "interpretation of the antibiotic sensitivity"
+    }, {
+      "id" : "Ext-microbiologyevents.comments",
+      "path" : "Ext-microbiologyevents.comments",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Deidentified free-text comments associated with the microbiology measurement. Usually these provide information about the sample, whether any notifications were made to care providers regarding the results, considerations for interpretation, or in some cases the comments contain the result of the measurement itself. ",
+      "short" : "free-text comments associated with the microbiology measurement"
+    } ]
+  }
+}

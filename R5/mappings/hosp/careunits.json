@@ -1,0 +1,33 @@
+{
+  "id" : "careunits",
+  "url" : "https://mimic.mit.edu/fhir/mappings/careunits",
+  "name" : "careunits",
+  "title" : "Mapping of Care Units in 'transfers' table in MIMIC-IV v3.1 dataset into FHIR Location resources",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "careunits",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-careunits",
+    "joinOn" : [ ]
+  } ],
+  "context" : { },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "careunits-mapping",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "status" : "active",
+        "name" : "{{careunit}}",
+        "mode" : "kind",
+        "type" : {
+          "{{#utype}}" : "{{trms:translateToCoding(careunit, 'https://mimic.mit.edu/fhir/CodeSystem/care-units', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/careunits-to-hl7')}}",
+          "{{*}}" : {
+            "coding" : "{{* %utype}}"
+          }
+        },
+        "id" : "{{mpp:getHashedId('Location', careunit.toString())}}",
+        "resourceType" : "Location"
+      }
+    }
+  } ]
+}

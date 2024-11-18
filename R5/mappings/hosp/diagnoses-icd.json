@@ -1,0 +1,77 @@
+{
+  "id": "diagnoses-icd",
+  "url": "https://mimic.mit.edu/fhir/mappings/diagnoses-icd",
+  "name": "diagnoses-icd",
+  "title": "Mapping of entries in 'diagnoses_icd' table joined with 'd_icd_diagnoses' table restructured as FHIR concept map in MIMIC-IV v3.1 dataset into FHIR Condition resources.",
+  "source": [
+    {
+      "alias": "diagnoses",
+      "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-diagnoses-icd",
+      "joinOn": ["icd_version", "icd_code"]
+    },
+    {
+      "alias": "icdConceptMap",
+      "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-d-icd-diagnoses",
+      "joinOn": ["icd_version", "icd_code"]
+    }
+  ],
+  "context": {
+    "icd9to10Map":  {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/icd9toicd10cmgem.csv"
+    }
+  },
+  "mapping": [
+    {
+      "expression": {
+        "name": "condition-mapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Condition",
+          "id": "{{mpp:getHashedId('Condition',hadm_id.toString() & seq_num.toString())}}",
+          "meta": {
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "clinicalStatus" : {
+            "coding" : [ {
+              "system" : "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code" : "unknown"
+            } ]
+          },
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                  "code": "encounter-diagnosis",
+                  "display": "Encounter diagnosis"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "{{#icdConcept}}": "{{%icdConceptMap}}",
+                "{{?}}": {
+                  "system": "{{iif(icd_version=9, 'http://hl7.org/fhir/sid/icd-9-cm','http://hl7.org/fhir/sid/icd-10')}}",
+                  "code": "{{iif(icd_code.length()=3 or (icd_code.startsWith('E') and icd_version=9 and icd_code.length()=4), icd_code, iif(icd_code.startsWith('E') and icd_version=9, icd_code.substring(0,4)&'.'&icd_code.substring(4), icd_code.substring(0,3) & '.' & icd_code.substring(3)))}}",
+                  "display": "{{%icdConcept.long_title}}"
+                }
+              },
+              {
+                "{{#mappedConcept}}": "{{iif(icd_version=9, mpp:getConcept(%icd9to10Map, icd_code).where(combination='0' and no_map='0').nav:orElse(iif(icd_code.length()>4, mpp:getConcept(%icd9to10Map, icd_code.substring(0,4)).where(combination='0' and no_map='0').nav:orElse(mpp:getConcept(%icd9to10Map, icd_code.substring(0,3)).where(combination='0' and no_map='0')), iif(icd_code.length()=4, mpp:getConcept(%icd9to10Map, icd_code.substring(0,3)).where(combination='0' and no_map='0'), {}))).last(),{})}}",
+                "{{?}}": {
+                  "system": "http://hl7.org/fhir/sid/icd-10",
+                  "code": "{{iif(%mappedConcept.icd10cm.length()>3, %mappedConcept.icd10cm.substring(0,3) & '.' & %mappedConcept.icd10cm.substring(3),%mappedConcept.icd10cm)}}"
+                }
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}"
+        }
+      }
+    }
+  ]
+}
