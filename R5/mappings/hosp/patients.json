@@ -41,19 +41,6 @@
         "meta" : {
           "source" : "{{%sourceSystem.sourceUri}}"
         },
-        "extension" : {
-          "{{#extensionVar}}" : "{{%lastAdmission}}",
-          "{{?}}" : [ {
-            "url" : "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race",
-            "extension" : [ {
-              "url" : "text",
-              "valueString" : "{{%extensionVar.race}}"
-            }, {
-              "url" : "ombCategory",
-              "valueCoding" : "{{trms:translateToCoding(%extensionVar.race, 'https://mimic.mit.edu/fhir/CodeSystem/race','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/race-to-hl7')}}"
-            } ]
-          } ]
-        },
         "resourceType" : "Patient"
       }
     }

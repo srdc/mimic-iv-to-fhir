@@ -22,8 +22,7 @@
             "code" : "laboratory",
             "display" : "Laboratory"
           } ],
-          "text" : "Laboratory",
-          "@sliceName" : "Laboratory"
+          "text" : "Laboratory"
         } ],
         "code" : {
           "coding" : [ "{{? trms:translateToCoding(itemid.toString(), 'https://mimic.mit.edu/fhir/CodeSystem/labitems','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/labitems-to-loinc')}}", {
@@ -88,8 +87,7 @@
         },
         "id" : "{{mpp:getHashedId('Observation', labevent_id.toString())}}",
         "meta" : {
-          "source" : "{{%sourceSystem.sourceUri}}",
-          "profile" : [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab" ]
+          "source" : "{{%sourceSystem.sourceUri}}"
         },
         "extension" : {
           "{{#pr}}" : "{{priority}}",
