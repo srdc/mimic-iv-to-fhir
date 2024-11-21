@@ -12,6 +12,7 @@
   "context" : { },
   "variable" : [ ],
   "mapping" : [ {
+    "description" : "charttime.first() is used because charttime values for each micro_specimen_id are always the same. Because charttime records the time at which an observation was charted which is specimen in this case.",
     "expression" : {
       "name" : "diagnostic-report-mapping",
       "language" : "application/fhir-template+json",
@@ -45,8 +46,7 @@
         },
         "resourceType" : "DiagnosticReport"
       }
-    },
-    "description" : "charttime.first() is used because charttime values for each micro_specimen_id are always the same. Because charttime records the time at which an observation was charted which is specimen in this case."
+    }
   }, {
     "expression" : {
       "name" : "specimen-mapping",
@@ -125,18 +125,18 @@
           },
           "specimen" : "{{mpp:createFhirReferenceWithHashedId('Specimen', micro_specimen_id.toString())}}",
           "component" : [ {
-            "{{#o_itemid}}" : "{{org_itemid[%ind]}}",
+            "{{#oItemCoding}}" : "{{iif(org_itemid[%ind].exists(), trms:translateToCoding(%o_itemid.toString(), 'https://mimic.mit.edu/fhir/CodeSystem/microb-orgitems', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/org-itemids-to-snomed'))}}",
             "{{?}}" : {
               "code" : {
-                "coding" : "{{* trms:translateToCoding(%o_itemid.toString(), 'https://mimic.mit.edu/fhir/CodeSystem/microb-orgitems', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/org-itemids-to-snomed')}}"
+                "coding" : "{{* %oItemCoding}}"
               },
               "valueString" : "Organism Grown"
             }
           }, {
-            "{{#a_itemid}}" : "{{ab_itemid[%ind]}}",
+            "{{#abItemCoding}}" : "{{iif(ab_itemid[%ind].exists(), trms:translateToCoding(ab_itemid[%ind].toString(), 'https://mimic.mit.edu/fhir/CodeSystem/microb-abitems', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/ab-itemids-to-atc'))}}",
             "{{?}}" : {
               "code" : {
-                "coding" : "{{* trms:translateToCoding(%a_itemid.toString(), 'https://mimic.mit.edu/fhir/CodeSystem/microb-abitems', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/ab-itemids-to-atc')}}"
+                "coding" : "{{* %abItemCoding}}"
               },
               "valueString" : "Anti-biotic Used"
             }
