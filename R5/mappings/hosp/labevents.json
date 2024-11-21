@@ -34,7 +34,7 @@
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
         "effectiveDateTime" : "{{charttime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
         "valueString" : {
-          "{{#strValue}}" : "{{iif(valuenum.exists().not() and value.utl:isFhirQuantityExpression().not() and trms:translateToCoding(value.orElse(comments).utl:takeUntil('.' | '*').trim().orElse('!NO-SUCH-CODE!'), 'https://mimic.mit.edu/fhir/CodeSystem/labitem_coded_values', 'https://mimic.mit.edu/fhir/ConceptMap/labitem_coded_values_to_other').exists().not(),value,{})}}",
+          "{{#strValue}}" : "{{iif(valuenum.exists().not() and value.utl:isFhirQuantityExpression().not() and trms:translateToCoding(value.orElse(comments).utl:takeUntil('.' | '*').trim().orElse('!NO-SUCH-CODE!'), 'https://mimic.mit.edu/fhir/CodeSystem/labitem_coded_values', 'https://mimic.mit.edu/fhir/ConceptMap/labitem-coded-values-to-other').exists().not(),value,{})}}",
           "{{?}}" : "{{%strValue}}"
         },
         "valueQuantity" : {
