@@ -75,7 +75,7 @@
     }
   }, {
     "expression" : {
-      "name" : "test-mapping",
+      "name" : "observation-mapping",
       "language" : "application/fhir-template+json",
       "value" : {
         "{{#ind}}" : "{{utl:indices(0, count.toInteger() - 1)}}",
