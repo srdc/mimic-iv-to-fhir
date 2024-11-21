@@ -1,0 +1,92 @@
+{
+  "id" : "Ext-procedures-icd",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-procedures-icd",
+  "version" : "latest",
+  "name" : "Ext-procedures-icd",
+  "description" : "Schema of the 'procedures_icd' table in MIMIC-IV v3.1 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/procedures_icd/)",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Ext-procedures-icd",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Ext-procedures-icd",
+      "path" : "Ext-procedures-icd",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Ext-procedures-icd.subject_id",
+      "path" : "Ext-procedures-icd.subject_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "It is a unique identifier which specifies an individual patient. Any rows associated with a single subject_id pertain to the same individual. As subject_id is the primary key for the table, it is unique for each row.",
+      "short" : "Patient identifier"
+    }, {
+      "id" : "Ext-procedures-icd.hadm_id",
+      "path" : "Ext-procedures-icd.hadm_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Represents a single patient’s admission to the hospital. hadm_id ranges from 2000000 - 2999999",
+      "short" : "Hospital admission identifier"
+    }, {
+      "id" : "Ext-procedures-icd.seq_num",
+      "path" : "Ext-procedures-icd.seq_num",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "The priority assigned to the diagnoses. The priority can be interpreted as a ranking of which diagnoses are “important”, but many caveats to this broad statement exist. For example, patients who are diagnosed with sepsis must have sepsis as their 2nd billed condition. The 1st billed condition must be the infectious agent. There’s also less importance placed on ranking low priority diagnoses “correctly” (as there may be no correct ordering of the priority of the 5th - 10th diagnosis codes, for example).",
+      "short" : "Diagnoses priority"
+    }, {
+      "id" : "Ext-procedures-icd.chartdate",
+      "path" : "Ext-procedures-icd.chartdate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "The date of the associated procedures. Date does not strictly correlate with seq_num.",
+      "short" : "Procedure date"
+    }, {
+      "id" : "Ext-procedures-icd.icd_code",
+      "path" : "Ext-procedures-icd.icd_code",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "icd_code is the International Coding Definitions (ICD) code.\n\nThere are two versions for this coding system: version 9 (ICD-9) and version 10 (ICD-10). These can be differentiated using the icd_version column. ",
+      "short" : "Diagnosis ICD code"
+    }, {
+      "id" : "Ext-procedures-icd.icd_version",
+      "path" : "Ext-procedures-icd.icd_version",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "There are two versions for this coding system: version 9 (ICD-9) and version 10 (ICD-10). These can be differentiated using the icd_version column",
+      "short" : "ICD code version"
+    } ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id" : "patients",
+  "url" : "https://mimic.mit.edu/fhir/mappings/patients",
+  "name" : "patients",
+  "title" : "Mapping of entries in 'patients' table in MIMIC-IV v3.1 dataset into FHIR Patient resources",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "patients",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-patients",
+    "joinOn" : [ "subject_id" ]
+  }, {
+    "alias" : "admissions",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-admissions",
+    "joinOn" : [ "subject_id" ]
+  } ],
+  "context" : { },
+  "variable" : [ {
+    "name" : "lastAdmission",
+    "language" : "text/fhirpath",
+    "expression" : "%admissions.aggregate(iif($total.empty(), $this, iif($this.admittime > $total.admittime, $this, $total)))"
+  } ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "patients-mapping",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "identifier" : [ {
+          "use" : "official",
+          "system" : "{{%sourceSystem.sourceUri}}/fhir/subject_ids",
+          "value" : "{{subject_id.toString()}}"
+        } ],
+        "active" : true,
+        "gender" : "{{iif(gender='M', 'male', 'female')}}",
+        "birthDate" : "{{(anchor_year - anchor_age)}}",
+        "deceasedDateTime" : "{{? dod}}",
+        "maritalStatus" : {
+          "coding" : [ "{{? trms:translateToCoding(%lastAdmission.marital_status, 'https://mimic.mit.edu/fhir/CodeSystem/marital-status','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/marital-status-to-hl7')}}" ],
+          "text" : "{{? %lastAdmission.marital_status}}"
+        },
+        "id" : "{{mpp:getHashedId('Patient', subject_id.toString())}}",
+        "meta" : {
+          "source" : "{{%sourceSystem.sourceUri}}"
+        },
+        "resourceType" : "Patient"
+      }
+    }
+  } ]
+}

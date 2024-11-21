@@ -1,0 +1,62 @@
+{
+  "id": "procedures-icd",
+  "url": "https://mimic.mit.edu/fhir/mappings/procedures-icd",
+  "name": "procedures-icd",
+  "title": "Mapping of entries in 'procedures_icd' table joined with 'd_icd_procedures' table restructured as FHIR concept map in MIMIC-IV v3.1 dataset into FHIR Procedure resources.",
+  "source": [
+    {
+      "alias": "procedures",
+      "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-procedures-icd",
+      "joinOn": ["icd_version", "icd_code"]
+    },
+    {
+      "alias": "icdConceptMap",
+      "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-d-icd-diagnoses",
+      "joinOn": ["icd_version", "icd_code"]
+    }
+  ],
+  "context": {
+    "icd9to10Map":  {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/icd9toicd10pcsgem.csv"
+    }
+  },
+  "mapping": [
+    {
+      "expression": {
+        "name": "procedure-mapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Procedure",
+          "id": "{{mpp:getHashedId('Procedure', hadm_id.toString() & seq_num.toString())}}",
+          "meta": {
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "completed",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}",
+          "code": {
+            "coding": [
+              {
+                "{{#icdConcept}}": "{{%icdConceptMap}}",
+                "{{?}}": {
+                  "system": "{{iif(icd_version=9, 'http://hl7.org/fhir/sid/ex-icd-10-procedures','http://hl7.org/fhir/sid/ex-icd-10-procedures')}}",
+                  "code": "{{iif(icd_version=10, icd_code, icd_code.substring(0,2) & '.' & icd_code.substring(2))}}",
+                  "display": "{{%icdConcept.long_title}}"
+                }
+              },
+              {
+                "{{#mappedConcept}}": "{{iif(icd_version=9, mpp:getConcept(%icd9to10Map, icd_code).where(combination='0' and no_map='0').last(), {})}}",
+                "{{?}}": {
+                  "system": "http://hl7.org/fhir/sid/ex-icd-10-procedures",
+                  "code": "{{%mappedConcept.icd10cm}}"
+                }
+              }
+            ]
+          },
+          "occurrenceDateTime": "{{chartdate}}"
+        }
+      }
+    }
+  ]
+}

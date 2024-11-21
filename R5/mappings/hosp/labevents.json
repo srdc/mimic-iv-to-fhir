@@ -1,0 +1,103 @@
+{
+  "id" : "labevents",
+  "url" : "https://mimic.mit.edu/fhir/mappings/labevents",
+  "name" : "labevents",
+  "title" : "Mapping of entries in 'labevents' table in MIMIC-IV v3.1 dataset into FHIR Observation resources",
+  "source" : [ {
+    "alias" : "source",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-labevents",
+    "joinOn" : [ ]
+  } ],
+  "context" : { },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "labevents-mapping",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "status" : "final",
+        "category" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code" : "laboratory",
+            "display" : "Laboratory"
+          } ],
+          "text" : "Laboratory"
+        } ],
+        "code" : {
+          "coding" : [ "{{? trms:translateToCoding(itemid.toString(), 'https://mimic.mit.edu/fhir/CodeSystem/labitems','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/labitems-to-loinc')}}", {
+            "system" : "https://mimic.mit.edu/fhir/CodeSystem/labitems",
+            "code" : "{{itemid.toString()}}",
+            "display" : "{{trms:lookupDisplay(itemid.toString(),'https://mimic.mit.edu/fhir/CodeSystem/labitems', {})}}"
+          } ]
+        },
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
+        "effectiveDateTime" : "{{charttime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
+        "valueString" : {
+          "{{#strValue}}" : "{{iif(valuenum.exists().not() and value.utl:isFhirQuantityExpression().not() and trms:translateToCoding(value.orElse(comments).utl:takeUntil('.' | '*').trim().orElse('!NO-SUCH-CODE!'), 'https://mimic.mit.edu/fhir/CodeSystem/labitem_coded_values', 'https://mimic.mit.edu/fhir/ConceptMap/labitem_coded_values_to_other').exists().not(),value,{})}}",
+          "{{?}}" : "{{%strValue}}"
+        },
+        "valueQuantity" : {
+          "{{#ifQuantity}}" : "{{iif(valuenum.exists() or (value.exists() and value.utl:isFhirQuantityExpression()), true, {})}}",
+          "{{?}}" : "{{utl:createFhirQuantity(valuenum.orElse(value), valueuom.trim(), 'http://unitsofmeasure.org', valueuom.trim())}}"
+        },
+        "valueCodeableConcept" : {
+          "{{#codedValue}}" : "{{iif(valuenum.exists().not(), trms:translateToCoding(value.orElse(comments).utl:takeUntil('.' | '*').trim().orElse('!NO-SUCH-CODE!'), 'https://mimic.mit.edu/fhir/CodeSystem/labitem-coded-values', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/labitem-coded-values-to-other'),{})}}",
+          "{{?}}" : {
+            "coding" : "{{* %codedValue}}",
+            "text" : "{{? value}}"
+          }
+        },
+        "identifier" : [ {
+          "use" : "official",
+          "system" : "{{%sourceSystem.sourceUri}}/fhir/labevent_ids",
+          "value" : "{{labevent_id.toString()}}"
+        } ],
+        "encounter" : "{{? mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}",
+        "issued" : "{{? storetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
+        "interpretation" : {
+          "{{#isAbnormal}}" : "{{iif(flag.exists() and flag='abnormal', true, {})}}",
+          "{{*}}" : {
+            "coding" : [ {
+              "system" : "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+              "code" : "A",
+              "display" : "Abnormal"
+            } ],
+            "text" : "Abnormal"
+          }
+        },
+        "note" : {
+          "{{#note}}" : "{{comments}}",
+          "{{*}}" : {
+            "text" : "{{%note}}"
+          }
+        },
+        "specimen" : {
+          "identifier" : {
+            "system" : "{{%sourceSystem.sourceUri}}/fhir/specimen_ids",
+            "value" : "{{specimen_id.toString()}}"
+          }
+        },
+        "referenceRange" : {
+          "{{#rrExists}}" : "{{iif(ref_range_lower.exists() and ref_range_upper.exists(), true, {})}}",
+          "{{*}}" : {
+            "low" : "{{utl:createFhirQuantity(ref_range_lower, valueuom.trim(), 'http://unitsofmeasure.org', valueuom.trim())}}",
+            "high" : "{{utl:createFhirQuantity(ref_range_upper, valueuom.trim(), 'http://unitsofmeasure.org', valueuom.trim())}}"
+          }
+        },
+        "id" : "{{mpp:getHashedId('Observation', labevent_id.toString())}}",
+        "meta" : {
+          "source" : "{{%sourceSystem.sourceUri}}"
+        },
+        "extension" : {
+          "{{#pr}}" : "{{priority}}",
+          "{{*}}" : {
+            "url" : "http://hl7.org/fhir/us/cdmh/StructureDefinition/cdmh-pcornet-lab-test-priority",
+            "valueCode" : "{{iif(%pr='ROUTINE', 'R', iif(%pr='STAT', 'S', 'O'))}}"
+          }
+        },
+        "resourceType" : "Observation"
+      }
+    }
+  } ]
+}

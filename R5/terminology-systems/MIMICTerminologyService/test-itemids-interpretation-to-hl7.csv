@@ -1,0 +1,5 @@
+source_system,source_code,target_system,target_code,target_display
+https://mimic.mit.edu/fhir/ValueSet/interpretation-codes,S,http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation,S,"Suspectible"
+https://mimic.mit.edu/fhir/ValueSet/interpretation-codes,R,http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation,R,"Resistant"
+https://mimic.mit.edu/fhir/ValueSet/interpretation-codes,I,http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation,I,"Intermediate"
+https://mimic.mit.edu/fhir/ValueSet/interpretation-codes,P,http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation,IE,"Insufficient evidence"

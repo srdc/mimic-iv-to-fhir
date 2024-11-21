@@ -1,0 +1,86 @@
+{
+  "id" : "emar",
+  "url" : "https://mimic.mit.edu/fhir/mappings/emar",
+  "name" : "emar",
+  "title" : "Mapping of entries in 'emar' and 'emar_detail' tables in MIMIC-IV v3.1 dataset into FHIR MedicationAdministration resources.",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "emar",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-emar",
+    "joinOn" : [ "emar_id", "pharmacy_id" ]
+  }, {
+    "alias" : "emarDetail",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-emar-detail",
+    "joinOn" : [ "emar_id", null ]
+  }, {
+    "alias" : "prescription",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-prescriptions",
+    "joinOn" : [ null, "pharmacy_id" ]
+  } ],
+  "context" : {
+    "emarStatusConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/hosp/emar-status.csv"
+    },
+    "routeConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/hosp/med-routes-to-snomed.csv"
+    }
+  },
+  "variable" : [ {
+    "name" : "prescriptionsWithNdcCode",
+    "language" : "text/fhirpath",
+    "expression" : "%prescription.where(ndc.exists())"
+  } ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "medication-administration-mapping",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "{{#emarVar}}" : "{{%emarDetail.where(parent_field_ordinal.exists())}}",
+        "{{*}}" : {
+          "{{#prescriptionVar}}" : "{{%prescriptionsWithNdcCode}}",
+          "{{*}}" : {
+            "identifier" : [ {
+              "use" : "official",
+              "system" : "{{%sourceSystem.sourceUri}}/fhir/emar_ids",
+              "value" : "{{emar_id.toString() & '-' & parent_field_ordinal.toString()}}"
+            } ],
+            "status" : "{{mpp:getConcept(%emarStatusConceptMap, event_txt, 'target_code')}}",
+            "medication" : {
+              "reference" : {
+                "reference" : "{{? mpp:createFhirReferenceWithHashedId('Medication', %prescriptionVar.drug & %prescriptionVar.gsn.toString() & %prescriptionVar.ndc.toString() & %prescriptionVar.formulary_drug_cd).reference}}",
+                "display" : "{{? medication}}"
+              }
+            },
+            "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
+            "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}",
+            "occurenceDateTime" : "{{charttime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
+            "request" : "{{? iif(pharmacy_id.exists(), mpp:createFhirReferenceWithHashedId('MedicationRequest', pharmacy_id.toString()))}}",
+            "dosage" : {
+              "site" : {
+                "text" : "{{? iif(%emarVar.side.exists() and %emarVar.site.exists(), %emarVar.side & '-' & %emarVar.site, iif(%emarVar.site.exists(), %emarVar.site) ) }}"
+              },
+              "route" : {
+                "{{#routeVar}}" : "{{iif(%emarVar.route.exists(), mpp:getConcept(%routeConceptMap, %emarVar.route))}}",
+                "{{?}}" : {
+                  "coding" : [ {
+                    "system" : "http://snomed.info/sct",
+                    "code" : "{{%routeVar.target_code)}}",
+                    "display" : "{{%routeVar.target_display)}}"
+                  } ]
+                }
+              },
+              "dose" : {
+                "value" : "{{? iif(%emarVar.dose_given.toDecimal().exists(), %emarVar.dose_given.toDecimal(), iif(%emarVar.product_amount_given.toDecimal().exists(), %emarVar.product_amount_given.toDecimal(), %emarVar.dose_due.toDecimal()))}}",
+                "unit" : "{{? iif(%emarVar.dose_given_unit.exists(), %emarVar.dose_given_unit, iif(%emarVar.product_unit.exists(), %emarVar.product_unit, %emarVar.dose_due_unit))}}"
+              }
+            },
+            "id" : "{{mpp:getHashedId('MedicationAdministration', emar_id.toString() & '-' & parent_field_ordinal.toString())}}",
+            "resourceType" : "MedicationAdministration"
+          }
+        }
+      }
+    }
+  } ]
+}

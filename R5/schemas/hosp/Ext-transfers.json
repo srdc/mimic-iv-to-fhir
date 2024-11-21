@@ -1,0 +1,103 @@
+{
+  "id" : "Ext-transfers",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-transfers",
+  "version" : "latest",
+  "name" : "Ext-transfers",
+  "description" : "Schema of the 'transfers' table in MIMIC-IV v3.1 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/transfers/)",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Ext-transfers",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Ext-transfers",
+      "path" : "Ext-transfers",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Ext-transfers.subject_id",
+      "path" : "Ext-transfers.subject_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "It is a unique identifier which specifies an individual patient. Any rows associated with a single subject_id pertain to the same individual. As subject_id is the primary key for the table, it is unique for each row.",
+      "short" : "Patient identifier"
+    }, {
+      "id" : "Ext-transfers.hadm_id",
+      "path" : "Ext-transfers.hadm_id",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Represents a single patient’s admission to the hospital. hadm_id ranges from 2000000 - 2999999",
+      "short" : "Hospital admission identifier"
+    }, {
+      "id" : "Ext-transfers.transfer_id",
+      "path" : "Ext-transfers.transfer_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Identifier for the transfer event",
+      "short" : "Identifier for the transfer event"
+    }, {
+      "id" : "Ext-transfers.eventtype",
+      "path" : "Ext-transfers.eventtype",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "describes what transfer event occurred: ‘ed’ for an emergency department stay, ‘admit’ for an admission to the hospital, ‘transfer’ for an intra-hospital transfer and ‘discharge’ for a discharge from the hospital.",
+      "short" : "Type of transfer event"
+    }, {
+      "id" : "Ext-transfers.careunit",
+      "path" : "Ext-transfers.careunit",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The type of unit or ward in which the patient is physically located. Examples of care units include medical ICUs, surgical ICUs, medical wards, new baby nurseries, and so on",
+      "short" : "Type of Care Unit"
+    }, {
+      "id" : "Ext-transfers.intime",
+      "path" : "Ext-transfers.intime",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Provides the date and time the patient was transferred into the current care unit (careunit) from the previous care unit (Timestamp format: yyyy-MM-dd HH:mm:ss)",
+      "short" : "Transfer in time"
+    }, {
+      "id" : "Ext-transfers.outtime",
+      "path" : "Ext-transfers.outtime",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "provides the date and time the patient was transferred out of the current physical location (Timestamp format: yyyy-MM-dd HH:mm:ss)",
+      "short" : "Transfer out time"
+    } ]
+  }
+}

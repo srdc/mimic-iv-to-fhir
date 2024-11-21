@@ -1,0 +1,76 @@
+source_system,source_code,target_system,target_code,target_display
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,AD,http://snomed.info/sct,10547007,Otic route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,AS,http://snomed.info/sct,10547007,Otic route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,AU,http://snomed.info/sct,10547007,Otic route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,BOTH EARS,http://snomed.info/sct,10547007,Otic route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,BOTH EYES,http://snomed.info/sct,54485002,Ophthalmic route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,BU,http://snomed.info/sct,54471007,Buccal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,BUCCAL,http://snomed.info/sct,54471007,Buccal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,DIALYS,http://snomed.info/sct,766790006,Extracorporeal hemodialysis route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,DWELL,http://snomed.info/sct,445755006,Intravascular route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,ED,http://snomed.info/sct,445755006,Intravascular route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,ET,http://snomed.info/sct,445755006,Intravascular route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,FEMORAL VEIN,http://snomed.info/sct,47625008,Intravenous route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,FLUSH,http://snomed.info/sct,445755006,Intravascular route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,G TUBE,http://snomed.info/sct,445768003,Intragastric route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IA,http://snomed.info/sct,58100008,Intra-arterial route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,ID,http://snomed.info/sct,372464004,Intradermal use
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IH,http://snomed.info/sct,417255000,Intraosseous route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IJ,http://snomed.info/sct,448491004,Intrajejunal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IM,http://snomed.info/sct,78421000,Intramuscular route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IMPELLA,http://snomed.info/sct,428191002,Percutaneous route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IN,http://snomed.info/sct,46713006,Nasal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,INFUSION VIA ON-Q PUMP,http://snomed.info/sct,372475000,Perineural use
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,INHALATION,http://snomed.info/sct,46713006,Nasal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,INTERSPACE,http://snomed.info/sct,418418000,Intraspinal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,INTRA-ARTERIALLY,http://snomed.info/sct,58100008,Intra-arterial route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,INTRALESIONAL,http://snomed.info/sct,372466002,Intralesional use
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,INTRAPLEURAL,http://snomed.info/sct,372469009,Intrapleural use
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,INTRAVITREAL,http://snomed.info/sct,418401004,Intravitreal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IO,http://snomed.info/sct,417255000,Intraosseous route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IP,http://snomed.info/sct,38239002,Intraperitoneal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IR,http://snomed.info/sct,418401004,Intravitreal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IRR,http://snomed.info/sct,67889009,Irrigation
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IT,http://snomed.info/sct,72607000,Intrathecal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,ITPCA,http://snomed.info/sct,72607000,Intrathecal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IV,http://snomed.info/sct,445755006,Intravascular route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IV BOLUS,http://snomed.info/sct,445755006,Intravascular route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IV DRIP,http://snomed.info/sct,445755006,Intravascular route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IVCI,http://snomed.info/sct,445755006,Intravascular route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IVPCA,http://snomed.info/sct,445755006,Intravascular route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,IVT,http://snomed.info/sct,418401004,Intravitreal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,J TUBE,http://snomed.info/sct,127491008,Jejunostomy route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,LEFT EAR,http://snomed.info/sct,10547007,Otic route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,LEFT EYE,http://snomed.info/sct,54485002,Ophthalmic route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,LOCK,http://snomed.info/sct,47625008,Intravenous route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,LUMBAR PLEXUS,http://snomed.info/sct,404820008,Epidural route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,NAS,http://snomed.info/sct,46713006,Nasal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,NEB,http://snomed.info/sct,46713006,Nasal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,NG,http://snomed.info/sct,127492001,Nasogastric route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,NG/OG,http://snomed.info/sct,127492001,Nasogastric route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,NS,http://snomed.info/sct,46713006,Nasal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,NU,http://snomed.info/sct,46713006,Nasal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,OD,http://snomed.info/sct,54485002,Ophthalmic route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,OG,http://snomed.info/sct,26643006,Oral route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,ORAL,http://snomed.info/sct,26643006,Oral route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,OS,http://snomed.info/sct,26643006,Oral route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,OU,http://snomed.info/sct,54485002,Ophthalmic route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,PB,http://snomed.info/sct,26643006,Oral route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,PERIPHNERVE,http://snomed.info/sct,47625008,Intravenous route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,PL,http://snomed.info/sct,47625008,Intravenous route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,PO,http://snomed.info/sct,26643006,Oral route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,PO/NG,http://snomed.info/sct,447964005,Digestive tract route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,PR,http://snomed.info/sct,37161004,Per rectum
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,REPLACE,http://snomed.info/sct,47625008,Intravenous route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,RIGHT EAR,http://snomed.info/sct,10547007,Otic route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,RIGHT EYE,http://snomed.info/sct,54485002,Ophthalmic route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,SC,http://snomed.info/sct,34206005,Subcutaneous route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,SC INFUSION,http://snomed.info/sct,34206005,Subcutaneous route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,SL,http://snomed.info/sct,37839007,Sublingual route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,SUBCUT,http://snomed.info/sct,34206005,Subcutaneous route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,SUBCUT INFUSION,http://snomed.info/sct,34206005,Subcutaneous route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,TD,http://snomed.info/sct,45890007,Transdermal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,TP,http://snomed.info/sct,6064005,Topical route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,TRANSDERMAL,http://snomed.info/sct,45890007,Transdermal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,TT,http://snomed.info/sct,45890007,Transdermal route
+https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes,VG,http://snomed.info/sct,16857009,Per Vagina

@@ -1,0 +1,131 @@
+{
+  "id" : "admissions",
+  "url" : "https://mimic.mit.edu/fhir/mappings/admissions",
+  "name" : "admissions",
+  "title" : "Mapping of entries in 'admissions' table joined with 'diagnoses_icd' and 'procedures_icd' in MIMIC-IV v3.1 dataset into FHIR Encounter resources as well as FHIR Patch to FHIR Patient resource",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "admissions",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-admissions",
+    "joinOn" : [ "hadm_id" ]
+  }, {
+    "alias" : "diagnoses",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-diagnoses-icd",
+    "joinOn" : [ "hadm_id" ]
+  }, {
+    "alias" : "procedures",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-procedures-icd",
+    "joinOn" : [ "hadm_id" ]
+  }, {
+    "alias" : "transfers",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-transfers",
+    "joinOn" : [ "hadm_id" ]
+  }, {
+    "alias" : "services",
+    "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-services",
+    "joinOn" : [ "hadm_id" ]
+  } ],
+  "context" : {
+    "admissionTypeConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/hosp/admission-type-concept-map.csv"
+    }
+  },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "admissions-to-encounter-mapping",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "identifier" : [ {
+          "use" : "official",
+          "system" : "{{%sourceSystem.sourceUri}}/fhir/hadm_ids",
+          "value" : "{{hadm_id.toString()}}"
+        } ],
+        "status" : "completed",
+        "class" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+            "code" : "{{mpp:getConcept(%admissionTypeConceptMap, admission_type, 'target_class')}}",
+            "display" : "{{mpp:getConcept(%admissionTypeConceptMap, admission_type, 'target_class_display')}}"
+          } ]
+        } ],
+        "type" : {
+          "{{#stype}}" : "{{%services}}",
+          "{{*}}" : {
+            "coding" : [ {
+              "system" : "https://mimic.mit.edu/fhir/CodeSystem/services",
+              "code" : "{{%stype.curr_service}}",
+              "display" : "{{trms:lookupDisplay(%stype.curr_service,'https://mimic.mit.edu/fhir/CodeSystem/services', {})}}"
+            }, "{{? trms:translateToCoding(%stype.curr_service, 'https://mimic.mit.edu/fhir/CodeSystem/services','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/services-to-snomed')}}" ]
+          }
+        },
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
+        "actualPeriod" : {
+          "start" : "{{admittime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
+          "end" : "{{dischtime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}"
+        },
+        "length" : "{{utl:getDurationAsQuantityObject(admittime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00'), dischtime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00'))}}",
+        "diagnosis" : {
+          "{{#cond}}" : "{{%diagnoses}}",
+          "{{*}}" : {
+            "condition" : [ {
+              "reference" : "{{mpp:createFhirReferenceWithHashedId('Condition', %cond.hadm_id.toString() & %cond.seq_num.toString())}}"
+            } ],
+            "use" : [ {
+              "coding" : [ {
+                "system" : "http://terminology.hl7.org/CodeSystem/diagnosis-role",
+                "code" : "billing",
+                "display" : "Billing"
+              } ]
+            } ]
+          }
+        },
+        "reason" : [ {
+          "value" : {
+            "{{#proc}}" : "{{%procedures}}",
+            "{{*}}" : {
+              "reference" : "{{mpp:createFhirReferenceWithHashedId('Procedure', %proc.hadm_id.toString() & %proc.seq_num.toString())}}"
+            }
+          }
+        } ],
+        "admission" : {
+          "admitSource" : {
+            "coding" : "{{* trms:translateToCoding(admission_location, 'https://mimic.mit.edu/fhir/CodeSystem/admission-locations','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/admission-location-to-hl7')}}",
+            "text" : "{{admission_location}}"
+          },
+          "dischargeDisposition" : {
+            "{{#dscl}}" : "{{iif(hospital_expire_flag=1,'DIED',discharge_location)}}",
+            "{{?}}" : {
+              "coding" : "{{* trms:translateToCoding(%dscl, 'https://mimic.mit.edu/fhir/CodeSystem/discharge-locations','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/discharge-location-to-hl7')}}",
+              "text" : "{{%dscl}}"
+            }
+          }
+        },
+        "location" : {
+          "{{#transfer}}" : "{{%transfers.where($this.eventtype != 'discharge')}}",
+          "{{*}}" : {
+            "location" : {
+              "reference" : "{{mpp:createFhirReferenceWithHashedId('Location', %transfer.careunit).reference}}",
+              "display" : "{{%transfer.careunit}}"
+            },
+            "status" : "completed",
+            "period" : {
+              "start" : "{{%transfer.intime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
+              "end" : "{{%transfer.outtime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}"
+            }
+          }
+        },
+        "id" : "{{mpp:getHashedId('Encounter',hadm_id.toString())}}",
+        "meta" : {
+          "source" : "{{%sourceSystem.sourceUri}}"
+        },
+        "extension" : [ {
+          "url" : "https://mimic.mit.edu/fhir/StructureDefinition/ext-insurance",
+          "valueString" : "{{insurance}}"
+        } ],
+        "resourceType" : "Encounter"
+      }
+    }
+  } ]
+}

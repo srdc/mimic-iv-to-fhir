@@ -1,0 +1,130 @@
+{
+  "id": "prescriptions",
+  "url": "https://mimic.mit.edu/fhir/mappings/prescriptions",
+  "name": "prescriptions",
+  "title": "Mapping of prescriptions in 'prescriptions' table in MIMIC-IV v3.1 dataset into FHIR MedicationRequest resources",
+  "source": [
+    {
+      "alias": "source",
+      "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-prescriptions"
+    }
+  ],
+  "variable": [
+    {
+      "name": "doseUnit",
+      "language": "text/fhirpath",
+      "expression": "iif(dose_unit_rx.empty(), {}, trms:translateToCoding(dose_unit_rx, 'https://mimic.mit.edu/fhir/CodeSystem/medication-dose-units', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/medication-dose-to-orderable-drug-form'))"
+    },
+    {
+      "name": "stime",
+      "language": "text/fhirpath",
+      "expression": "starttime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')"
+    },
+    {
+      "name": "etime",
+      "language": "text/fhirpath",
+      "expression": "stoptime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')"
+    }
+  ],
+  "mapping": [
+    {
+      "expression": {
+        "name": "patients-mapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "MedicationRequest",
+          "id": "{{mpp:getHashedId('MedicationRequest', pharmacy_id.toString())}}",
+          "status": "completed",
+          "intent": "order",
+          "medication": {
+            "reference": {
+              "reference": "{{mpp:createFhirReferenceWithHashedId('Medication', drug & gsn.toString() & ndc.toString() & formulary_drug_cd).reference}}",
+              "display": "{{drug}}"
+            }
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}",
+          "basedOn": "{{* mpp:createFhirReferenceWithHashedId('ServiceRequest', poe_id.toString())}}",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                  "code": "inpatient",
+                  "display": "Inpatient"
+                }
+              ]
+            },
+            {
+              "coding": [
+                {
+                  "system": "https://mimic.mit.edu/fhir/CodeSystem/medication-types",
+                  "code": "{{drug_type}}"
+                }
+              ]
+            }
+          ],
+          "dosageInstruction": [
+            {
+              "timing": {
+                "repeat": {
+                  "boundsPeriod": {
+                    "{{#isPeriodExist}}": "{{stime | etime}}",
+                    "{{?}}" : {
+                      "start": "{{iif(%stime > %etime or %etime.empty().not(), %etime, %stime)}}",
+                      "end": "{{? iif(%stime > %etime, %stime, %etime)}}"
+                    }
+                  },
+                  "frequency": "{{? doses_per_24_hrs.where($this != 0)}}",
+                  "period": "{{? iif(doses_per_24_hrs.exists(), 1, {})}}",
+                  "periodUnit": "{{? iif(doses_per_24_hrs.exists(), 'd', {})}}"
+                }
+              },
+              "route": {
+                "coding": [
+                  {
+                    "system": "{{? iif(route.exists(),'https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes',{})}}",
+                    "code": "{{? route}}"
+                  },
+                  "{{trms:translateToCoding(route, 'https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/medication-route-codes-to-snomed')}}"
+                ]
+              },
+              "doseAndRate": [
+                {
+                  "{{#dsq}}": "{{iif(dose_val_rx.contains('-'), {}, dose_val_rx.replace(',','').toDecimal())}}",
+                  "{{?}}": {
+                    "doseQuantity": {
+                      "value": "{{%dsq}}",
+                      "code": "{{? %doseUnit.code}}",
+                      "system": "{{? %doseUnit.system}}",
+                      "unit": "{{(%doseUnit.code | dose_unit_rx).first()}}"
+                    }
+                  }
+                },
+                {
+                  "{{#isRange}}": "{{iif(dose_val_rx.contains('-'),true,{})}}",
+                  "{{?}}": {
+                    "doseRange": {
+                      "low":  {
+                        "value": "{{dose_val_rx.split('-').select($this.toDecimal()).aggregate(iif($total.empty(), $this, iif($this < $total, $this, $total)))}}",
+                        "code": "{{? %doseUnit.code}}",
+                        "system": "{{? %doseUnit.system}}",
+                        "unit": "{{(%doseUnit.code | dose_unit_rx).first()}}"
+                      },
+                      "high":  {
+                        "value": "{{dose_val_rx.split('-').select($this.toDecimal()).aggregate(iif($total.empty(), $this, iif($this < $total, $total, $this)))}}",
+                        "code": "{{? %doseUnit.code}}",
+                        "system": "{{? %doseUnit.system}}",
+                        "unit": "{{(%doseUnit.code | dose_unit_rx).first()}}"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "id" : "Ext-labevents",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://mimic.mit.edu/fhir/StructureDefinition/Ext-labevents",
+  "version" : "latest",
+  "name" : "Ext-labevents",
+  "description" : "Schema of the 'labevents' table in MIMIC-IV v3.1 dataset (See https://mimic.mit.edu/docs/iv/modules/hosp/labevents/)",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Ext-labevents",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Ext-labevents",
+      "path" : "Ext-labevents",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Ext-labevents.labevent_id",
+      "path" : "Ext-labevents.labevent_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "An integer which is unique for every row in the table.",
+      "short" : "Lab event unique identifier"
+    }, {
+      "id" : "Ext-labevents.subject_id",
+      "path" : "Ext-labevents.subject_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "subject_id is a unique identifier which specifies an individual patient. Any rows associated with a single subject_id pertain to the same individual.",
+      "short" : "Patient identifier"
+    }, {
+      "id" : "Ext-labevents.hadm_id",
+      "path" : "Ext-labevents.hadm_id",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "It is an integer identifier which is unique for each patient hospitalization",
+      "short" : "Unique identifier for hospitalization"
+    }, {
+      "id" : "Ext-labevents.specimen_id",
+      "path" : "Ext-labevents.specimen_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Uniquely denoted the specimen from which the lab measurement was made. Most lab measurements are made on patient derived samples (specimens) such as blood, urine, and so on. Often multiple measurements are made on the same sample. The specimen_id will group measurements made on the same sample, e.g. blood gas measurements made on the same sample of blood.",
+      "short" : "Specimen identifier"
+    }, {
+      "id" : "Ext-labevents.itemid",
+      "path" : "Ext-labevents.itemid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "An identifier which uniquely denotes laboratory concepts",
+      "short" : "Lab event item identifier"
+    }, {
+      "id" : "Ext-labevents.order_provider_id",
+      "path" : "Ext-labevents.order_provider_id",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "An anonymous identifier for the provider who ordered the laboratory measurement",
+      "short" : "Provider who ordered the laboratory measurement"
+    }, {
+      "id" : "Ext-labevents.charttime",
+      "path" : "Ext-labevents.charttime",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The time at which the laboratory measurement was charted. This is usually the time at which the specimen was acquired, and is usually significantly earlier than the time at which the measurement is available. (in timestamp format, e.g. 2180-03-23 11:51:00)",
+      "short" : "Lab measurement chart time"
+    }, {
+      "id" : "Ext-labevents.storetime",
+      "path" : "Ext-labevents.storetime",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The time at which the measurement was made available in the laboratory system. This is when the information would have been available to care providers (Timestamp format: yyyy-MM-dd hh:mm:ss)",
+      "short" : "Time measurement is available"
+    }, {
+      "id" : "Ext-labevents.value",
+      "path" : "Ext-labevents.value",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The result of the laboratory measurement",
+      "short" : "Measurement value"
+    }, {
+      "id" : "Ext-labevents.valuenum",
+      "path" : "Ext-labevents.valuenum",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "decimal",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/decimal" ]
+      } ],
+      "definition" : "If result is numeric, the value cast as a numeric data type.",
+      "short" : "Numeric measurement value"
+    }, {
+      "id" : "Ext-labevents.valueuom",
+      "path" : "Ext-labevents.valueuom",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The unit of measurement for the laboratory concept.",
+      "short" : "Unit for measurement"
+    }, {
+      "id" : "Ext-labevents.ref_range_lower",
+      "path" : "Ext-labevents.ref_range_lower",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "decimal",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/decimal" ]
+      } ],
+      "definition" : "Lower reference ranges indicating the normal range for the laboratory measurements. Values outside the reference ranges are considered abnormal.",
+      "short" : "Lower reference range"
+    }, {
+      "id" : "Ext-labevents.ref_range_upper",
+      "path" : "Ext-labevents.ref_range_upper",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "decimal",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/decimal" ]
+      } ],
+      "definition" : "Upper reference ranges indicating the normal range for the laboratory measurements. Values outside the reference ranges are considered abnormal.",
+      "short" : "Upper reference range"
+    }, {
+      "id" : "Ext-labevents.flag",
+      "path" : "Ext-labevents.flag",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "A brief string mainly used to indicate if the laboratory measurement is abnormal. ('abnormal' indicates abnormal)",
+      "short" : "Flag for result"
+    }, {
+      "id" : "Ext-labevents.priority",
+      "path" : "Ext-labevents.priority",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "code",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/code" ]
+      } ],
+      "definition" : "The priority of the laboratory measurement: either 'ROUTINE' or 'STAT' (urgent).",
+      "short" : "Priority of test"
+    }, {
+      "id" : "Ext-labevents.comments",
+      "path" : "Ext-labevents.comments",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Deidentified free-text comments associated with the laboratory measurement. Usually these provide information about the sample, whether any notifications were made to care providers regarding the results, considerations for interpretation, or in some cases the comments contain the result of the laboratory itself. Comments which have been fully deidentified (i.e. no information content retained) are present as three underscores: ___. A NULL comment indicates no comment was made for the row.",
+      "short" : "Comments"
+    } ]
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "id": "omr",
+  "url": "https://mimic.mit.edu/fhir/mappings/omr",
+  "name": "omr",
+  "title": "Mapping of entries in 'omr' table in MIMIC-IV v3.1 dataset into FHIR Observation (Vital Sign profile) resources",
+  "source": [{
+    "alias": "source",
+    "url": "https://mimic.mit.edu/fhir/StructureDefinition/Ext-omr"
+  }],
+  "context": {
+    "resultProfileMapping":  {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/omr-result-name-map.csv"
+    }
+  },
+  "mapping": [
+    {
+      "precondition": {
+        "name": "isNotBloodPressure",
+        "language": "text/fhirpath",
+        "expression": "result_name.startsWith('Blood Pressure').not()"
+      },
+      "expression": {
+        "name": "omr-mapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', subject_id.toString() & chartdate.toString() & seq_num.toString() & result_name)}}",
+          "meta": {
+            "profile": "{{* mpp:getConcept(%resultProfileMapping, result_name, 'target_profile')}}",
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "{{iif(result_name = 'eGFR', 'laboratory', 'vital-signs')}}",
+                  "display": "{{iif(result_name = 'eGFR', 'Laboratory', 'Vital signs')}}"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "{{mpp:getConcept(%resultProfileMapping, result_name, 'target_code')}}"
+              }
+            ],
+            "text": "{{result_name}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
+          "effectiveDateTime": "{{chartdate}}",
+          "valueQuantity": "{{utl:createFhirQuantity(result_value, 'http://unitsofmeasure.org', mpp:getConcept(%resultProfileMapping, result_name, 'target_unit'))}}",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/observation-timeOffset",
+              "valueInteger": "{{seq_num}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "isBloodPressure",
+        "language": "text/fhirpath",
+        "expression": "result_name.startsWith('Blood Pressure')"
+      },
+      "expression": {
+        "name": "bp-mapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', subject_id.toString() & chartdate.toString() & seq_num.toString() & result_name)}}",
+          "meta": {
+            "profile": "{{* mpp:getConcept(%resultProfileMapping, result_name, 'target_profile')}}",
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "vital-signs",
+                  "display": "Vital signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "{{mpp:getConcept(%resultProfileMapping, result_name, 'target_code')}}"
+              },
+              {
+                "{{#sc}}": "{{mpp:getConcept(%resultProfileMapping, result_name, 'secondary_code')}}",
+                "{{?}}": {
+                  "system": "http://snomed.info/sct",
+                  "code": "{{%sc}}"
+                }
+              }
+            ],
+            "text": "{{result_name}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
+          "effectiveDateTime": "{{chartdate}}",
+          "component": [
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://loinc.org",
+                    "code": "8480-6",
+                    "display": "Systolic blood pressure"
+                  }
+                ]
+              },
+              "valueQuantity":{
+                "{{#sysBp}}": "{{result_value.utl:split('/').first().toDecimal()}}",
+                "{{?}}": {
+                  "value": "{{%sysBp}}",
+                  "unit": "mmHg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mm[Hg]"
+                }
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://loinc.org",
+                    "code": "8462-4",
+                    "display": "Diastolic blood pressure"
+                  }
+                ]
+              },
+              "valueQuantity":{
+                "{{#diasBp}}": "{{result_value.utl:split('/').last().toDecimal()}}",
+                "{{?}}": {
+                  "value": "{{%diasBp}}",
+                  "unit": "mmHg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mm[Hg]"
+                }
+              }
+            }
+          ],
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/observation-timeOffset",
+              "valueInteger": "{{seq_num}}"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
