@@ -109,10 +109,15 @@
         "meta" : {
           "source" : "{{%sourceSystem.sourceUri}}"
         },
-        "extension" : [ {
-          "url" : "https://mimic.mit.edu/fhir/StructureDefinition/ext-insurance",
-          "valueString" : "{{insurance}}"
-        } ],
+        "extension": {
+          "{{#insuranceVar}}": "{{insurance}}",
+          "{{?}}": [
+            {
+              "url": "https://mimic.mit.edu/fhir/StructureDefinition/ext-insurance",
+              "valueString": "{{%insuranceVar}}"
+            }
+          ]
+        },
         "resourceType" : "Encounter"
       }
     }
