@@ -18,7 +18,7 @@
   },
   "terminologyServiceSettings" : {
     "jsonClass" : "LocalFhirTerminologyServiceSettings",
-    "folderPath" : "/terminology-systems/MIMICTerminologyService",
+    "folderPath" : "terminology-systems/MIMICTerminologyService",
     "conceptMapFiles" : [ {
       "id" : "ab-itemids-to-atc.csv",
       "name" : "ab-itemids-to-atc.csv",

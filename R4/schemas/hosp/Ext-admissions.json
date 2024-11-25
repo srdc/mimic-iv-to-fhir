@@ -123,7 +123,7 @@
     }, {
       "id" : "Ext-admissions.insurance",
       "path" : "Ext-admissions.insurance",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "code",

@@ -10,7 +10,7 @@
   "context": {
     "resultProfileMapping":  {
       "category": "concept-map",
-      "url": "$CONTEXT_REPO/omr-result-name-map.csv"
+      "url": "$CONTEXT_REPO/hosp/omr-result-name-map.csv"
     }
   },
   "mapping": [

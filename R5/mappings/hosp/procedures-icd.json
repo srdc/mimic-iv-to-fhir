@@ -18,7 +18,7 @@
   "context": {
     "icd9to10Map":  {
       "category": "concept-map",
-      "url": "$CONTEXT_REPO/icd9toicd10pcsgem.csv"
+      "url": "$CONTEXT_REPO/hosp/icd9toicd10pcsgem.csv"
     }
   },
   "mapping": [
