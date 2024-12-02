@@ -33,7 +33,7 @@
         "language": "application/fhir-template+json",
         "value": {
           "resourceType": "MedicationRequest",
-          "id": "{{mpp:getHashedId('MedicationRequest', pharmacy_id.toString())}}",
+          "id" : "{{mpp:getHashedId('MedicationRequest', pharmacy_id.toString() & gsn.toString() & ndc.toString() & formulary_drug_cd.toString())}}",
           "status": "completed",
           "intent": "order",
           "medicationReference": {
@@ -42,6 +42,9 @@
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
           "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}",
+          "identifier" : [ {
+            "value" : "{{pharmacy_id.toString() & '-' & gsn.toString() & '-' & ndc.toString() & '-' & formulary_drug_cd.toString()}}"
+          } ],
           "basedOn": "{{* mpp:createFhirReferenceWithHashedId('ServiceRequest', poe_id.toString())}}",
           "category": [
             {
@@ -84,7 +87,7 @@
                     "system": "{{? iif(route.exists(),'https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes',{})}}",
                     "code": "{{? route}}"
                   },
-                  "{{trms:translateToCoding(route, 'https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/medication-route-codes-to-snomed')}}"
+                  "{{? trms:translateToCoding(route, 'https://mimic.mit.edu/fhir/CodeSystem/medication-route-codes', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/medication-route-codes-to-snomed')}}"
                 ]
               },
               "doseAndRate": [

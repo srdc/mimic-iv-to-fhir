@@ -37,16 +37,16 @@
       "name" : "medication-administration-mapping",
       "language" : "application/fhir-template+json",
       "value" : {
-        "{{#emarVar}}" : "{{%emarDetail.where(parent_field_ordinal.exists())}}",
+        "{{#emarVar}}" : "{{%emarDetail.where(parent_field_ordinal.exists() and (dose_given.exists() or product_amount_given.exists() )}}",
         "{{*}}" : {
           "{{#prescriptionVar}}" : "{{%prescriptionsWithNdcCode}}",
           "{{*}}" : {
             "identifier" : [ {
               "use" : "official",
               "system" : "{{%sourceSystem.sourceUri}}/fhir/emar_ids",
-              "value" : "{{emar_id.toString() & '-' & parent_field_ordinal.toString()}}"
+              "value" : "{{emar_id.toString() & '-' & parent_field_ordinal.toString() & '-' & %prescriptionVar.drug & '-' & %prescriptionVar.gsn.toString() & '-' & %prescriptionVar.ndc.toString() & '-' & %prescriptionVar.formulary_drug_cd }}"
             } ],
-            "status" : "{{mpp:getConcept(%emarStatusConceptMap, event_txt, 'target_code').nav:orElse('unknown')}}",
+            "status" : "{{ mpp:getConcept(%emarStatusConceptMap, event_txt, 'target_code').nav:orElse('unknown') }}",
             "medicationReference" : {
               "reference" : "{{? mpp:createFhirReferenceWithHashedId('Medication', %prescriptionVar.drug & %prescriptionVar.gsn.toString() & %prescriptionVar.ndc.toString() & %prescriptionVar.formulary_drug_cd).reference}}",
               "display" : "{{? medication}}"
@@ -54,7 +54,7 @@
             "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
             "context" : "{{? mpp:createFhirReferenceWithHashedId('Encounter', hadm_id.toString())}}",
             "effectiveDateTime" : "{{charttime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
-            "request" : "{{? iif(pharmacy_id.exists(), mpp:createFhirReferenceWithHashedId('MedicationRequest', pharmacy_id.toString()))}}",
+            "request" : "{{? mpp:createFhirReferenceWithHashedId('MedicationRequest', %prescriptionVar.pharmacy_id.toString() & %prescriptionVar.gsn.toString() & %prescriptionVar.ndc.toString() & %prescriptionVar.formulary_drug_cd.toString() )}}",
             "dosage" : {
               "site" : {
                 "text" : "{{? iif(%emarVar.side.exists() and %emarVar.site.exists(), %emarVar.side & '-' & %emarVar.site, iif(%emarVar.site.exists(), %emarVar.site) ) }}"
@@ -74,7 +74,7 @@
                 "unit" : "{{? iif(%emarVar.dose_given_unit.exists(), %emarVar.dose_given_unit, iif(%emarVar.product_unit.exists(), %emarVar.product_unit, %emarVar.dose_due_unit))}}"
               }
             },
-            "id" : "{{mpp:getHashedId('MedicationAdministration', emar_id.toString() & '-' & parent_field_ordinal.toString())}}",
+            "id" : "{{mpp:getHashedId('MedicationAdministration', emar_id.toString() & %emarVar.parent_field_ordinal.toString() & %prescriptionVar.gsn.toString() & %prescriptionVar.ndc.toString() & %prescriptionVar.formulary_drug_cd )}}",
             "resourceType" : "MedicationAdministration"
           }
         }

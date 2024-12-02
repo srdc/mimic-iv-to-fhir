@@ -11,6 +11,11 @@
   "context" : { },
   "variable" : [ ],
   "mapping" : [ {
+    "precondition" : {
+      "name" : "measurementExists",
+      "language" : "text/fhirpath",
+      "expression" : "(value.exists() or valuenum.exists()) and valueuom.exists() and valueuom.trim() != ''"
+    },
     "expression" : {
       "name" : "labevents-mapping",
       "language" : "application/fhir-template+json",
@@ -28,18 +33,24 @@
           "coding" : [ "{{? trms:translateToCoding(itemid.toString(), 'https://mimic.mit.edu/fhir/CodeSystem/labitems','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/labitems-to-loinc')}}", {
             "system" : "https://mimic.mit.edu/fhir/CodeSystem/labitems",
             "code" : "{{itemid.toString()}}",
-            "display" : "{{trms:lookupDisplay(itemid.toString(),'https://mimic.mit.edu/fhir/CodeSystem/labitems', {})}}"
+            "display" : "{{? trms:lookupDisplay(itemid.toString(),'https://mimic.mit.edu/fhir/CodeSystem/labitems', {})}}"
           } ]
         },
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",
         "effectiveDateTime" : "{{charttime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
         "valueString" : {
-          "{{#strValue}}" : "{{iif(valuenum.exists().not() and value.utl:isFhirQuantityExpression().not() and trms:translateToCoding(value.orElse(comments).utl:takeUntil('.' | '*').trim().orElse('!NO-SUCH-CODE!'), 'https://mimic.mit.edu/fhir/CodeSystem/labitem_coded_values', 'https://mimic.mit.edu/fhir/ConceptMap/labitem-coded-values-to-other').exists().not(),value,{})}}",
+          "{{#strValue}}" : "{{iif(valuenum.exists().not() and value.utl:isFhirQuantityExpression().not() and trms:translateToCoding(value.orElse(comments).utl:takeUntil('.' | '*').trim().orElse('!NO-SUCH-CODE!'), 'https://mimic.mit.edu/fhir/CodeSystem/labitem-coded-values', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/labitem-coded-values-to-other').exists().not(),value,{})}}",
           "{{?}}" : "{{%strValue}}"
         },
         "valueQuantity" : {
-          "{{#ifQuantity}}" : "{{iif(valuenum.exists() or (value.exists() and value.utl:isFhirQuantityExpression()), true, {})}}",
-          "{{?}}" : "{{utl:createFhirQuantity(valuenum.orElse(value), valueuom.trim(), 'http://unitsofmeasure.org', valueuom.trim())}}"
+          "{{#ifQuantity}}" : "{{ iif(valuenum.exists() or (value.exists() and value.utl:isFhirQuantityExpression()), utl:parseFhirQuantityExpression(valuenum.orElse(value)))}}",
+          "{{?}}" : {
+            "system" : "http://unitsofmeasure.org",
+            "code" : "{{valueuom.trim()}}",
+            "value" : "{{ %ifQuantity.first() }}",
+            "comparator" : "{{? iif(%ifQuantity[1].exists(), %ifQuantity.last()) }}",
+            "unit" : "{{valueuom.trim()}}"
+          }
         },
         "valueCodeableConcept" : {
           "{{#codedValue}}" : "{{iif(valuenum.exists().not(), trms:translateToCoding(value.orElse(comments).utl:takeUntil('.' | '*').trim().orElse('!NO-SUCH-CODE!'), 'https://mimic.mit.edu/fhir/CodeSystem/labitem-coded-values', 'https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/labitem-coded-values-to-other'),{})}}",

@@ -81,7 +81,7 @@
         "hospitalization" : {
           "admitSource" : {
             "coding" : "{{* trms:translateToCoding(admission_location, 'https://mimic.mit.edu/fhir/CodeSystem/admission-locations','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/admission-location-to-hl7')}}",
-            "text" : "{{admission_location}}"
+            "text" : "{{? admission_location}}"
           },
           "dischargeDisposition" : {
             "{{#dscl}}" : "{{iif(hospital_expire_flag=1,'DIED',discharge_location)}}",
@@ -101,7 +101,7 @@
             "status" : "completed",
             "period" : {
               "start" : "{{%transfer.intime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}",
-              "end" : "{{%transfer.outtime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}"
+              "end" : "{{? %transfer.outtime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', '-05:00')}}"
             }
           }
         },
@@ -109,14 +109,12 @@
         "meta" : {
           "source" : "{{%sourceSystem.sourceUri}}"
         },
-        "extension": {
-          "{{#insuranceVar}}": "{{insurance}}",
-          "{{?}}": [
-            {
-              "url": "https://mimic.mit.edu/fhir/StructureDefinition/ext-insurance",
-              "valueString": "{{%insuranceVar}}"
-            }
-          ]
+        "extension" : {
+          "{{#insuranceVar}}" : "{{insurance}}",
+          "{{?}}" : [ {
+            "url" : "https://mimic.mit.edu/fhir/StructureDefinition/ext-insurance",
+            "valueString" : "{{%insuranceVar}}"
+          } ]
         },
         "resourceType" : "Encounter"
       }

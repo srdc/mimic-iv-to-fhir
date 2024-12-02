@@ -11,4 +11,4 @@ Height (Inches),http://hl7.org/fhir/StructureDefinition/bodyheight,8302-2,[in_i]
 BMI,http://hl7.org/fhir/StructureDefinition/bmi,39156-5,kg/m2,
 Weight,http://hl7.org/fhir/StructureDefinition/bodyweight,29463-7,[lb_av],
 Height,http://hl7.org/fhir/StructureDefinition/bodyheight,8302-2,[in_i],
-eFGR,,50384-7,mL/min/{1.73_m2},
+eGFR,,50384-7,mL/min/{1.73_m2},

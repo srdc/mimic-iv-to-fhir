@@ -101,7 +101,7 @@
     }, {
       "id" : "Ext-admissions.admission_location",
       "path" : "Ext-admissions.admission_location",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "code",

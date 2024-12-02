@@ -61,7 +61,7 @@
           "coding" : [ {
             "system" : "https://mimic.mit.edu/fhir/CodeSystem/specimen_types",
             "code" : "{{spec_itemid.toString()}}",
-            "display" : "{{spec_type_desc}}"
+            "display" : "{{? spec_type_desc}}"
           }, "{{* trms:translateToCoding(spec_itemid.toString(), 'https://mimic.mit.edu/fhir/CodeSystem/specimen_types','https://github.com/srdc/mimic-iv-to-fhir/fhir/ConceptMap/specimen-types-to-hl7')}}" ]
         },
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject_id.toString())}}",

@@ -112,7 +112,7 @@
     }, {
       "id" : "Ext-microbiologyevents.spec_type_desc",
       "path" : "Ext-microbiologyevents.spec_type_desc",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "string",
